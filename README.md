@@ -4,4 +4,4 @@ A program that provide : downloading the latest version of a program, install it
 
 ## Usage
 
-Launch the MultiInstaller, select the program that you want install, select the windows activation or office that you wanted and hit "Apply"
+Launch the MultiInstaller.exe in the zip file, select the program that you want install, select the windows activation or office that you wanted and hit "Apply" !
