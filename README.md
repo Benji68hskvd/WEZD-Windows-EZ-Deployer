@@ -8,9 +8,9 @@ Launch the MultiInstaller.exe in the zip file, select the program that you want 
 
 ## Nuget Package that i use
 
-- • AutoClosingMessageBox by Dmitry Garavsky
-- • HtmlAgilityPack by ZZZ Projects
+- AutoClosingMessageBox by Dmitry Garavsky
+- HtmlAgilityPack by ZZZ Projects
 
 ## External Program that i use
 
- • Microsoft Activation Scripts (MAS) by massgravel
+- Microsoft Activation Scripts (MAS) by massgravel
