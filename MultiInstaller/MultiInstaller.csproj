@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="README.md~RF1b5d1aa.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoClosingMessageBox" Version="1.0.0.5" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
   </ItemGroup>
