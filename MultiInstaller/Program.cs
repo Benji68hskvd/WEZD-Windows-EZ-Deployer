@@ -7,6 +7,7 @@ using static System.Windows.Forms.DataFormats;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using HtmlAgilityPack;
 using System.Xml.Linq;
+using System.Runtime.InteropServices;
 
 namespace MultiInstaller
 {
@@ -22,12 +23,13 @@ namespace MultiInstaller
 
             if (form.Install == true)
             {
-                await CheckInstall(form.IsChromeChecked(), false, "https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi", "", "/", "", "", "chrome_installer.msi", "Chrome");
-                await CheckInstall(form.IsFirefoxChecked(), true, "https://ftp.mozilla.org/pub/firefox/releases/", "/pub/firefox/releases/", "/pub/firefox/releases/", "b", "/win64/fr/", "firefox_installer.msi", "Firefox");
-                await CheckInstall(form.IsCCleanerChecked(), false, "https://bits.avcdn.net/productfamily_CCLEANER/insttype_BUSINESS_32/platform_WIN_MSI/installertype_ONLINE/build_RELEASE", "", "/", "", "", "ccleaner_installer.msi", "CCleaner");
-                await CheckInstall(form.IsNovaBenchChecked(), false, "https://cdn.novabench.net/novabench.msi", "", "/", "", "", "novabench_installer.msi", "NovaBench");
-                await CheckInstall(form.IsLibreOfficeChecked(), true, "https://miroir.univ-lorraine.fr/documentfoundation/libreoffice/stable/", "", "/", "", "/win/x86_64/", "libreoffice_installer.msi", "LibreOffice");
-                await CheckInstall(form.IsVLCChecked(), true, "https://get.videolan.org/vlc/last/win64/", "", "/", "", "", "vlc_installer.msi", "VLC");
+                await CheckInstall(form.IsChromeChecked(), "https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi", "", "/", "", "", "chrome_installer.msi", "Chrome");
+                await CheckInstall(form.IsFirefoxChecked(), "https://ftp.mozilla.org/pub/firefox/releases/", "/pub/firefox/releases/", "/pub/firefox/releases/", "b", "/win64/fr/", "firefox_installer.msi", "Firefox");
+                await CheckInstall(form.IsCCleanerChecked(), "https://bits.avcdn.net/productfamily_CCLEANER/insttype_BUSINESS_32/platform_WIN_MSI/installertype_ONLINE/build_RELEASE/.msi/", "", "/", "", "", "ccleaner_installer.msi", "CCleaner");
+                await CheckInstall(form.IsNovaBenchChecked(), "https://cdn.novabench.net/novabench.msi", "", "/", "", "", "novabench_installer.msi", "NovaBench");
+                await CheckInstall(form.IsLibreOfficeChecked(), "https://miroir.univ-lorraine.fr/documentfoundation/libreoffice/stable/", "", "/", "", "/win/x86_64/", "libreoffice_installer.msi", "LibreOffice");
+                await CheckInstall(form.IsVLCChecked(), "https://get.videolan.org/vlc/last/win64/", "", "/", "", "", "vlc_installer.msi", "VLC");
+                await CheckInstall(form.IsTeamViewerChecked(), "https://dl.teamviewer.com/download/version_15x/TeamViewer_Setup_x64.exe", "", "/", "", "", "TeamViewer.exe", "TeamViewer");
 
                 if (form.IsHWIDChecked() == true)
                 {
@@ -52,11 +54,11 @@ namespace MultiInstaller
             }
         }
 
-        static async Task CheckInstall(bool isChecked, bool search, string url, string hrefNodes, string hrefReplace, string ignoreVersionName, string endUrl, string installerName, string packageName)
+        static async Task CheckInstall(bool isChecked, string url, string hrefNodes, string hrefReplace, string ignoreVersionName, string endUrl, string installerName, string packageName)
         {
             if (isChecked == true)
             {
-                await Install(search, url, hrefNodes, hrefReplace, ignoreVersionName, endUrl, installerName, packageName);
+                await Install(url, hrefNodes, hrefReplace, ignoreVersionName, endUrl, installerName, packageName);
             }
         }
 
@@ -91,9 +93,20 @@ namespace MultiInstaller
         }
 
         //Installation Script ---------------------------------------------------------------------------------------------------------------
-        static async Task Install(bool searchMsi, string url, string hrefNodes, string hrefReplace, string ignoreVersionName, string endUrl, string installerName, string packageName)
+        static async Task Install(string url, string hrefNodes, string hrefReplace, string ignoreVersionName, string endUrl, string installerName, string packageName)
         {
-            var DownloadPath = "C:\\Users\\" + Environment.UserName + "\\Downloads\\";
+            var downloadPath = "C:\\Users\\" + Environment.UserName + "\\Downloads\\";
+
+            bool containsMsi = url.Contains(".msi");
+            bool containsExe = url.Contains(".exe");
+
+            if (containsMsi || containsExe)
+            {
+                MessageBox.Show("In contains msi or exe");
+                await InstallPackage(url, downloadPath, packageName, installerName);
+                MessageBox.Show("return");
+                return;
+            }
 
             try
             {
@@ -118,11 +131,9 @@ namespace MultiInstaller
                 versions = versions.Where(version => !version.Contains($"'{ignoreVersionName}'")).ToList();
                 versions.Sort((x, y) => new Version(x).CompareTo(new Version(y)));
                 string latestVersion = versions.LastOrDefault();
-                MessageBox.Show("The latest version is : " + latestVersion);
 
                 url = url + latestVersion + endUrl;
 
-                MessageBox.Show("The new url with the end is : " + url);
             }
             catch (Exception ex)
             {
@@ -138,22 +149,39 @@ namespace MultiInstaller
                 var nodes = doc.DocumentNode.SelectSingleNode("//a[contains(@href, '.msi')]");
 
                 string originalHref = nodes.GetAttributeValue("href", "");
-                MessageBox.Show($"Original : {originalHref}");
                 string fullFileUrl = new Uri(new Uri(url), originalHref).ToString();
-                MessageBox.Show($"full : {fullFileUrl}");
                 string modifiedHref = fullFileUrl.Replace(" ", "%20");
-                MessageBox.Show($"modif : {modifiedHref}");
 
                 url = modifiedHref;
-                MessageBox.Show($"the url : {url}");
 
-                System.Net.WebClient myWebClient = new System.Net.WebClient();
-                AutoClosingMessageBox.Show(packageName + " Download Started", timeout: 2000);
-                myWebClient.DownloadFile(url, DownloadPath + installerName);
+                await InstallPackage(url, downloadPath, packageName, installerName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur lors du téléchargement: {ex.Message}");
+            }
+        }
+        static async Task InstallPackage(string url, string downloadPath, string packageName, string installerName)
+        {
+            System.Net.WebClient myWebClient = new System.Net.WebClient();
+            AutoClosingMessageBox.Show(packageName + " Download Started", timeout: 2000);
+            myWebClient.DownloadFile(url, downloadPath + installerName);
 
-                AutoClosingMessageBox.Show(packageName + " Download Complete", timeout: 2000);
+            AutoClosingMessageBox.Show(packageName + " Download Complete", timeout: 2000);
 
-                string msiPath = DownloadPath + installerName;
+            string filePath = downloadPath + installerName;
+
+            bool containsExe = url.Contains(".exe");
+
+            if (containsExe == true)
+            {
+                ProcessStartInfo installInfo = new ProcessStartInfo("cmd.exe", "/C " + filePath);
+                var installProcess = Process.Start(installInfo);
+                installProcess.WaitForExit();
+            }
+            else
+            {
+                string msiPath = downloadPath + installerName;
 
                 string arguments = $"/passive /i \"{msiPath}\"";
 
@@ -162,23 +190,10 @@ namespace MultiInstaller
                 var process = Process.Start(startInfo);
                 process.WaitForExit();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erreur lors du téléchargement: {ex.Message}");
-            }
 
-            Form1 form = new Form1();
-
-            if (form.IsAutoDeleteInstallerChecked() == true)
-            {
-                string filePath = DownloadPath + installerName;
-
-                string command = $"del \"{filePath}\"";
-
-                ProcessStartInfo deleteInfo = new ProcessStartInfo("cmd.exe", "/C " + command);
-                var deleteProcess = Process.Start(deleteInfo);
-                deleteProcess.WaitForExit();
-            }
+            ProcessStartInfo deleteInfo = new ProcessStartInfo($"cmd.exe", "/C " + $"del \"{filePath}\"");
+            var deleteProcess = Process.Start(deleteInfo);
+            deleteProcess.WaitForExit();
         }
     }
 }
