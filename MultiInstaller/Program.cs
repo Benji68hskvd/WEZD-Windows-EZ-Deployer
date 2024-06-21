@@ -102,9 +102,7 @@ namespace MultiInstaller
 
             if (containsMsi || containsExe)
             {
-                MessageBox.Show("In contains msi or exe");
                 await InstallPackage(url, downloadPath, packageName, installerName);
-                MessageBox.Show("return");
                 return;
             }
 
