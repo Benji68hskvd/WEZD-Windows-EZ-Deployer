@@ -19,6 +19,16 @@ namespace MultiInstaller
             return chrome.Checked;
         }
 
+        public bool IsFirefoxChecked()
+        {
+            return Firefox.Checked;
+        }
+
+        public bool IsTeamViewerChecked()
+        {
+        return TeamViewer.Checked;
+        }
+
         public bool IsCCleanerChecked()
         {
             return CCleaner.Checked;
@@ -86,7 +96,7 @@ namespace MultiInstaller
             this.Close();
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click_1(object sender, EventArgs e)
         {
             this.Close();
         }

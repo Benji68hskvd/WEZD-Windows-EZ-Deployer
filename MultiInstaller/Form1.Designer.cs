@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             InstallButton = new Button();
-            button2 = new Button();
+            CancelButton = new Button();
             label1 = new Label();
             chrome = new CheckBox();
             CCleaner = new CheckBox();
@@ -50,6 +50,8 @@
             OfficeOnlineKMS = new RadioButton();
             Ohook = new RadioButton();
             UseCurDir = new CheckBox();
+            TeamViewer = new CheckBox();
+            Firefox = new CheckBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -65,14 +67,15 @@
             InstallButton.UseVisualStyleBackColor = true;
             InstallButton.Click += InstallButton_Click;
             // 
-            // button2
+            // CancelButton
             // 
-            button2.Location = new Point(618, 402);
-            button2.Name = "button2";
-            button2.Size = new Size(100, 27);
-            button2.TabIndex = 1;
-            button2.Text = "Cancel";
-            button2.UseVisualStyleBackColor = true;
+            CancelButton.Location = new Point(618, 402);
+            CancelButton.Name = "CancelButton";
+            CancelButton.Size = new Size(100, 27);
+            CancelButton.TabIndex = 1;
+            CancelButton.Text = "Cancel";
+            CancelButton.UseVisualStyleBackColor = true;
+            CancelButton.Click += CancelButton_Click_1;
             // 
             // label1
             // 
@@ -86,7 +89,7 @@
             // chrome
             // 
             chrome.AutoSize = true;
-            chrome.Location = new Point(38, 17);
+            chrome.Location = new Point(38, 16);
             chrome.Name = "chrome";
             chrome.Size = new Size(69, 19);
             chrome.TabIndex = 3;
@@ -96,7 +99,7 @@
             // CCleaner
             // 
             CCleaner.AutoSize = true;
-            CCleaner.Location = new Point(38, 42);
+            CCleaner.Location = new Point(38, 66);
             CCleaner.Name = "CCleaner";
             CCleaner.Size = new Size(74, 19);
             CCleaner.TabIndex = 4;
@@ -106,7 +109,7 @@
             // NovaBench
             // 
             NovaBench.AutoSize = true;
-            NovaBench.Location = new Point(38, 66);
+            NovaBench.Location = new Point(38, 91);
             NovaBench.Name = "NovaBench";
             NovaBench.Size = new Size(87, 19);
             NovaBench.TabIndex = 5;
@@ -116,7 +119,7 @@
             // VLC
             // 
             VLC.AutoSize = true;
-            VLC.Location = new Point(38, 117);
+            VLC.Location = new Point(38, 141);
             VLC.Name = "VLC";
             VLC.Size = new Size(47, 19);
             VLC.TabIndex = 6;
@@ -126,7 +129,7 @@
             // LibreOffice
             // 
             LibreOffice.AutoSize = true;
-            LibreOffice.Location = new Point(38, 91);
+            LibreOffice.Location = new Point(38, 116);
             LibreOffice.Name = "LibreOffice";
             LibreOffice.Size = new Size(84, 19);
             LibreOffice.TabIndex = 7;
@@ -211,14 +214,16 @@
             // panel2
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(TeamViewer);
             panel2.Controls.Add(chrome);
+            panel2.Controls.Add(Firefox);
             panel2.Controls.Add(CCleaner);
+            panel2.Controls.Add(VLC);
             panel2.Controls.Add(NovaBench);
             panel2.Controls.Add(LibreOffice);
-            panel2.Controls.Add(VLC);
             panel2.Location = new Point(36, 44);
             panel2.Name = "panel2";
-            panel2.Size = new Size(200, 162);
+            panel2.Size = new Size(200, 204);
             panel2.TabIndex = 19;
             // 
             // label3
@@ -285,6 +290,26 @@
             UseCurDir.Text = "Use Current Directory";
             UseCurDir.UseVisualStyleBackColor = true;
             // 
+            // TeamViewer
+            // 
+            TeamViewer.AutoSize = true;
+            TeamViewer.Location = new Point(38, 166);
+            TeamViewer.Name = "TeamViewer";
+            TeamViewer.Size = new Size(89, 19);
+            TeamViewer.TabIndex = 8;
+            TeamViewer.Text = "TeamViewer";
+            TeamViewer.UseVisualStyleBackColor = true;
+            // 
+            // Firefox
+            // 
+            Firefox.AutoSize = true;
+            Firefox.Location = new Point(38, 41);
+            Firefox.Name = "Firefox";
+            Firefox.Size = new Size(62, 19);
+            Firefox.TabIndex = 9;
+            Firefox.Text = "Firefox";
+            Firefox.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -298,9 +323,8 @@
             Controls.Add(label2);
             Controls.Add(panel1);
             Controls.Add(AutoDeleteInstaller);
-            Controls.Add(button2);
+            Controls.Add(CancelButton);
             Controls.Add(InstallButton);
-            Cursor = Cursors.Default;
             Name = "Form1";
             Text = "MultiInstaller";
             panel1.ResumeLayout(false);
@@ -316,7 +340,7 @@
         #endregion
 
         private Button InstallButton;
-        private Button button2;
+        private Button CancelButton;
         private Label label1;
         private CheckBox chrome;
         private CheckBox CCleaner;
@@ -337,5 +361,7 @@
         private RadioButton Ohook;
         private RadioButton OfficeOnlineKMS;
         private CheckBox UseCurDir;
+        private CheckBox TeamViewer;
+        private CheckBox Firefox;
     }
 }
