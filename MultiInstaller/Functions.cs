@@ -8,8 +8,6 @@ namespace MultiInstaller
         {
             try
             {
-                Form1.UpdateStatusLabel("Download...");
-
                 Debug.WriteLine("début install");
 
                 // vérifier directement les checkboxes sur l'instance actuelle du formulaire
@@ -202,6 +200,8 @@ namespace MultiInstaller
 
         public static async Task InstallVLC()
         {
+            Form1.UpdateStatusLabel("Download VLC...");
+
             var downloadPath = "C:\\Users\\" + Environment.UserName + "\\Downloads\\";
             var baseVlcUrl = "https://download.videolan.org/vlc/";
             var installerName = "vlc_installer.msi";
@@ -274,10 +274,10 @@ namespace MultiInstaller
 
         public static async Task InstallPackage(string url, string downloadPath, string packageName, string installerName)
         {
+            Form1.UpdateStatusLabel($"Download {packageName}...");
+
             System.Net.WebClient myWebClient = new System.Net.WebClient();
-            AutoClosingMessageBox.Show(packageName + " Download Started", timeout: 2000);
-            myWebClient.DownloadFile(url, downloadPath + installerName);
-            AutoClosingMessageBox.Show(packageName + " Download Complete", timeout: 2000);
+            await myWebClient.DownloadFileTaskAsync(url, downloadPath + installerName);
 
             string filePath = downloadPath + installerName;
 
@@ -285,12 +285,15 @@ namespace MultiInstaller
 
             if (containsExe == true)
             {
+                Form1.UpdateStatusLabel($"Install {packageName}...");
                 ProcessStartInfo installInfo = new ProcessStartInfo("cmd.exe", "/C " + filePath);
                 var installProcess = Process.Start(installInfo);
                 installProcess.WaitForExit();
             }
             else
             {
+                Form1.UpdateStatusLabel($"Install {packageName}...");
+
                 string msiPath = downloadPath + installerName;
 
                 string arguments = $"/passive /i \"{msiPath}\"";

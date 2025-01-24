@@ -25,7 +25,6 @@ namespace MultiInstaller
 
         private async void InstallButton_Click(object sender, EventArgs e)
         {
-            UpdateStatusLabel("Start install...");
             Debug.WriteLine("bouton start début install");
 
             // Désactiver tous les contrôles
