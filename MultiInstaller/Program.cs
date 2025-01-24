@@ -122,21 +122,27 @@ namespace MultiInstaller
                     versions = versionNodes
                                 .Select(node => node.GetAttributeValue("href", ""))
                                 .Select(href => href.Replace(hrefReplace, "").Trim('/'))
-                                .Where(href => Version.TryParse(href, out _)) // Vérifiez que href est une version valide
+                                .Where(href => Version.TryParse(href, out _))
                                 .ToList();
                 }
 
-                versions = versions.Where(version => !version.Contains($"'{ignoreVersionName}'")).ToList();
+                versions = versions.Where(version => !version.Contains(ignoreVersionName)).ToList();
                 versions.Sort((x, y) => new Version(x).CompareTo(new Version(y)));
                 string latestVersion = versions.LastOrDefault();
 
                 url = url + latestVersion + endUrl;
-
+            }
+            catch (HttpRequestException ex) when (ex.InnerException is System.Net.Sockets.SocketException)
+            {
+                MessageBox.Show("Erreur de connexion internet: Veuillez vérifier votre connexion et réessayer.");
+                return;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erreur lors de la récupération des versions: {ex.Message}");
+                return;
             }
+
             try
             {
                 HttpClient client = new HttpClient();
@@ -154,17 +160,21 @@ namespace MultiInstaller
 
                 await InstallPackage(url, downloadPath, packageName, installerName);
             }
+            catch (HttpRequestException ex) when (ex.InnerException is System.Net.Sockets.SocketException)
+            {
+                MessageBox.Show("Erreur de connexion internet: Veuillez vérifier votre connexion et réessayer.");
+            }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erreur lors du téléchargement: {ex.Message}");
             }
         }
+
         static async Task InstallPackage(string url, string downloadPath, string packageName, string installerName)
         {
             System.Net.WebClient myWebClient = new System.Net.WebClient();
             AutoClosingMessageBox.Show(packageName + " Download Started", timeout: 2000);
             myWebClient.DownloadFile(url, downloadPath + installerName);
-
             AutoClosingMessageBox.Show(packageName + " Download Complete", timeout: 2000);
 
             string filePath = downloadPath + installerName;

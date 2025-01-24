@@ -44,14 +44,16 @@
             WinOnlineKMS = new RadioButton();
             panel1 = new Panel();
             panel2 = new Panel();
+            TeamViewer = new CheckBox();
+            Firefox = new CheckBox();
             label3 = new Label();
             panel3 = new Panel();
             radioButton8 = new RadioButton();
             OfficeOnlineKMS = new RadioButton();
             Ohook = new RadioButton();
             UseCurDir = new CheckBox();
-            TeamViewer = new CheckBox();
-            Firefox = new CheckBox();
+            panel4 = new Panel();
+            label4 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -80,7 +82,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(43, 35);
+            label1.Location = new Point(40, 35);
             label1.Name = "label1";
             label1.Size = new Size(122, 15);
             label1.TabIndex = 2;
@@ -151,7 +153,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(260, 35);
+            label2.Location = new Point(258, 35);
             label2.Name = "label2";
             label2.Size = new Size(119, 15);
             label2.TabIndex = 12;
@@ -226,10 +228,30 @@
             panel2.Size = new Size(200, 204);
             panel2.TabIndex = 19;
             // 
+            // TeamViewer
+            // 
+            TeamViewer.AutoSize = true;
+            TeamViewer.Location = new Point(38, 166);
+            TeamViewer.Name = "TeamViewer";
+            TeamViewer.Size = new Size(89, 19);
+            TeamViewer.TabIndex = 8;
+            TeamViewer.Text = "TeamViewer";
+            TeamViewer.UseVisualStyleBackColor = true;
+            // 
+            // Firefox
+            // 
+            Firefox.AutoSize = true;
+            Firefox.Location = new Point(38, 41);
+            Firefox.Name = "Firefox";
+            Firefox.Size = new Size(62, 19);
+            Firefox.TabIndex = 9;
+            Firefox.Text = "Firefox";
+            Firefox.UseVisualStyleBackColor = true;
+            // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(260, 201);
+            label3.Location = new Point(258, 200);
             label3.Name = "label3";
             label3.Size = new Size(102, 15);
             label3.TabIndex = 20;
@@ -290,31 +312,30 @@
             UseCurDir.Text = "Use Current Directory";
             UseCurDir.UseVisualStyleBackColor = true;
             // 
-            // TeamViewer
+            // panel4
             // 
-            TeamViewer.AutoSize = true;
-            TeamViewer.Location = new Point(38, 166);
-            TeamViewer.Name = "TeamViewer";
-            TeamViewer.Size = new Size(89, 19);
-            TeamViewer.TabIndex = 8;
-            TeamViewer.Text = "TeamViewer";
-            TeamViewer.UseVisualStyleBackColor = true;
+            panel4.BorderStyle = BorderStyle.FixedSingle;
+            panel4.Location = new Point(455, 44);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(422, 330);
+            panel4.TabIndex = 24;
             // 
-            // Firefox
+            // label4
             // 
-            Firefox.AutoSize = true;
-            Firefox.Location = new Point(38, 41);
-            Firefox.Name = "Firefox";
-            Firefox.Size = new Size(62, 19);
-            Firefox.TabIndex = 9;
-            Firefox.Text = "Firefox";
-            Firefox.UseVisualStyleBackColor = true;
+            label4.AutoSize = true;
+            label4.Location = new Point(459, 35);
+            label4.Name = "label4";
+            label4.Size = new Size(103, 15);
+            label4.TabIndex = 0;
+            label4.Text = "Office Instalation :";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(730, 441);
+            ClientSize = new Size(928, 446);
+            Controls.Add(label4);
+            Controls.Add(panel4);
             Controls.Add(UseCurDir);
             Controls.Add(label3);
             Controls.Add(panel3);
@@ -363,5 +384,7 @@
         private CheckBox UseCurDir;
         private CheckBox TeamViewer;
         private CheckBox Firefox;
+        private Panel panel4;
+        private Label label4;
     }
 }

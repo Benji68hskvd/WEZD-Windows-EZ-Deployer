@@ -23,7 +23,7 @@ namespace MultiInstaller
         {
             return Firefox.Checked;
         }
-
+        //
         public bool IsTeamViewerChecked()
         {
         return TeamViewer.Checked;
