@@ -54,6 +54,7 @@
             UseCurDir = new CheckBox();
             panel4 = new Panel();
             label4 = new Label();
+            labelStatus = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -233,7 +234,7 @@
             TeamViewer.AutoSize = true;
             TeamViewer.Location = new Point(38, 166);
             TeamViewer.Name = "TeamViewer";
-            TeamViewer.Size = new Size(89, 19);
+            TeamViewer.Size = new Size(90, 19);
             TeamViewer.TabIndex = 8;
             TeamViewer.Text = "TeamViewer";
             TeamViewer.UseVisualStyleBackColor = true;
@@ -243,7 +244,7 @@
             Firefox.AutoSize = true;
             Firefox.Location = new Point(38, 41);
             Firefox.Name = "Firefox";
-            Firefox.Size = new Size(62, 19);
+            Firefox.Size = new Size(61, 19);
             Firefox.TabIndex = 9;
             Firefox.Text = "Firefox";
             Firefox.UseVisualStyleBackColor = true;
@@ -329,11 +330,20 @@
             label4.TabIndex = 0;
             label4.Text = "Office Instalation :";
             // 
+            // labelStatus
+            // 
+            labelStatus.AutoSize = true;
+            labelStatus.Location = new Point(90, 337);
+            labelStatus.Name = "labelStatus";
+            labelStatus.Size = new Size(0, 15);
+            labelStatus.TabIndex = 25;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(928, 446);
+            Controls.Add(labelStatus);
             Controls.Add(label4);
             Controls.Add(panel4);
             Controls.Add(UseCurDir);
@@ -386,5 +396,6 @@
         private CheckBox Firefox;
         private Panel panel4;
         private Label label4;
+        private static Label labelStatus;
     }
 }

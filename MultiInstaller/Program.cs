@@ -1,34 +1,29 @@
-using System;
 using System.Diagnostics;
-using System.Net;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.DataFormats;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using HtmlAgilityPack;
-using System.Xml.Linq;
-using System.Runtime.InteropServices;
 
 namespace MultiInstaller
 {
-    internal static class Program
+    public class Program
     {
 
         [STAThread]
-        static async Task Main()
+        public static async Task Main()
         {
             ApplicationConfiguration.Initialize();
-            Form1 form = new Form1();
+            Form1 form = new();
             Application.Run(form);
 
-            if (form.Install == true)
+            if (form.Install)
             {
                 await CheckInstall(form.IsChromeChecked(), "https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi", "", "/", "", "", "chrome_installer.msi", "Chrome");
                 await CheckInstall(form.IsFirefoxChecked(), "https://ftp.mozilla.org/pub/firefox/releases/", "/pub/firefox/releases/", "/pub/firefox/releases/", "b", "/win64/fr/", "firefox_installer.msi", "Firefox");
                 await CheckInstall(form.IsCCleanerChecked(), "https://bits.avcdn.net/productfamily_CCLEANER/insttype_BUSINESS_32/platform_WIN_MSI/installertype_ONLINE/build_RELEASE/.msi/", "", "/", "", "", "ccleaner_installer.msi", "CCleaner");
                 await CheckInstall(form.IsNovaBenchChecked(), "https://cdn.novabench.net/novabench.msi", "", "/", "", "", "novabench_installer.msi", "NovaBench");
                 await CheckInstall(form.IsLibreOfficeChecked(), "https://miroir.univ-lorraine.fr/documentfoundation/libreoffice/stable/", "", "/", "", "/win/x86_64/", "libreoffice_installer.msi", "LibreOffice");
-                await CheckInstall(form.IsVLCChecked(), "https://get.videolan.org/vlc/last/win64/", "", "/", "", "", "vlc_installer.msi", "VLC");
+                //await CheckInstall(form.IsVLCChecked(), "https://get.videolan.org/vlc/last/win64/", "", "/", "", "", "vlc_installer.msi", "VLC");
+                if (form.IsVLCChecked())
+                {
+                    await InstallVLC(); // appel spécifique pour VLC
+                }
                 await CheckInstall(form.IsTeamViewerChecked(), "https://dl.teamviewer.com/download/version_15x/TeamViewer_Setup_x64.exe", "", "/", "", "", "TeamViewer.exe", "TeamViewer");
 
                 if (form.IsHWIDChecked() == true)
@@ -54,7 +49,7 @@ namespace MultiInstaller
             }
         }
 
-        static async Task CheckInstall(bool isChecked, string url, string hrefNodes, string hrefReplace, string ignoreVersionName, string endUrl, string installerName, string packageName)
+        public static async Task CheckInstall(bool isChecked, string url, string hrefNodes, string hrefReplace, string ignoreVersionName, string endUrl, string installerName, string packageName)
         {
             if (isChecked == true)
             {
@@ -64,9 +59,11 @@ namespace MultiInstaller
 
         //Activation Script ----------------------------------------------------------------------------------------------------------
 
-        static async void ActivationCommand(bool useCurrentDirectory, string command)
+        public static async void ActivationCommand(bool useCurrentDirectory, string command)
         {
-            string url = "https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/master/MAS/All-In-One-Version/MAS_AIO-CRC32_31F7FD1E.cmd";
+            Form1.UpdateStatusLabel("Activate...");
+            //string url = "https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/master/MAS/All-In-One-Version/MAS_AIO-CRC32_31F7FD1E.cmd";
+            string url = "https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/refs/heads/master/MAS/All-In-One-Version-KL/MAS_AIO.cmd";
             string currentDirectory = Directory.GetCurrentDirectory();
             string ScriptFile = "\\MAS_AIO.cmd";
 
@@ -93,7 +90,7 @@ namespace MultiInstaller
         }
 
         //Installation Script ---------------------------------------------------------------------------------------------------------------
-        static async Task Install(string url, string hrefNodes, string hrefReplace, string ignoreVersionName, string endUrl, string installerName, string packageName)
+        public static async Task Install(string url, string hrefNodes, string hrefReplace, string ignoreVersionName, string endUrl, string installerName, string packageName)
         {
             var downloadPath = "C:\\Users\\" + Environment.UserName + "\\Downloads\\";
 
@@ -167,6 +164,78 @@ namespace MultiInstaller
             catch (Exception ex)
             {
                 MessageBox.Show($"Erreur lors du téléchargement: {ex.Message}");
+            }
+        }
+
+        public static async Task InstallVLC()
+        {
+            var downloadPath = "C:\\Users\\" + Environment.UserName + "\\Downloads\\";
+            string baseVlcUrl = "https://download.videolan.org/vlc/";
+            string installerName = "vlc_installer.msi";
+            string packageName = "VLC";
+
+            try
+            {
+                HttpClient client = new HttpClient();
+
+                // récupérer la liste des versions disponibles
+                string pageContent = await client.GetStringAsync(baseVlcUrl);
+                var doc = new HtmlAgilityPack.HtmlDocument();
+                doc.LoadHtml(pageContent);
+
+                var versionNodes = doc.DocumentNode.SelectNodes("//a[starts-with(@href, '3.0.') and contains(@href, '/')]");
+                List<string> versions = new List<string>();
+
+                if (versionNodes != null)
+                {
+                    versions = versionNodes
+                                .Select(node => node.GetAttributeValue("href", "").Trim('/'))
+                                .Where(href => Version.TryParse(href, out _))
+                                .ToList();
+                }
+
+                // trier les versions par ordre décroissant
+                versions.Sort((x, y) => new Version(y).CompareTo(new Version(x)));
+
+                // vérifier chaque version pour trouver un fichier MSI valide
+                foreach (var version in versions)
+                {
+                    string versionUrl = $"{baseVlcUrl}{version}/win64/";
+                    try
+                    {
+                        string versionPageContent = await client.GetStringAsync(versionUrl);
+                        var versionDoc = new HtmlAgilityPack.HtmlDocument();
+                        versionDoc.LoadHtml(versionPageContent);
+
+                        var msiNode = versionDoc.DocumentNode.SelectSingleNode($"//a[contains(@href, 'vlc-{version}-win64.msi')]");
+
+                        if (msiNode != null)
+                        {
+                            string originalHref = msiNode.GetAttributeValue("href", "");
+                            string fullFileUrl = new Uri(new Uri(versionUrl), originalHref).ToString();
+
+                            // téléchargement et installation
+                            await InstallPackage(fullFileUrl, downloadPath, packageName, installerName);
+                            return;
+                        }
+                    }
+                    catch
+                    {
+                        // ignorer les erreurs et passer à la version suivante
+                        continue;
+                    }
+                }
+
+                // si aucune version valide n'a été trouvée
+                MessageBox.Show("Impossible de trouver un fichier MSI valide pour VLC.");
+            }
+            catch (HttpRequestException ex) when (ex.InnerException is System.Net.Sockets.SocketException)
+            {
+                MessageBox.Show("Erreur de connexion internet: Veuillez vérifier votre connexion et réessayer.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur lors de la recherche des versions de VLC: {ex.Message}");
             }
         }
 

@@ -1,10 +1,12 @@
 using System.Net.Quic;
+using System.Windows.Forms;
 
 namespace MultiInstaller
 {
     public partial class Form1 : Form
     {
-        public bool Install { get; set; }
+        public bool Install { get; private set; }
+        //private Label statusLabel;
 
         public Form1()
         {
@@ -23,7 +25,7 @@ namespace MultiInstaller
         {
             return Firefox.Checked;
         }
-        //
+        
         public bool IsTeamViewerChecked()
         {
         return TeamViewer.Checked;
@@ -93,12 +95,24 @@ namespace MultiInstaller
         private void InstallButton_Click(object sender, EventArgs e)
         {
             Install = true;
-            this.Close();
+            Close();
         }
 
         private void CancelButton_Click_1(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
+        }
+
+        public static void UpdateStatusLabel(string text)
+        {
+            labelStatus.Text = text;
+            //labelStatus.Location = new Point((ClientSize.Width - labelStatus.PreferredWidth) / 2, labelStatus.Location.Y);
+        }
+
+        //controlers
+        public void Initalize()
+        {
+            
         }
     }
 }
