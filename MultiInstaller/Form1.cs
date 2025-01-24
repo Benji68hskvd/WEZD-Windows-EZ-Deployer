@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net.Quic;
 using System.Windows.Forms;
 
@@ -95,12 +96,17 @@ namespace MultiInstaller
         private void InstallButton_Click(object sender, EventArgs e)
         {
             Install = true;
-            Close();
+            //Close();
+            Form1.UpdateStatusLabel("Start install...");
+            Debug.WriteLine("début install");
+            Functions func = new();
+            func.Install();
         }
 
         private void CancelButton_Click_1(object sender, EventArgs e)
         {
-            Close();
+            //Close();
+            Application.Exit();
         }
 
         public static void UpdateStatusLabel(string text)
