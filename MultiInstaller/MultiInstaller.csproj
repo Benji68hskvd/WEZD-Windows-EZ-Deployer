@@ -1,35 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
 
-  <ItemGroup>
-    <None Remove="README.md~RF1b5d1aa.TMP" />
-  </ItemGroup>
+		<!-- Publication autonome -->
+		<PublishSingleFile>true</PublishSingleFile> <!-- Un seul fichier autonome -->
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier> <!-- Cible Windows 64 bits -->
+		<SelfContained>true</SelfContained> <!-- Inclut le runtime -->
+		<PublishTrimmed>false</PublishTrimmed> <!-- Pas de trimming pour Windows Forms -->
+	</PropertyGroup>
 
-  <!--<ItemGroup>
-    <PackageReference Include="AutoClosingMessageBox" Version="1.0.0.5" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
-  </ItemGroup>-->
+	<ItemGroup>
+		<None Remove="README.md~RF1b5d1aa.TMP" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
 
 </Project>
