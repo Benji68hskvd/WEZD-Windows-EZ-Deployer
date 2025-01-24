@@ -1,20 +1,20 @@
-# MultiInstaller
+# Windows Easy Deploy
 
 A program that provide : downloading the latest version of a program, install it, activate windows and office (for massive windows installation) 
 
-## Usage
+## Usage :
 
 - Check the program that you want to install
 - Choose if you want to activate windows, office or both
 - Check "Use Current Directory" if you want use the current directory of the program (where is the program MAS_AIO-CRC32_31F7FD1E.cmd is stored by default)
 - Or if it's not check he just use the Downloads folder of the current User to execute the MAS_AIO-CRC32_31F7FD1E.cmd
-- Finally click on "Apply" to install and activate windows or office
+- Finally click on "Apply" to install or/and activate windows or office
 
-## Nuget Package that i use
+## Nuget Package :
 
-- AutoClosingMessageBox by Dmitry Garavsky
+- A̶u̶t̶o̶C̶l̶o̶s̶i̶n̶g̶M̶e̶s̶s̶a̶g̶e̶B̶o̶x̶ ̶b̶y̶ ̶D̶m̶i̶t̶r̶y̶ ̶G̶a̶r̶a̶v̶s̶k̶y̶
 - HtmlAgilityPack by ZZZ Projects
 
-## External Program that i use
+## External Program :
 
 - Microsoft Activation Scripts (MAS) by massgravel
