@@ -4,47 +4,129 @@ namespace MultiInstaller
 {
     public class Functions
     {
+        //public async void Install()
+        //{
+        //    Form1 form = new();
+        //    Form1.UpdateStatusLabel("Activate...");
+        //    if (form.Install)
+        //    {
+        //        await CheckInstall(form.IsChromeChecked(), "https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi", "", "/", "", "", "chrome_installer.msi", "Chrome");
+        //        await CheckInstall(form.IsFirefoxChecked(), "https://ftp.mozilla.org/pub/firefox/releases/", "/pub/firefox/releases/", "/pub/firefox/releases/", "b", "/win64/fr/", "firefox_installer.msi", "Firefox");
+        //        await CheckInstall(form.IsCCleanerChecked(), "https://bits.avcdn.net/productfamily_CCLEANER/insttype_BUSINESS_32/platform_WIN_MSI/installertype_ONLINE/build_RELEASE/.msi/", "", "/", "", "", "ccleaner_installer.msi", "CCleaner");
+        //        await CheckInstall(form.IsNovaBenchChecked(), "https://cdn.novabench.net/novabench.msi", "", "/", "", "", "novabench_installer.msi", "NovaBench");
+        //        await CheckInstall(form.IsLibreOfficeChecked(), "https://miroir.univ-lorraine.fr/documentfoundation/libreoffice/stable/", "", "/", "", "/win/x86_64/", "libreoffice_installer.msi", "LibreOffice");
+        //        //await CheckInstall(form.IsVLCChecked(), "https://get.videolan.org/vlc/last/win64/", "", "/", "", "", "vlc_installer.msi", "VLC");
+        //        if (form.IsVLCChecked())
+        //        {
+        //            await InstallVLC(); // appel spécifique pour VLC
+        //        }
+        //        await CheckInstall(form.IsTeamViewerChecked(), "https://dl.teamviewer.com/download/version_15x/TeamViewer_Setup_x64.exe", "", "/", "", "", "TeamViewer.exe", "TeamViewer");
+
+        //        if (form.IsHWIDChecked() == true)
+        //        {
+        //            ActivationCommand(form.IsUseCurDirChecked(), " /HWID");
+        //        }
+        //        if (form.IsKMS38Checked() == true)
+        //        {
+        //            ActivationCommand(form.IsUseCurDirChecked(), " /KMS38");
+        //        }
+        //        if (form.IsWinOnlineKMSChecked() == true)
+        //        {
+        //            ActivationCommand(form.IsUseCurDirChecked(), " /KMS-Windows /KMS-RenewalTask");
+        //        }
+        //        if (form.IsOhookChecked() == true)
+        //        {
+        //            ActivationCommand(form.IsUseCurDirChecked(), " /Ohook");
+        //        }
+        //        if (form.IsOfficeOnlineKMSChecked() == true)
+        //        {
+        //            ActivationCommand(form.IsUseCurDirChecked(), " /KMS-Office /KMS-RenewalTask");
+        //        }
+        //    }
+        //}
+
         public async void Install()
         {
-            Form1 form = new();
-            Form1.UpdateStatusLabel("Activate...");
-            if (form.Install)
+            try
             {
-                await CheckInstall(form.IsChromeChecked(), "https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi", "", "/", "", "", "chrome_installer.msi", "Chrome");
-                await CheckInstall(form.IsFirefoxChecked(), "https://ftp.mozilla.org/pub/firefox/releases/", "/pub/firefox/releases/", "/pub/firefox/releases/", "b", "/win64/fr/", "firefox_installer.msi", "Firefox");
-                await CheckInstall(form.IsCCleanerChecked(), "https://bits.avcdn.net/productfamily_CCLEANER/insttype_BUSINESS_32/platform_WIN_MSI/installertype_ONLINE/build_RELEASE/.msi/", "", "/", "", "", "ccleaner_installer.msi", "CCleaner");
-                await CheckInstall(form.IsNovaBenchChecked(), "https://cdn.novabench.net/novabench.msi", "", "/", "", "", "novabench_installer.msi", "NovaBench");
-                await CheckInstall(form.IsLibreOfficeChecked(), "https://miroir.univ-lorraine.fr/documentfoundation/libreoffice/stable/", "", "/", "", "/win/x86_64/", "libreoffice_installer.msi", "LibreOffice");
-                //await CheckInstall(form.IsVLCChecked(), "https://get.videolan.org/vlc/last/win64/", "", "/", "", "", "vlc_installer.msi", "VLC");
-                if (form.IsVLCChecked())
+                Form1 form = new();
+                Form1.UpdateStatusLabel("Download...");
+
+                //if (form.Install)
+                //{
+                    Debug.WriteLine("début install");
+                    // vérifier directement les checkboxes
+                if (form.chrome.Checked)
                 {
+                    Debug.WriteLine("install chrome");
+                    await Install("https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi", "", "/", "", "", "chrome_installer.msi", "Chrome");
+                }
+                if (form.Firefox.Checked)
+                {
+                    Debug.WriteLine("install firefox");
+                    await CheckInstall("https://ftp.mozilla.org/pub/firefox/releases/", "/pub/firefox/releases/", "/pub/firefox/releases/", "b", "/win64/fr/", "firefox_installer.msi", "Firefox");
+                }
+                if (form.CCleaner.Checked)
+                {
+                    Debug.WriteLine("install ccleaner");
+                    await CheckInstall("https://bits.avcdn.net/productfamily_CCLEANER/insttype_BUSINESS_32/platform_WIN_MSI/installertype_ONLINE/build_RELEASE/.msi/", "", "/", "", "", "ccleaner_installer.msi", "CCleaner");
+                }
+                if (form.NovaBench.Checked)
+                {
+                    Debug.WriteLine("install novabench");
+                    await CheckInstall("https://cdn.novabench.net/novabench.msi", "", "/", "", "", "novabench_installer.msi", "NovaBench");
+                }
+                if (form.LibreOffice.Checked)
+                {
+                    Debug.WriteLine("install libreoffice");
+                    await CheckInstall("https://miroir.univ-lorraine.fr/documentfoundation/libreoffice/stable/", "", "/", "", "/win/x86_64/", "libreoffice_installer.msi", "LibreOffice");
+                }
+                if (form.VLC.Checked)
+                {
+                    Debug.WriteLine("install vlc");
                     await InstallVLC(); // appel spécifique pour VLC
                 }
-                await CheckInstall(form.IsTeamViewerChecked(), "https://dl.teamviewer.com/download/version_15x/TeamViewer_Setup_x64.exe", "", "/", "", "", "TeamViewer.exe", "TeamViewer");
-
-                if (form.IsHWIDChecked() == true)
+                if (form.TeamViewer.Checked)
                 {
-                    ActivationCommand(form.IsUseCurDirChecked(), " /HWID");
+                    Debug.WriteLine("install teamviewer");
+                    await CheckInstall("https://dl.teamviewer.com/download/version_15x/TeamViewer_Setup_x64.exe", "", "/", "", "", "TeamViewer.exe", "TeamViewer");
                 }
-                if (form.IsKMS38Checked() == true)
+                // activation Windows
+                if (form.HWID.Checked)
                 {
-                    ActivationCommand(form.IsUseCurDirChecked(), " /KMS38");
+                    Debug.WriteLine("using hwid");
+                    ActivationCommand(form.UseCurDir.Checked, " /HWID");
                 }
-                if (form.IsWinOnlineKMSChecked() == true)
+                if (form.KMS38.Checked)
                 {
-                    ActivationCommand(form.IsUseCurDirChecked(), " /KMS-Windows /KMS-RenewalTask");
+                    Debug.WriteLine("using kms38");
+                    ActivationCommand(form.UseCurDir.Checked, " /KMS38");
                 }
-                if (form.IsOhookChecked() == true)
+                if (form.WinOnlineKMS.Checked)
                 {
-                    ActivationCommand(form.IsUseCurDirChecked(), " /Ohook");
+                    Debug.WriteLine("using online kms windows");
+                    ActivationCommand(form.UseCurDir.Checked, " /KMS-Windows /KMS-RenewalTask");
                 }
-                if (form.IsOfficeOnlineKMSChecked() == true)
+                // activation Office
+                if (form.Ohook.Checked)
                 {
-                    ActivationCommand(form.IsUseCurDirChecked(), " /KMS-Office /KMS-RenewalTask");
+                    Debug.WriteLine("install ohook");
+                    ActivationCommand(form.UseCurDir.Checked, " /Ohook");
                 }
+                if (form.OfficeOnlineKMS.Checked) 
+                {
+                    Debug.WriteLine("install online kms office");
+                    ActivationCommand(form.UseCurDir.Checked, " /KMS-Office /KMS-RenewalTask");
+                }
+                //}
+            }
+            catch (Exception e)
+            {
+                //throw; // TODO handle exception
+                MessageBox.Show($@"Erreur : {e}");
             }
         }
-        
+
         //Activation Script ----------------------------------------------------------------------------------------------------------
 
         public static async void ActivationCommand(bool useCurrentDirectory, string command)
@@ -77,12 +159,12 @@ namespace MultiInstaller
             }
         }
 
-        public static async Task CheckInstall(bool isChecked, string url, string hrefNodes, string hrefReplace, string ignoreVersionName, string endUrl, string installerName, string packageName)
+        public static async Task CheckInstall(/*bool isChecked,*/ string url, string hrefNodes, string hrefReplace, string ignoreVersionName, string endUrl, string installerName, string packageName)
         {
-            if (isChecked == true)
-            {
+            //if (isChecked == true)
+            //{
                 await Install(url, hrefNodes, hrefReplace, ignoreVersionName, endUrl, installerName, packageName);
-            }
+            //}
         }
 
         //Installation Script ---------------------------------------------------------------------------------------------------------------

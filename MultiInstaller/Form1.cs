@@ -12,7 +12,7 @@ namespace MultiInstaller
         public Form1()
         {
             InitializeComponent();
-            Install = false;
+            //Install = false;
         }
 
         //Program To Install ----------------------------------
@@ -95,10 +95,10 @@ namespace MultiInstaller
 
         private void InstallButton_Click(object sender, EventArgs e)
         {
-            Install = true;
+            //Install = true;
             //Close();
             Form1.UpdateStatusLabel("Start install...");
-            Debug.WriteLine("début install");
+            Debug.WriteLine("bouton start début install");
             Functions func = new();
             func.Install();
         }
