@@ -3,6 +3,7 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net8.0-windows</TargetFramework>
+				<GenerateAssemblyInfo>False</GenerateAssemblyInfo>
 		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -11,11 +12,16 @@
 		<PublishSingleFile>true</PublishSingleFile> <!-- Un seul fichier autonome -->
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier> <!-- Cible Windows 64 bits -->
 		<SelfContained>true</SelfContained> <!-- Inclut le runtime -->
-		<PublishTrimmed>false</PublishTrimmed> <!-- Pas de trimming pour Windows Forms -->
+		<PublishTrimmed>false</PublishTrimmed>
+		<ApplicationIcon>Ressource\setup-icon-29.ico</ApplicationIcon> <!-- Pas de trimming pour Windows Forms -->
 	</PropertyGroup>
 
 	<ItemGroup>
 		<None Remove="README.md~RF1b5d1aa.TMP" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Ressource\setup-icon-29.ico" />
 	</ItemGroup>
 
 	<ItemGroup>
