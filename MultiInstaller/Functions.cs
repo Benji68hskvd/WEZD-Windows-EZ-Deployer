@@ -4,58 +4,15 @@ namespace MultiInstaller
 {
     public class Functions
     {
-        //public async void Install()
-        //{
-        //    Form1 form = new();
-        //    Form1.UpdateStatusLabel("Activate...");
-        //    if (form.Install)
-        //    {
-        //        await CheckInstall(form.IsChromeChecked(), "https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi", "", "/", "", "", "chrome_installer.msi", "Chrome");
-        //        await CheckInstall(form.IsFirefoxChecked(), "https://ftp.mozilla.org/pub/firefox/releases/", "/pub/firefox/releases/", "/pub/firefox/releases/", "b", "/win64/fr/", "firefox_installer.msi", "Firefox");
-        //        await CheckInstall(form.IsCCleanerChecked(), "https://bits.avcdn.net/productfamily_CCLEANER/insttype_BUSINESS_32/platform_WIN_MSI/installertype_ONLINE/build_RELEASE/.msi/", "", "/", "", "", "ccleaner_installer.msi", "CCleaner");
-        //        await CheckInstall(form.IsNovaBenchChecked(), "https://cdn.novabench.net/novabench.msi", "", "/", "", "", "novabench_installer.msi", "NovaBench");
-        //        await CheckInstall(form.IsLibreOfficeChecked(), "https://miroir.univ-lorraine.fr/documentfoundation/libreoffice/stable/", "", "/", "", "/win/x86_64/", "libreoffice_installer.msi", "LibreOffice");
-        //        //await CheckInstall(form.IsVLCChecked(), "https://get.videolan.org/vlc/last/win64/", "", "/", "", "", "vlc_installer.msi", "VLC");
-        //        if (form.IsVLCChecked())
-        //        {
-        //            await InstallVLC(); // appel spécifique pour VLC
-        //        }
-        //        await CheckInstall(form.IsTeamViewerChecked(), "https://dl.teamviewer.com/download/version_15x/TeamViewer_Setup_x64.exe", "", "/", "", "", "TeamViewer.exe", "TeamViewer");
-
-        //        if (form.IsHWIDChecked() == true)
-        //        {
-        //            ActivationCommand(form.IsUseCurDirChecked(), " /HWID");
-        //        }
-        //        if (form.IsKMS38Checked() == true)
-        //        {
-        //            ActivationCommand(form.IsUseCurDirChecked(), " /KMS38");
-        //        }
-        //        if (form.IsWinOnlineKMSChecked() == true)
-        //        {
-        //            ActivationCommand(form.IsUseCurDirChecked(), " /KMS-Windows /KMS-RenewalTask");
-        //        }
-        //        if (form.IsOhookChecked() == true)
-        //        {
-        //            ActivationCommand(form.IsUseCurDirChecked(), " /Ohook");
-        //        }
-        //        if (form.IsOfficeOnlineKMSChecked() == true)
-        //        {
-        //            ActivationCommand(form.IsUseCurDirChecked(), " /KMS-Office /KMS-RenewalTask");
-        //        }
-        //    }
-        //}
-
-        public async void Install()
+        public async Task Install(Form1 form)
         {
             try
             {
-                Form1 form = new();
                 Form1.UpdateStatusLabel("Download...");
 
-                //if (form.Install)
-                //{
-                    Debug.WriteLine("début install");
-                    // vérifier directement les checkboxes
+                Debug.WriteLine("début install");
+
+                // vérifier directement les checkboxes sur l'instance actuelle du formulaire
                 if (form.chrome.Checked)
                 {
                     Debug.WriteLine("install chrome");
@@ -113,16 +70,14 @@ namespace MultiInstaller
                     Debug.WriteLine("install ohook");
                     ActivationCommand(form.UseCurDir.Checked, " /Ohook");
                 }
-                if (form.OfficeOnlineKMS.Checked) 
+                if (form.OfficeOnlineKMS.Checked)
                 {
                     Debug.WriteLine("install online kms office");
                     ActivationCommand(form.UseCurDir.Checked, " /KMS-Office /KMS-RenewalTask");
                 }
-                //}
             }
             catch (Exception e)
             {
-                //throw; // TODO handle exception
                 MessageBox.Show($@"Erreur : {e}");
             }
         }

@@ -1,6 +1,4 @@
 using System.Diagnostics;
-using System.Net.Quic;
-using System.Windows.Forms;
 
 namespace MultiInstaller
 {
@@ -15,92 +13,33 @@ namespace MultiInstaller
             //Install = false;
         }
 
-        //Program To Install ----------------------------------
+        //private void InstallButton_Click(object sender, EventArgs e)
+        //{
+        //    //Install = true;
+        //    //Close();
+        //    Form1.UpdateStatusLabel("Start install...");
+        //    Debug.WriteLine("bouton start début install");
+        //    Functions func = new();
+        //    func.Install(this);
+        //}
 
-        public bool IsChromeChecked()
+        private async void InstallButton_Click(object sender, EventArgs e)
         {
-            return chrome.Checked;
-        }
-
-        public bool IsFirefoxChecked()
-        {
-            return Firefox.Checked;
-        }
-        
-        public bool IsTeamViewerChecked()
-        {
-        return TeamViewer.Checked;
-        }
-
-        public bool IsCCleanerChecked()
-        {
-            return CCleaner.Checked;
-        }
-
-        public bool IsNovaBenchChecked()
-        {
-            return NovaBench.Checked;
-        }
-
-        public bool IsLibreOfficeChecked()
-        {
-            return LibreOffice.Checked;
-        }
-
-        public bool IsVLCChecked()
-        {
-            return VLC.Checked;
-        }
-
-        //Option -----------------------------------------------
-
-        public bool IsAutoDeleteInstallerChecked()
-        {
-            return AutoDeleteInstaller.Checked;
-        }
-
-        public bool IsUseCurDirChecked()
-        {
-            return UseCurDir.Checked;
-        }
-
-        //Windows Activation -----------------------------------
-
-        public bool IsHWIDChecked()
-        {
-            return HWID.Checked;
-        }
-
-        public bool IsKMS38Checked()
-        {
-            return KMS38.Checked;
-        }
-
-        public bool IsWinOnlineKMSChecked()
-        {
-            return WinOnlineKMS.Checked;
-        }
-
-        //Office Activation ---------------------------------------
-
-        public bool IsOhookChecked()
-        {
-            return Ohook.Checked;
-        }
-
-        public bool IsOfficeOnlineKMSChecked()
-        {
-            return OfficeOnlineKMS.Checked;
-        }
-
-        private void InstallButton_Click(object sender, EventArgs e)
-        {
-            //Install = true;
-            //Close();
-            Form1.UpdateStatusLabel("Start install...");
+            UpdateStatusLabel("Start install...");
             Debug.WriteLine("bouton start début install");
+
+            // Désactiver tous les contrôles
+            SetControlsEnabled(false);
+
+            //Functions func = new();
+            //await Task.Run(() => func.Install(this)); // Appeler Install avec `this`
+
             Functions func = new();
-            func.Install();
+            await func.Install(this); // Appeler Install en respectant son asynchronisme
+
+            // Réactiver tous les contrôles après l'installation
+            SetControlsEnabled(true);
+            UpdateStatusLabel("Installation terminée.");
         }
 
         private void CancelButton_Click_1(object sender, EventArgs e)
@@ -109,16 +48,35 @@ namespace MultiInstaller
             Application.Exit();
         }
 
+        //public static void UpdateStatusLabel(string text)
+        //{
+        //    labelStatus.Text = text;
+        //    //labelStatus.Location = new Point((ClientSize.Width - labelStatus.PreferredWidth) / 2, labelStatus.Location.Y);
+        //}
+
         public static void UpdateStatusLabel(string text)
         {
-            labelStatus.Text = text;
-            //labelStatus.Location = new Point((ClientSize.Width - labelStatus.PreferredWidth) / 2, labelStatus.Location.Y);
+            if (labelStatus.InvokeRequired)
+            {
+                // Exécute la mise à jour sur le thread principal
+                labelStatus.Invoke(new Action(() => labelStatus.Text = text));
+            }
+            else
+            {
+                // Si on est déjà sur le thread principal, on peut mettre à jour directement
+                labelStatus.Text = text;
+            }
         }
 
-        //controlers
-        public void Initalize()
+        private void SetControlsEnabled(bool isEnabled)
         {
-            
+            foreach (Control control in Controls)
+            {
+                if (control is Button || control is CheckBox) // Désactiver uniquement les boutons et checkboxes
+                {
+                    control.Enabled = isEnabled;
+                }
+            }
         }
     }
 }
