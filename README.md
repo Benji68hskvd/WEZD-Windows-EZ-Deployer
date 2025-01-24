@@ -12,7 +12,7 @@ A program that provide : downloading the latest version of a program, install it
 
 ## Nuget Package :
 
-- A̶u̶t̶o̶C̶l̶o̶s̶i̶n̶g̶M̶e̶s̶s̶a̶g̶e̶B̶o̶x̶ ̶b̶y̶ ̶D̶m̶i̶t̶r̶y̶ ̶G̶a̶r̶a̶v̶s̶k̶y̶
+- A̵̶̵u̵̶̵t̵̶̵o̵̶̵C̵̶̵l̵̶̵o̵̶̵s̵̶̵i̵̶̵n̵̶̵g̵̶̵M̵̶̵e̵̶̵s̵̶̵s̵̶̵a̵̶̵g̵̶̵e̵̶̵B̵̶̵o̵̶̵x̵̶̵ ̵̶̵b̵̶̵y̵̶̵ ̵̶̵D̵̶̵m̵̶̵i̵̶̵t̵̶̵r̵̶̵y̵̶̵ ̵̶̵G̵̶̵a̵̶̵r̵̶̵a̵̶̵v̵̶̵s̵̶̵k̵̶̵y̵̶̵
 - HtmlAgilityPack by ZZZ Projects
 
 ## External Program :
