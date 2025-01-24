@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.XPath;
 
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	public class HtmlDocument : IXPathNavigable
 	{
@@ -161,11 +158,8 @@ namespace HtmlAgilityPack
 
 		public static bool DisableBehaviorTagP
 		{
-			get
-			{
-				return _disableBehaviorTagP;
-			}
-			set
+			get => _disableBehaviorTagP;
+            set
 			{
 				if (value)
 				{
@@ -190,15 +184,9 @@ namespace HtmlAgilityPack
 
 		public static int MaxDepthLevel
 		{
-			get
-			{
-				return _maxDepthLevel;
-			}
-			set
-			{
-				_maxDepthLevel = value;
-			}
-		}
+			get => _maxDepthLevel;
+            set => _maxDepthLevel = value;
+        }
 
 		public int CheckSum
 		{

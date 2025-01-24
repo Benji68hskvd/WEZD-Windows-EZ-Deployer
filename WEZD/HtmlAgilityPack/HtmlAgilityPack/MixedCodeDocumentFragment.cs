@@ -1,4 +1,4 @@
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	public abstract class MixedCodeDocumentFragment
 	{
@@ -26,25 +26,16 @@ namespace HtmlAgilityPack
 				}
 				return _fragmentText;
 			}
-			internal set
-			{
-				_fragmentText = value;
-			}
-		}
+			internal set => _fragmentText = value;
+        }
 
 		public MixedCodeDocumentFragmentType FragmentType => _type;
 
 		public int Line
 		{
-			get
-			{
-				return _line;
-			}
-			internal set
-			{
-				_line = value;
-			}
-		}
+			get => _line;
+            internal set => _line = value;
+        }
 
 		public int LinePosition => _lineposition;
 

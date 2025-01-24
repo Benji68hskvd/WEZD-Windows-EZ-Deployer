@@ -1,18 +1,12 @@
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	public class MixedCodeDocumentTextFragment : MixedCodeDocumentFragment
 	{
 		public string Text
 		{
-			get
-			{
-				return base.FragmentText;
-			}
-			set
-			{
-				base.FragmentText = value;
-			}
-		}
+			get => base.FragmentText;
+            set => base.FragmentText = value;
+        }
 
 		internal MixedCodeDocumentTextFragment(MixedCodeDocument doc)
 			: base(doc, MixedCodeDocumentFragmentType.Text)

@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	public class HtmlAttributeCollection : IList<HtmlAttribute>, ICollection<HtmlAttribute>, IEnumerable<HtmlAttribute>, IEnumerable
 	{
@@ -18,11 +16,8 @@ namespace HtmlAgilityPack
 
 		public HtmlAttribute this[int index]
 		{
-			get
-			{
-				return items[index];
-			}
-			set
+			get => items[index];
+            set
 			{
 				HtmlAttribute htmlAttribute = items[index];
 				items[index] = value;

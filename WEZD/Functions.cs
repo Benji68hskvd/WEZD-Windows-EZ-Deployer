@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
+using HtmlDocument = WEZD.HtmlAgilityPack.HtmlAgilityPack.HtmlDocument;
 
-namespace MultiInstaller
+namespace WEZD
 {
     public class Functions
     {
@@ -139,7 +140,7 @@ namespace MultiInstaller
                 HttpClient client = new HttpClient();
 
                 string pageContent = await client.GetStringAsync(url);
-                var doc = new HtmlAgilityPack.HtmlDocument();
+                var doc = new HtmlDocument();
                 doc.LoadHtml(pageContent);
 
                 var versionNodes = doc.DocumentNode.SelectNodes($"//a[starts-with(@href, '{hrefNodes}') and contains(@href, '.')]");
@@ -175,7 +176,7 @@ namespace MultiInstaller
             {
                 HttpClient client = new HttpClient();
                 string pageContent = await client.GetStringAsync(url);
-                var doc = new HtmlAgilityPack.HtmlDocument();
+                var doc = new HtmlDocument();
                 doc.LoadHtml(pageContent);
 
                 var nodes = doc.DocumentNode.SelectSingleNode("//a[contains(@href, '.msi')]");
@@ -213,7 +214,7 @@ namespace MultiInstaller
 
                 // récupérer la liste des versions disponibles
                 string pageContent = await client.GetStringAsync(baseVlcUrl);
-                var doc = new HtmlAgilityPack.HtmlDocument();
+                var doc = new HtmlDocument();
                 doc.LoadHtml(pageContent);
 
                 var versionNodes = doc.DocumentNode.SelectNodes("//a[starts-with(@href, '3.0.') and contains(@href, '/')]");
@@ -237,7 +238,7 @@ namespace MultiInstaller
                     try
                     {
                         string versionPageContent = await client.GetStringAsync(versionUrl);
-                        var versionDoc = new HtmlAgilityPack.HtmlDocument();
+                        var versionDoc = new HtmlDocument();
                         versionDoc.LoadHtml(versionPageContent);
 
                         var msiNode = versionDoc.DocumentNode.SelectSingleNode($"//a[contains(@href, 'vlc-{version}-win64.msi')]");

@@ -1,4 +1,4 @@
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	public class MixedCodeDocumentCodeFragment : MixedCodeDocumentFragment
 	{
@@ -18,11 +18,8 @@ namespace HtmlAgilityPack
 				}
 				return _code;
 			}
-			set
-			{
-				_code = value;
-			}
-		}
+			set => _code = value;
+        }
 
 		internal MixedCodeDocumentCodeFragment(MixedCodeDocument doc)
 			: base(doc, MixedCodeDocumentFragmentType.Code)

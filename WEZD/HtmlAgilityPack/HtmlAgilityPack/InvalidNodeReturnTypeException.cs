@@ -1,6 +1,4 @@
-using System;
-
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	public class InvalidNodeReturnTypeException : Exception
 	{

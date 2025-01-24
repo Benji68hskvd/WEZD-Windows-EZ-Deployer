@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace MultiInstaller
+namespace WEZD
 {
     public partial class Form1 : Form
     {

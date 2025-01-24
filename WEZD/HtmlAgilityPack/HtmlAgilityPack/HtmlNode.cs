@@ -1,15 +1,11 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
 
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	[DebuggerDisplay("Name: {OriginalName}")]
 	public class HtmlNode : IXPathNavigable
@@ -86,23 +82,14 @@ namespace HtmlAgilityPack
 				}
 				return _attributes;
 			}
-			internal set
-			{
-				_attributes = value;
-			}
-		}
+			internal set => _attributes = value;
+        }
 
 		public HtmlNodeCollection ChildNodes
 		{
-			get
-			{
-				return _childnodes ?? (_childnodes = new HtmlNodeCollection(this));
-			}
-			internal set
-			{
-				_childnodes = value;
-			}
-		}
+			get => _childnodes ?? (_childnodes = new HtmlNodeCollection(this));
+            internal set => _childnodes = value;
+        }
 
 		public bool Closed => _endnode != null;
 
@@ -271,27 +258,15 @@ namespace HtmlAgilityPack
 
 		public int Line
 		{
-			get
-			{
-				return _line;
-			}
-			internal set
-			{
-				_line = value;
-			}
-		}
+			get => _line;
+            internal set => _line = value;
+        }
 
 		public int LinePosition
 		{
-			get
-			{
-				return _lineposition;
-			}
-			internal set
-			{
-				_lineposition = value;
-			}
-		}
+			get => _lineposition;
+            internal set => _lineposition = value;
+        }
 
 		public int InnerStartIndex => _innerstartindex;
 
@@ -338,27 +313,15 @@ namespace HtmlAgilityPack
 
 		public HtmlNode NextSibling
 		{
-			get
-			{
-				return _nextnode;
-			}
-			internal set
-			{
-				_nextnode = value;
-			}
-		}
+			get => _nextnode;
+            internal set => _nextnode = value;
+        }
 
 		public HtmlNodeType NodeType
 		{
-			get
-			{
-				return _nodetype;
-			}
-			internal set
-			{
-				_nodetype = value;
-			}
-		}
+			get => _nodetype;
+            internal set => _nodetype = value;
+        }
 
 		public string OriginalName => _name;
 
@@ -385,39 +348,21 @@ namespace HtmlAgilityPack
 
 		public HtmlDocument OwnerDocument
 		{
-			get
-			{
-				return _ownerdocument;
-			}
-			internal set
-			{
-				_ownerdocument = value;
-			}
-		}
+			get => _ownerdocument;
+            internal set => _ownerdocument = value;
+        }
 
 		public HtmlNode ParentNode
 		{
-			get
-			{
-				return _parentnode;
-			}
-			internal set
-			{
-				_parentnode = value;
-			}
-		}
+			get => _parentnode;
+            internal set => _parentnode = value;
+        }
 
 		public HtmlNode PreviousSibling
 		{
-			get
-			{
-				return _prevnode;
-			}
-			internal set
-			{
-				_prevnode = value;
-			}
-		}
+			get => _prevnode;
+            internal set => _prevnode = value;
+        }
 
 		public int StreamPosition => _streamposition;
 

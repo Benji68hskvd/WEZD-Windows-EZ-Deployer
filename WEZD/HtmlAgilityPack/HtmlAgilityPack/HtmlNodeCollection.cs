@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	public class HtmlNodeCollection : IList<HtmlNode>, ICollection<HtmlNode>, IEnumerable<HtmlNode>, IEnumerable
 	{
@@ -46,15 +44,9 @@ namespace HtmlAgilityPack
 
 		public HtmlNode this[int index]
 		{
-			get
-			{
-				return _items[index];
-			}
-			set
-			{
-				_items[index] = value;
-			}
-		}
+			get => _items[index];
+            set => _items[index] = value;
+        }
 
 		public HtmlNodeCollection(HtmlNode parentnode)
 		{

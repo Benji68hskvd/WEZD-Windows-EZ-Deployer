@@ -1,7 +1,6 @@
-using System;
 using System.Diagnostics;
 
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	internal class HtmlConsoleListener : TraceListener
 	{

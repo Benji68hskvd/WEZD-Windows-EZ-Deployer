@@ -1,7 +1,6 @@
-using System;
 using System.Text;
 
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	internal class EncodingFoundException : Exception
 	{

@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	[DebuggerDisplay("Name: {OriginalName}, Value: {Value}")]
 	public class HtmlAttribute : IComparable
@@ -39,15 +37,9 @@ namespace HtmlAgilityPack
 
 		public int Line
 		{
-			get
-			{
-				return _line;
-			}
-			internal set
-			{
-				_line = value;
-			}
-		}
+			get => _line;
+            internal set => _line = value;
+        }
 
 		public int LinePosition => _lineposition;
 
@@ -70,11 +62,8 @@ namespace HtmlAgilityPack
 				}
 				return result;
 			}
-			set
-			{
-				_localUseOriginalName = value;
-			}
-		}
+			set => _localUseOriginalName = value;
+        }
 
 		public string Name
 		{
@@ -112,15 +101,9 @@ namespace HtmlAgilityPack
 
 		public AttributeValueQuote QuoteType
 		{
-			get
-			{
-				return _quoteType;
-			}
-			set
-			{
-				_quoteType = value;
-			}
-		}
+			get => _quoteType;
+            set => _quoteType = value;
+        }
 
 		internal AttributeValueQuote InternalQuoteType { get; set; }
 

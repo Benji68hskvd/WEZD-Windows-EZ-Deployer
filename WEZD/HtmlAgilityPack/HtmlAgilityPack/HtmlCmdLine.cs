@@ -1,6 +1,4 @@
-using System;
-
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	internal class HtmlCmdLine
 	{

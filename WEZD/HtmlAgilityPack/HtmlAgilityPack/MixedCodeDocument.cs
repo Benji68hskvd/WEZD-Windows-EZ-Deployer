@@ -1,8 +1,6 @@
-using System;
-using System.IO;
 using System.Text;
 
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	public class MixedCodeDocument
 	{

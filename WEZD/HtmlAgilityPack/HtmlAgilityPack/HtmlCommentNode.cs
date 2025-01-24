@@ -1,4 +1,4 @@
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	public class HtmlCommentNode : HtmlNode
 	{
@@ -14,11 +14,8 @@ namespace HtmlAgilityPack
 				}
 				return _comment;
 			}
-			set
-			{
-				_comment = value;
-			}
-		}
+			set => _comment = value;
+        }
 
 		public override string InnerHtml
 		{
@@ -30,11 +27,8 @@ namespace HtmlAgilityPack
 				}
 				return _comment;
 			}
-			set
-			{
-				_comment = value;
-			}
-		}
+			set => _comment = value;
+        }
 
 		public override string OuterHtml
 		{

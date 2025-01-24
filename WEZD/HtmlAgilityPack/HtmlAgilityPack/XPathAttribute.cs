@@ -1,6 +1,4 @@
-using System;
-
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	[AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
 	public sealed class XPathAttribute : Attribute
@@ -15,11 +13,8 @@ namespace HtmlAgilityPack
 
 		public ReturnType NodeReturnType
 		{
-			get
-			{
-				return _nodeReturnType;
-			}
-			set
+			get => _nodeReturnType;
+            set
 			{
 				_nodeReturnType = value;
 				IsNodeReturnTypeExplicitlySet = true;

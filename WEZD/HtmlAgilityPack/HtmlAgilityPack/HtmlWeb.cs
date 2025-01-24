@@ -1,16 +1,11 @@
-using System;
 using System.Collections.Concurrent;
-using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Xml.Xsl;
 
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	public class HtmlWeb
 	{
@@ -64,11 +59,8 @@ namespace HtmlAgilityPack
 
 		public int? MaxAutoRedirects
 		{
-			get
-			{
-				return _maxAutoRedirects;
-			}
-			set
+			get => _maxAutoRedirects;
+            set
 			{
 				if (value <= 0)
 				{
@@ -80,11 +72,8 @@ namespace HtmlAgilityPack
 
 		public int Timeout
 		{
-			get
-			{
-				return _timeout;
-			}
-			set
+			get => _timeout;
+            set
 			{
 				if (value <= 0 && value != -1)
 				{
@@ -96,35 +85,20 @@ namespace HtmlAgilityPack
 
 		public bool AutoDetectEncoding
 		{
-			get
-			{
-				return _autoDetectEncoding;
-			}
-			set
-			{
-				_autoDetectEncoding = value;
-			}
-		}
+			get => _autoDetectEncoding;
+            set => _autoDetectEncoding = value;
+        }
 
 		public Encoding OverrideEncoding
 		{
-			get
-			{
-				return _encoding;
-			}
-			set
-			{
-				_encoding = value;
-			}
-		}
+			get => _encoding;
+            set => _encoding = value;
+        }
 
 		public bool CacheOnly
 		{
-			get
-			{
-				return _cacheOnly;
-			}
-			set
+			get => _cacheOnly;
+            set
 			{
 				if (value && !UsingCache)
 				{
@@ -136,27 +110,15 @@ namespace HtmlAgilityPack
 
 		public bool UsingCacheIfExists
 		{
-			get
-			{
-				return _usingCacheIfExists;
-			}
-			set
-			{
-				_usingCacheIfExists = value;
-			}
-		}
+			get => _usingCacheIfExists;
+            set => _usingCacheIfExists = value;
+        }
 
 		public string CachePath
 		{
-			get
-			{
-				return _cachePath;
-			}
-			set
-			{
-				_cachePath = value;
-			}
-		}
+			get => _cachePath;
+            set => _cachePath = value;
+        }
 
 		public bool FromCache => _fromCache;
 
@@ -168,11 +130,8 @@ namespace HtmlAgilityPack
 
 		public int StreamBufferSize
 		{
-			get
-			{
-				return _streamBufferSize;
-			}
-			set
+			get => _streamBufferSize;
+            set
 			{
 				if (_streamBufferSize <= 0)
 				{
@@ -184,29 +143,17 @@ namespace HtmlAgilityPack
 
 		public bool UseCookies
 		{
-			get
-			{
-				return _useCookies;
-			}
-			set
-			{
-				_useCookies = value;
-			}
-		}
+			get => _useCookies;
+            set => _useCookies = value;
+        }
 
 		public bool CaptureRedirect { get; set; }
 
 		public string UserAgent
 		{
-			get
-			{
-				return _userAgent;
-			}
-			set
-			{
-				_userAgent = value;
-			}
-		}
+			get => _userAgent;
+            set => _userAgent = value;
+        }
 
 		public bool UsingCache
 		{

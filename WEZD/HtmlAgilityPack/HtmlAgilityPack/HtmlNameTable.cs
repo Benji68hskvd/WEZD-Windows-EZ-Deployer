@@ -1,6 +1,6 @@
 using System.Xml;
 
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	internal class HtmlNameTable : XmlNameTable
 	{

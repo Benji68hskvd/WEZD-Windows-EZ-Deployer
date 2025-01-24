@@ -1,7 +1,6 @@
-using System.IO;
 using System.Runtime.InteropServices;
 
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	[StructLayout(LayoutKind.Sequential, Size = 1)]
 	internal struct IOLibrary

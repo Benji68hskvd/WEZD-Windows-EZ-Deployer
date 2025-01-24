@@ -1,6 +1,4 @@
-using System;
-
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	[Obsolete("This type should not be used; it is intended for internal use in HTML Agility Pack.")]
 	[CLSCompliant(false)]
@@ -40,15 +38,9 @@ namespace HtmlAgilityPack
 
 		internal uint CheckSum
 		{
-			get
-			{
-				return _crc32;
-			}
-			set
-			{
-				_crc32 = value;
-			}
-		}
+			get => _crc32;
+            set => _crc32 = value;
+        }
 
 		public static uint CRC32Bytes(byte[] bytes)
 		{

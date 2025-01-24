@@ -1,4 +1,4 @@
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	public enum MixedCodeDocumentFragmentType
 	{

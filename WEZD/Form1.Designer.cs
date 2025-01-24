@@ -1,4 +1,4 @@
-﻿namespace MultiInstaller
+﻿namespace WEZD
 {
     partial class Form1
     {

@@ -1,4 +1,4 @@
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	public class HtmlTextNode : HtmlNode
 	{
@@ -6,15 +6,9 @@ namespace HtmlAgilityPack
 
 		public override string InnerHtml
 		{
-			get
-			{
-				return OuterHtml;
-			}
-			set
-			{
-				_text = value;
-			}
-		}
+			get => OuterHtml;
+            set => _text = value;
+        }
 
 		public override string OuterHtml
 		{

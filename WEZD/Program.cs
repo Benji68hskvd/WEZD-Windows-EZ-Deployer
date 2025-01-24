@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace MultiInstaller
+namespace WEZD
 {
     public class Program
     {
@@ -8,9 +8,6 @@ namespace MultiInstaller
         [STAThread]
         public static void Main()
         {
-            //ApplicationConfiguration.Initialize();
-            //Form1 form = new();
-            //Application.Run(form);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

@@ -1,10 +1,8 @@
-using System;
-using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
 
-namespace HtmlAgilityPack
+namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	public class HtmlNodeNavigator : XPathNavigator
 	{
