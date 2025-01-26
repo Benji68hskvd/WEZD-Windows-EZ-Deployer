@@ -54,11 +54,22 @@
             Ohook = new RadioButton();
             UseCurDir = new CheckBox();
             panel4 = new Panel();
+            Excel = new CheckBox();
+            PowerPoint = new CheckBox();
+            Outlook = new CheckBox();
+            Access = new CheckBox();
+            checkBox3 = new CheckBox();
+            checkBox2 = new CheckBox();
+            Word = new CheckBox();
+            x64 = new RadioButton();
+            x86 = new RadioButton();
+            label5 = new Label();
             label4 = new Label();
             labelStatus = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
+            panel4.SuspendLayout();
             SuspendLayout();
             // 
             // InstallButton
@@ -317,19 +328,130 @@
             // panel4
             // 
             panel4.BorderStyle = BorderStyle.FixedSingle;
+            panel4.Controls.Add(Excel);
+            panel4.Controls.Add(PowerPoint);
+            panel4.Controls.Add(Outlook);
+            panel4.Controls.Add(Access);
+            panel4.Controls.Add(checkBox3);
+            panel4.Controls.Add(checkBox2);
+            panel4.Controls.Add(Word);
+            panel4.Controls.Add(x64);
+            panel4.Controls.Add(x86);
+            panel4.Controls.Add(label5);
             panel4.Location = new Point(455, 44);
             panel4.Name = "panel4";
             panel4.Size = new Size(422, 330);
             panel4.TabIndex = 24;
+            // 
+            // Excel
+            // 
+            Excel.AutoSize = true;
+            Excel.Location = new Point(37, 92);
+            Excel.Name = "Excel";
+            Excel.Size = new Size(52, 19);
+            Excel.TabIndex = 25;
+            Excel.Text = "Excel";
+            Excel.UseVisualStyleBackColor = true;
+            // 
+            // PowerPoint
+            // 
+            PowerPoint.AutoSize = true;
+            PowerPoint.Location = new Point(37, 117);
+            PowerPoint.Name = "PowerPoint";
+            PowerPoint.Size = new Size(87, 19);
+            PowerPoint.TabIndex = 24;
+            PowerPoint.Text = "PowerPoint";
+            PowerPoint.UseVisualStyleBackColor = true;
+            // 
+            // Outlook
+            // 
+            Outlook.AutoSize = true;
+            Outlook.Location = new Point(37, 141);
+            Outlook.Name = "Outlook";
+            Outlook.Size = new Size(69, 19);
+            Outlook.TabIndex = 23;
+            Outlook.Text = "Outlook";
+            Outlook.UseVisualStyleBackColor = true;
+            // 
+            // Access
+            // 
+            Access.AutoSize = true;
+            Access.Location = new Point(37, 166);
+            Access.Name = "Access";
+            Access.Size = new Size(62, 19);
+            Access.TabIndex = 22;
+            Access.Text = "Access";
+            Access.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            checkBox3.AutoSize = true;
+            checkBox3.Location = new Point(37, 191);
+            checkBox3.Name = "checkBox3";
+            checkBox3.Size = new Size(82, 19);
+            checkBox3.TabIndex = 21;
+            checkBox3.Text = "checkBox3";
+            checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(37, 216);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(82, 19);
+            checkBox2.TabIndex = 20;
+            checkBox2.Text = "checkBox2";
+            checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // Word
+            // 
+            Word.AutoSize = true;
+            Word.Location = new Point(37, 66);
+            Word.Name = "Word";
+            Word.Size = new Size(55, 19);
+            Word.TabIndex = 19;
+            Word.Text = "Word";
+            Word.UseVisualStyleBackColor = true;
+            // 
+            // x64
+            // 
+            x64.AutoSize = true;
+            x64.Location = new Point(162, 16);
+            x64.Name = "x64";
+            x64.Size = new Size(42, 19);
+            x64.TabIndex = 18;
+            x64.Text = "x64";
+            x64.UseVisualStyleBackColor = true;
+            // 
+            // x86
+            // 
+            x86.AutoSize = true;
+            x86.Checked = true;
+            x86.Location = new Point(93, 16);
+            x86.Name = "x86";
+            x86.Size = new Size(42, 19);
+            x86.TabIndex = 17;
+            x86.TabStop = true;
+            x86.Text = "x86";
+            x86.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(14, 16);
+            label5.Name = "label5";
+            label5.Size = new Size(51, 15);
+            label5.TabIndex = 0;
+            label5.Text = "Version :";
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Location = new Point(459, 35);
             label4.Name = "label4";
-            label4.Size = new Size(103, 15);
+            label4.Size = new Size(79, 15);
             label4.TabIndex = 0;
-            label4.Text = "Office Instalation :";
+            label4.Text = "Install Office :";
             // 
             // labelStatus
             // 
@@ -368,6 +490,8 @@
             panel2.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -400,6 +524,17 @@
         public CheckBox Firefox;
         private Panel panel4;
         private Label label4;
+        public CheckBox Excel;
+        public CheckBox PowerPoint;
+        public CheckBox Outlook;
+        private CheckBox Access;
+        private CheckBox checkBox3;
+        private CheckBox checkBox2;
+        public CheckBox Word;
+        public RadioButton x64;
+        private RadioButton x86;
+        private Label label5;
         private static Label labelStatus;
+        //private Label labelStatus;
     }
 }

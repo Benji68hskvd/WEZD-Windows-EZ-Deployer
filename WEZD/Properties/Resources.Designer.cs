@@ -59,5 +59,15 @@ namespace WEZD.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] setup {
+            get {
+                object obj = ResourceManager.GetObject("setup", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

@@ -53,7 +53,7 @@ namespace WEZD
         //    //labelStatus.Location = new Point((ClientSize.Width - labelStatus.PreferredWidth) / 2, labelStatus.Location.Y);
         //}
 
-        public static void UpdateStatusLabel(string text)
+        public void UpdateStatusLabel(string text)
         {
             if (labelStatus.InvokeRequired)
             {

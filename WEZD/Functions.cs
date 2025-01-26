@@ -47,6 +47,26 @@ namespace WEZD
                     Debug.WriteLine("install teamviewer");
                     await CheckInstall("https://dl.teamviewer.com/download/version_15x/TeamViewer_Setup_x64.exe", "", "/", "", "", "TeamViewer.exe", "TeamViewer");
                 }
+
+                // ajout de l'installation d'Office
+                if (form.Word.Checked || form.Excel.Checked || form.PowerPoint.Checked || form.Outlook.Checked)
+                {
+                    Debug.WriteLine("install office");
+
+                    // créer une instance de la classe Office
+                    Office officeInstaller = new Office();
+
+                    // récupérer les options sélectionnées dans le formulaire
+                    bool isX64 = form.x64.Checked;
+                    bool installWord = form.Word.Checked;
+                    bool installExcel = form.Excel.Checked;
+                    bool installPowerPoint = form.PowerPoint.Checked;
+                    bool installOutlook = form.Outlook.Checked;
+
+                    // appeler la méthode d'installation
+                    officeInstaller.Install(isX64, installWord, installExcel, installPowerPoint, installOutlook);
+                }
+
                 // activation Windows
                 if (form.HWID.Checked)
                 {
@@ -63,6 +83,7 @@ namespace WEZD
                     Debug.WriteLine("using online kms windows");
                     ActivationCommand(form.UseCurDir.Checked, " /KMS-Windows /KMS-RenewalTask");
                 }
+
                 // activation Office
                 if (form.Ohook.Checked)
                 {
@@ -85,7 +106,8 @@ namespace WEZD
 
         public static async void ActivationCommand(bool useCurrentDirectory, string command)
         {
-            Form1.UpdateStatusLabel("Activate...");
+            Form1 f = new();
+            f.UpdateStatusLabel("Activate...");
             //string url = "https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/master/MAS/All-In-One-Version/MAS_AIO-CRC32_31F7FD1E.cmd";
             string url = "https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/refs/heads/master/MAS/All-In-One-Version-KL/MAS_AIO.cmd";
             string currentDirectory = Directory.GetCurrentDirectory();
@@ -201,7 +223,8 @@ namespace WEZD
 
         public static async Task InstallVLC()
         {
-            Form1.UpdateStatusLabel("Download VLC...");
+            Form1 f = new();
+            f.UpdateStatusLabel("Download VLC...");
 
             var downloadPath = "C:\\Users\\" + Environment.UserName + "\\Downloads\\";
             var baseVlcUrl = "https://download.videolan.org/vlc/";
@@ -275,7 +298,8 @@ namespace WEZD
 
         public static async Task InstallPackage(string url, string downloadPath, string packageName, string installerName)
         {
-            Form1.UpdateStatusLabel($"Download {packageName}...");
+            Form1 f = new();
+            f.UpdateStatusLabel($"Download {packageName}...");
 
             System.Net.WebClient myWebClient = new System.Net.WebClient();
             await myWebClient.DownloadFileTaskAsync(url, downloadPath + installerName);
@@ -286,14 +310,14 @@ namespace WEZD
 
             if (containsExe == true)
             {
-                Form1.UpdateStatusLabel($"Install {packageName}...");
+                f.UpdateStatusLabel($"Install {packageName}...");
                 ProcessStartInfo installInfo = new ProcessStartInfo("cmd.exe", "/C " + filePath);
                 var installProcess = Process.Start(installInfo);
                 installProcess.WaitForExit();
             }
             else
             {
-                Form1.UpdateStatusLabel($"Install {packageName}...");
+                f.UpdateStatusLabel($"Install {packageName}...");
 
                 string msiPath = downloadPath + installerName;
 
