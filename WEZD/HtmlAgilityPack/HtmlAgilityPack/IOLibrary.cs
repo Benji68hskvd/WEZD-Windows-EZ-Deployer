@@ -3,9 +3,9 @@ using System.Runtime.InteropServices;
 namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	[StructLayout(LayoutKind.Sequential, Size = 1)]
-	internal struct IOLibrary
+	public struct IOLibrary
 	{
-		internal static void CopyAlways(string source, string target)
+		public static void CopyAlways(string source, string target)
 		{
 			if (File.Exists(source))
 			{
@@ -15,7 +15,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			}
 		}
 
-		internal static void MakeWritable(string path)
+        private static void MakeWritable(string path)
 		{
 			if (File.Exists(path))
 			{

@@ -1,6 +1,6 @@
 namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
-	internal static class MimeTypeMap
+	public static class MimeTypeMap
 	{
 		public static IDictionary<string, string> Mappings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
 		{

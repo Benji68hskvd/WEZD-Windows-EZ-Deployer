@@ -14,7 +14,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 			object IEnumerator.Current => Current;
 
-			internal MixedCodeDocumentFragmentEnumerator(IList<MixedCodeDocumentFragment> items)
+            public MixedCodeDocumentFragmentEnumerator(IList<MixedCodeDocumentFragment> items)
 			{
 				_items = items;
 				_index = -1;
@@ -42,7 +42,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public MixedCodeDocumentFragment this[int index] => _items[index];
 
-		internal MixedCodeDocumentFragmentList(MixedCodeDocument doc)
+        public MixedCodeDocumentFragmentList(MixedCodeDocument doc)
 		{
 			_doc = doc;
 		}
@@ -99,12 +99,12 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			_items.RemoveAt(index);
 		}
 
-		internal void Clear()
+        public void Clear()
 		{
 			_items.Clear();
 		}
 
-		internal int GetFragmentIndex(MixedCodeDocumentFragment fragment)
+        private int GetFragmentIndex(MixedCodeDocumentFragment fragment)
 		{
 			if (fragment == null)
 			{

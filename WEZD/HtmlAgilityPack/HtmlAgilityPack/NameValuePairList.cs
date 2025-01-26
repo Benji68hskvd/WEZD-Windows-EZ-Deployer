@@ -1,6 +1,6 @@
 namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
-	internal class NameValuePairList
+	public class NameValuePairList
 	{
 		internal readonly string Text;
 
@@ -71,7 +71,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 				string[] array2 = text2.Split(new char[1] { '=' }, 2);
 				if (array2.Length != 0)
 				{
-					KeyValuePair<string, string> item = new KeyValuePair<string, string>(array2[0].Trim().ToLowerInvariant(), (array2.Length < 2) ? "" : array2[1]);
+					KeyValuePair<string, string> item = new(array2[0].Trim().ToLowerInvariant(), (array2.Length < 2) ? "" : array2[1]);
 					_allPairs.Add(item);
 					if (!_pairsWithName.TryGetValue(item.Key, out var value))
 					{

@@ -1,6 +1,6 @@
 namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
-	internal class HtmlCmdLine
+	public class HtmlCmdLine
 	{
 		internal static bool Help;
 

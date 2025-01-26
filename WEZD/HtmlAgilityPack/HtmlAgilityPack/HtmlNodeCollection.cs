@@ -6,7 +6,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 	{
 		private readonly HtmlNode _parentnode;
 
-		private readonly List<HtmlNode> _items = new List<HtmlNode>();
+		private readonly List<HtmlNode> _items = new();
 
 		internal HtmlNode ParentNode => _parentnode;
 

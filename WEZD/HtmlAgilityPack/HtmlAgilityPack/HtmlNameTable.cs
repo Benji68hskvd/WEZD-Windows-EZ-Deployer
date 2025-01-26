@@ -2,9 +2,9 @@ using System.Xml;
 
 namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
-	internal class HtmlNameTable : XmlNameTable
+	public class HtmlNameTable : XmlNameTable
 	{
-		private NameTable _nametable = new NameTable();
+		private NameTable _nametable = new();
 
 		public override string Add(string array)
 		{

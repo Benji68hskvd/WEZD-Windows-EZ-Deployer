@@ -3,9 +3,9 @@ using System.Reflection;
 
 namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
-	internal static class Tools
+	public static class Tools
 	{
-		internal delegate TResult HAPFunc<T, TResult>(T arg);
+        private delegate TResult HAPFunc<T, TResult>(T arg);
 
 		internal static bool IsDefinedAttribute(this Type type, Type attributeType)
 		{
@@ -30,7 +30,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				throw new ArgumentNullException("Parameter type is null while retrieving properties defined XPathAttribute of Type type.");
 			}
-			return type.GetProperties().HAPWhere((PropertyInfo x) => x.IsDefined(typeof(XPathAttribute), inherit: false));
+			return type.GetProperties().HAPWhere(x => x.IsDefined(typeof(XPathAttribute), inherit: false));
 		}
 
 		internal static bool IsIEnumerable(this PropertyInfo propertyInfo)
@@ -108,7 +108,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			return list;
 		}
 
-		internal static IEnumerable<TSource> HAPWhere<TSource>(this IEnumerable<TSource> source, HAPFunc<TSource, bool> predicate)
+        private static IEnumerable<TSource> HAPWhere<TSource>(this IEnumerable<TSource> source, HAPFunc<TSource, bool> predicate)
 		{
 			foreach (TSource item in source)
 			{

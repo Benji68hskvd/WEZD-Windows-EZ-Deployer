@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
-	internal class HtmlConsoleListener : TraceListener
+	public class HtmlConsoleListener : TraceListener
 	{
 		public override void Write(string Message)
 		{

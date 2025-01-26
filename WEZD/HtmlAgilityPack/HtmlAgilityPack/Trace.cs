@@ -1,10 +1,10 @@
 namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
-	internal class Trace
+	public class Trace
 	{
-		internal static Trace _current;
+        private static Trace _current;
 
-		internal static Trace Current
+        private static Trace Current
 		{
 			get
 			{

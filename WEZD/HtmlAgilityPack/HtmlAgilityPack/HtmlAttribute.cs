@@ -105,7 +105,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
             set => _quoteType = value;
         }
 
-		internal AttributeValueQuote InternalQuoteType { get; set; }
+        public AttributeValueQuote InternalQuoteType { get; set; }
 
 		public int StreamPosition => _streamposition;
 
@@ -139,13 +139,13 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public string DeEntitizeValue => HtmlEntity.DeEntitize(Value);
 
-		internal string XmlName => HtmlDocument.GetXmlName(Name, isAttribute: true, OwnerDocument.OptionPreserveXmlNamespaces);
+        public string XmlName => HtmlDocument.GetXmlName(Name, isAttribute: true, OwnerDocument.OptionPreserveXmlNamespaces);
 
-		internal string XmlValue => Value;
+        public string XmlValue => Value;
 
 		public string XPath => ((OwnerNode == null) ? "/" : (OwnerNode.XPath + "/")) + GetRelativeXpath();
 
-		internal HtmlAttribute(HtmlDocument ownerdocument)
+        public HtmlAttribute(HtmlDocument ownerdocument)
 		{
 			_ownerdocument = ownerdocument;
 		}

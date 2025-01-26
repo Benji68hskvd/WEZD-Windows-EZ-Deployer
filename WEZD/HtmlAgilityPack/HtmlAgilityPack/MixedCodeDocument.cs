@@ -162,25 +162,25 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public void Save(Stream outStream)
 		{
-			StreamWriter writer = new StreamWriter(outStream, GetOutEncoding());
+			StreamWriter writer = new(outStream, GetOutEncoding());
 			Save(writer);
 		}
 
 		public void Save(Stream outStream, Encoding encoding)
 		{
-			StreamWriter writer = new StreamWriter(outStream, encoding);
+			StreamWriter writer = new(outStream, encoding);
 			Save(writer);
 		}
 
 		public void Save(string filename)
 		{
-			StreamWriter writer = new StreamWriter(filename, append: false, GetOutEncoding());
+			StreamWriter writer = new(filename, append: false, GetOutEncoding());
 			Save(writer);
 		}
 
 		public void Save(string filename, Encoding encoding)
 		{
-			StreamWriter writer = new StreamWriter(filename, append: false, encoding);
+			StreamWriter writer = new(filename, append: false, encoding);
 			Save(writer);
 		}
 

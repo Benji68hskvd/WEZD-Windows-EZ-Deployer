@@ -51,7 +51,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public PreRequestHandler PreRequest;
 
-		internal static ConcurrentDictionary<string, HttpClient> SharedHttpClient = new ConcurrentDictionary<string, HttpClient>();
+        private static ConcurrentDictionary<string, HttpClient> SharedHttpClient = new();
 
 		private Encoding _encoding;
 
@@ -177,7 +177,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		internal static HttpClient GetSharedHttpClient(string userAgent)
 		{
-			return SharedHttpClient.GetOrAdd(userAgent, (string x) => new HttpClient
+			return SharedHttpClient.GetOrAdd(userAgent, x => new HttpClient
 			{
 				DefaultRequestHeaders = { { "User-Agent", userAgent } }
 			});
@@ -236,7 +236,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public void Get(string url, string path, string method)
 		{
-			Uri uri = new Uri(url);
+			Uri uri = new(url);
 			if (uri.Scheme == Uri.UriSchemeHttps || uri.Scheme == Uri.UriSchemeHttp)
 			{
 				Get(uri, method, path, null, null, null);
@@ -247,7 +247,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public void Get(string url, string path, WebProxy proxy, NetworkCredential credentials, string method)
 		{
-			Uri uri = new Uri(url);
+			Uri uri = new(url);
 			if (uri.Scheme == Uri.UriSchemeHttps || uri.Scheme == Uri.UriSchemeHttp)
 			{
 				Get(uri, method, path, null, proxy, credentials);
@@ -295,7 +295,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public HtmlDocument Load(string url, string proxyHost, int proxyPort, string userId, string password)
 		{
-			WebProxy webProxy = new WebProxy(proxyHost, proxyPort);
+			WebProxy webProxy = new(proxyHost, proxyPort);
 			webProxy.BypassProxyOnLocal = true;
 			NetworkCredential networkCredential = null;
 			if (userId != null && password != null)
@@ -312,7 +312,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public HtmlDocument Load(Uri uri, string proxyHost, int proxyPort, string userId, string password)
 		{
-			WebProxy webProxy = new WebProxy(proxyHost, proxyPort);
+			WebProxy webProxy = new(proxyHost, proxyPort);
 			webProxy.BypassProxyOnLocal = true;
 			NetworkCredential networkCredential = null;
 			if (userId != null && password != null)
@@ -329,7 +329,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public HtmlDocument Load(string url, string method)
 		{
-			Uri uri = new Uri(url);
+			Uri uri = new(url);
 			return Load(uri, method);
 		}
 
@@ -371,7 +371,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public HtmlDocument Load(string url, string method, WebProxy proxy, NetworkCredential credentials)
 		{
-			Uri uri = new Uri(url);
+			Uri uri = new(url);
 			return Load(uri, method, proxy, credentials);
 		}
 
@@ -439,11 +439,11 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 		{
 			FilePreparePath(path);
 			long num = 0L;
-			using (FileStream output = new FileStream(path, FileMode.Create, FileAccess.Write))
+			using (FileStream output = new(path, FileMode.Create, FileAccess.Write))
 			{
-				using (BinaryReader binaryReader = new BinaryReader(stream))
+				using (BinaryReader binaryReader = new(stream))
 				{
-					using (BinaryWriter binaryWriter = new BinaryWriter(output))
+					using (BinaryWriter binaryWriter = new(output))
 					{
 						byte[] array;
 						do
@@ -667,7 +667,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		private string GetCacheHeader(Uri requestUri, string name, string def)
 		{
-			XmlDocument xmlDocument = new XmlDocument();
+			XmlDocument xmlDocument = new();
 			xmlDocument.Load(GetCacheHeadersPath(requestUri));
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("//h[translate(@n, 'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')='" + name.ToUpperInvariant() + "']");
 			if (xmlNode == null)
@@ -700,7 +700,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		private HtmlDocument LoadUrl(Uri uri, string method, WebProxy proxy, NetworkCredential creds)
 		{
-			HtmlDocument htmlDocument = new HtmlDocument();
+			HtmlDocument htmlDocument = new();
 			htmlDocument.OptionAutoCloseOnEnd = false;
 			htmlDocument.OptionFixNestedTags = true;
 			_statusCode = Get(uri, method, null, htmlDocument, proxy, creds);
@@ -714,7 +714,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 		private void SaveCacheHeaders(Uri requestUri, HttpWebResponse resp)
 		{
 			string cacheHeadersPath = GetCacheHeadersPath(requestUri);
-			XmlDocument xmlDocument = new XmlDocument();
+			XmlDocument xmlDocument = new();
 			xmlDocument.LoadXml("<c></c>");
 			XmlNode firstChild = xmlDocument.FirstChild;
 			foreach (string header in resp.Headers)
@@ -808,8 +808,8 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public async Task<HtmlDocument> LoadFromWebAsync(Uri uri, Encoding encoding, NetworkCredential credentials, CancellationToken cancellationToken)
 		{
-			HtmlDocument doc = new HtmlDocument();
-			HttpClientHandler httpClientHandler = new HttpClientHandler();
+			HtmlDocument doc = new();
+			HttpClientHandler httpClientHandler = new();
 			if (credentials == null)
 			{
 				httpClientHandler.UseDefaultCredentials = true;
@@ -848,7 +848,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			string text = string.Empty;
 			if (encoding != null)
 			{
-				using (StreamReader streamReader = new StreamReader(await httpResponseMessage.Content.ReadAsStreamAsync().ConfigureAwait(continueOnCapturedContext: false), encoding))
+				using (StreamReader streamReader = new(await httpResponseMessage.Content.ReadAsStreamAsync().ConfigureAwait(continueOnCapturedContext: false), encoding))
 				{
 					text = streamReader.ReadToEnd();
 				}
@@ -875,8 +875,8 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public object CreateInstance(string htmlUrl, string xsltUrl, XsltArgumentList xsltArgs, Type type, string xmlPath)
 		{
-			StringWriter stringWriter = new StringWriter();
-			XmlTextWriter xmlTextWriter = new XmlTextWriter(stringWriter);
+			StringWriter stringWriter = new();
+			XmlTextWriter xmlTextWriter = new(stringWriter);
 			if (xsltUrl == null)
 			{
 				LoadHtmlAsXml(htmlUrl, xmlTextWriter);
@@ -890,8 +890,8 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 				LoadHtmlAsXml(htmlUrl, xsltUrl, xsltArgs, xmlTextWriter, xmlPath);
 			}
 			xmlTextWriter.Flush();
-			XmlTextReader xmlReader = new XmlTextReader(new StringReader(stringWriter.ToString()));
-			XmlSerializer xmlSerializer = new XmlSerializer(type);
+			XmlTextReader xmlReader = new(new StringReader(stringWriter.ToString()));
+			XmlSerializer xmlSerializer = new(type);
 			try
 			{
 				return xmlSerializer.Deserialize(xmlReader);
@@ -916,7 +916,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			HtmlDocument htmlDocument = Load(htmlUrl);
 			if (xmlPath != null)
 			{
-				XmlTextWriter xmlTextWriter = new XmlTextWriter(xmlPath, htmlDocument.Encoding);
+				XmlTextWriter xmlTextWriter = new(xmlPath, htmlDocument.Encoding);
 				htmlDocument.Save(xmlTextWriter);
 				xmlTextWriter.Close();
 			}
@@ -927,7 +927,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			xsltArgs.AddParam("url", "", htmlUrl);
 			xsltArgs.AddParam("requestDuration", "", RequestDuration);
 			xsltArgs.AddParam("fromCache", "", FromCache);
-			XslCompiledTransform xslCompiledTransform = new XslCompiledTransform();
+			XslCompiledTransform xslCompiledTransform = new();
 			xslCompiledTransform.Load(xsltUrl);
 			xslCompiledTransform.Transform(htmlDocument, xsltArgs, writer);
 		}

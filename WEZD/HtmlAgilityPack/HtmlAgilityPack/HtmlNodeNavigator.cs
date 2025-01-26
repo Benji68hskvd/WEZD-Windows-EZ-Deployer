@@ -14,7 +14,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		private readonly HtmlNameTable _nametable;
 
-		internal bool Trace;
+        public bool Trace;
 
 		public override string BaseURI => _nametable.GetOrAdd(string.Empty);
 

@@ -551,9 +551,9 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				return text;
 			}
-			StringBuilder stringBuilder = new StringBuilder(text.Length);
+			StringBuilder stringBuilder = new(text.Length);
 			ParseState parseState = ParseState.Text;
-			StringBuilder stringBuilder2 = new StringBuilder(10);
+			StringBuilder stringBuilder2 = new(10);
 			for (int i = 0; i < text.Length; i++)
 			{
 				switch (parseState)
@@ -681,7 +681,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				return text;
 			}
-			StringBuilder stringBuilder = new StringBuilder(text.Length);
+			StringBuilder stringBuilder = new(text.Length);
 			if (UseWebUtility)
 			{
 				TextElementEnumerator textElementEnumerator = StringInfo.GetTextElementEnumerator(text);

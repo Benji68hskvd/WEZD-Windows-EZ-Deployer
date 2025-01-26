@@ -13,24 +13,24 @@ namespace WEZD
                 // Vérifie si l'application est déjà lancée en tant qu'administrateur
                 if (!IsRunAsAdmin())
                 {
-                    ProcessStartInfo startInfo = new ProcessStartInfo
+                    ProcessStartInfo startInfo = new()
                     {
-                        FileName = filePath,         // Chemin du programme à exécuter
-                        Arguments = arguments,       // Arguments à passer au programme
-                        UseShellExecute = true,      // Nécessaire pour demander l'élévation
-                        Verb = "runas"               // Demande d'élévation des privilèges
+                        FileName = filePath,         
+                        Arguments = arguments,       
+                        UseShellExecute = true,      
+                        Verb = "runas"               
                     };
-
                     Process.Start(startInfo);
                 }
                 else
                 {
-                    Console.WriteLine("L'application est déjà lancée en tant qu'administrateur.");
+                    Debug.WriteLine("L'application est déjà lancée en tant qu'administrateur.");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erreur lors du lancement en tant qu'administrateur : {ex.Message}");
+                Debug.WriteLine($"Erreur lors du lancement en tant qu'administrateur : {ex.Message}");
+                MessageBox.Show($"Erreur lors du lancement en tant qu'administrateur : {ex.Message}");
             }
         }
 
@@ -38,7 +38,7 @@ namespace WEZD
         {
             // Vérifie si le processus actuel est exécuté avec des privilèges administrateur
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
-            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            WindowsPrincipal principal = new(identity);
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
     }

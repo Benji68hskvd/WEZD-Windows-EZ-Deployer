@@ -216,7 +216,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			}
 			set
 			{
-				HtmlDocument htmlDocument = new HtmlDocument();
+				HtmlDocument htmlDocument = new();
 				htmlDocument.LoadHtml(value);
 				RemoveAllChildren();
 				AppendChildren(htmlDocument.DocumentNode.ChildNodes);
@@ -227,7 +227,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 		{
 			get
 			{
-				StringBuilder stringBuilder = new StringBuilder();
+				StringBuilder stringBuilder = new();
 				int depthLevel = 0;
 				string name = Name;
 				if (name != null)
@@ -478,7 +478,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				if (HasChildNodes)
 				{
-					StringBuilder stringBuilder = new StringBuilder();
+					StringBuilder stringBuilder = new();
 					AppendDirectInnerText(stringBuilder);
 					return stringBuilder.ToString();
 				}
@@ -496,7 +496,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				return string.Empty;
 			}
-			StringBuilder stringBuilder2 = new StringBuilder();
+			StringBuilder stringBuilder2 = new();
 			foreach (HtmlNode item in (IEnumerable<HtmlNode>)ChildNodes)
 			{
 				if (item._nodetype == HtmlNodeType.Text)
@@ -579,7 +579,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public static HtmlNode CreateNode(string html, Action<HtmlDocument> htmlDocumentBuilder)
 		{
-			HtmlDocument htmlDocument = new HtmlDocument();
+			HtmlDocument htmlDocument = new();
 			htmlDocumentBuilder?.Invoke(htmlDocument);
 			htmlDocument.LoadHtml(html);
 			if (!htmlDocument.DocumentNode.IsSingleElementNode())
@@ -972,7 +972,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public HtmlAttribute GetDataAttribute(string key)
 		{
-			return Attributes.Hashitems.SingleOrDefault((KeyValuePair<string, HtmlAttribute> x) => x.Key.Equals("data-" + key, StringComparison.OrdinalIgnoreCase)).Value;
+			return Attributes.Hashitems.SingleOrDefault(x => x.Key.Equals("data-" + key, StringComparison.OrdinalIgnoreCase)).Value;
 		}
 
 		public IEnumerable<HtmlAttribute> GetDataAttributes()
@@ -989,7 +989,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public IEnumerable<HtmlAttribute> GetAttributes(params string[] attributeNames)
 		{
-			List<HtmlAttribute> list = new List<HtmlAttribute>();
+			List<HtmlAttribute> list = new();
 			foreach (string name in attributeNames)
 			{
 				list.Add(Attributes[name]);
@@ -999,17 +999,17 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public string GetAttributeValue(string name, string def)
 		{
-			return this.GetAttributeValue<string>(name, def);
+			return GetAttributeValue<string>(name, def);
 		}
 
 		public int GetAttributeValue(string name, int def)
 		{
-			return this.GetAttributeValue<int>(name, def);
+			return GetAttributeValue<int>(name, def);
 		}
 
 		public bool GetAttributeValue(string name, bool def)
 		{
-			return this.GetAttributeValue<bool>(name, def);
+			return GetAttributeValue<bool>(name, def);
 		}
 
 		public T GetAttributeValue<T>(string name, T def)
@@ -1319,7 +1319,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public string WriteContentTo()
 		{
-			StringWriter stringWriter = new StringWriter();
+			StringWriter stringWriter = new();
 			WriteContentTo(stringWriter);
 			stringWriter.Flush();
 			return stringWriter.ToString();
@@ -1522,7 +1522,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public string WriteTo()
 		{
-			using (StringWriter stringWriter = new StringWriter())
+			using (StringWriter stringWriter = new())
 			{
 				WriteTo(stringWriter);
 				stringWriter.Flush();
@@ -1626,7 +1626,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 				{
 					if (!item.Closed)
 					{
-						HtmlNode htmlNode = new HtmlNode(NodeType, _ownerdocument, -1);
+						HtmlNode htmlNode = new(NodeType, _ownerdocument, -1);
 						htmlNode._endnode = htmlNode;
 						item.CloseNode(htmlNode, level + 1);
 					}
@@ -1876,7 +1876,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				foreach (HtmlAttribute item in enumerable)
 				{
-					if (item.Value != null && item.Value.Split(new char[1] { ' ' }).ToList().Any((string x) => x.Equals(name)))
+					if (item.Value != null && item.Value.Split(new char[1] { ' ' }).ToList().Any(x => x.Equals(name)))
 					{
 						if (throwError)
 						{
@@ -1934,7 +1934,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 				{
 					Attributes.Remove(item);
 				}
-				else if (item.Value != null && item.Value.Split(new char[1] { ' ' }).ToList().Any((string x) => x.Equals(name)))
+				else if (item.Value != null && item.Value.Split(new char[1] { ' ' }).ToList().Any(x => x.Equals(name)))
 				{
 					string[] array = item.Value.Split(new char[1] { ' ' });
 					string text = "";
@@ -2107,7 +2107,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 							}
 							if (item.PropertyType.IsDefinedAttribute(typeof(HasXPathAttribute)))
 							{
-								HtmlDocument htmlDocument3 = new HtmlDocument();
+								HtmlDocument htmlDocument3 = new();
 								htmlDocument3.LoadHtml(Tools.GetHtmlForEncapsulation(htmlNode, (!xPathAttribute.IsNodeReturnTypeExplicitlySet) ? ReturnType.InnerHtml : xPathAttribute.NodeReturnType));
 								object encapsulatedData = GetEncapsulatedData(item.PropertyType, htmlDocument3);
 								item.SetValue(obj, encapsulatedData, null);
@@ -2181,7 +2181,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 						{
 							foreach (HtmlNode item2 in (IEnumerable<HtmlNode>)htmlNodeCollection)
 							{
-								HtmlDocument htmlDocument4 = new HtmlDocument();
+								HtmlDocument htmlDocument4 = new();
 								htmlDocument4.LoadHtml(Tools.GetHtmlForEncapsulation(item2, (!xPathAttribute.IsNodeReturnTypeExplicitlySet) ? ReturnType.InnerHtml : xPathAttribute.NodeReturnType));
 								object encapsulatedData2 = GetEncapsulatedData(list[0], htmlDocument4);
 								list2.Add(encapsulatedData2);
@@ -2260,7 +2260,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public HtmlNodeCollection SelectNodes(string xpath)
 		{
-			HtmlNodeCollection htmlNodeCollection = new HtmlNodeCollection(null);
+			HtmlNodeCollection htmlNodeCollection = new(null);
 			XPathNodeIterator xPathNodeIterator = new HtmlNodeNavigator(OwnerDocument, this).Select(xpath);
 			while (xPathNodeIterator.MoveNext())
 			{
@@ -2276,7 +2276,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public HtmlNodeCollection SelectNodes(XPathExpression xpath)
 		{
-			HtmlNodeCollection htmlNodeCollection = new HtmlNodeCollection(null);
+			HtmlNodeCollection htmlNodeCollection = new(null);
 			XPathNodeIterator xPathNodeIterator = new HtmlNodeNavigator(OwnerDocument, this).Select(xpath);
 			while (xPathNodeIterator.MoveNext())
 			{

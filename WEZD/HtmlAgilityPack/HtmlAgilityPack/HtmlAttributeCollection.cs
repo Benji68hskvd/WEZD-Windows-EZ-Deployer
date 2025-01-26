@@ -4,11 +4,11 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
 	public class HtmlAttributeCollection : IList<HtmlAttribute>, ICollection<HtmlAttribute>, IEnumerable<HtmlAttribute>, IEnumerable
 	{
-		internal Dictionary<string, HtmlAttribute> Hashitems = new Dictionary<string, HtmlAttribute>(StringComparer.OrdinalIgnoreCase);
+		internal Dictionary<string, HtmlAttribute> Hashitems = new(StringComparer.OrdinalIgnoreCase);
 
 		private HtmlNode _ownernode;
 
-		internal List<HtmlAttribute> items = new List<HtmlAttribute>();
+		internal List<HtmlAttribute> items = new();
 
 		public int Count => items.Count;
 

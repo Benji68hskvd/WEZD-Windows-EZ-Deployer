@@ -46,7 +46,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			}
 		}
 
-		internal HtmlCommentNode(HtmlDocument ownerdocument, int index)
+        public HtmlCommentNode(HtmlDocument ownerdocument, int index)
 			: base(HtmlNodeType.Comment, ownerdocument, index)
 		{
 		}

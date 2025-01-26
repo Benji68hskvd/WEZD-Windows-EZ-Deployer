@@ -10,7 +10,7 @@ namespace WEZD
         private readonly string _xmlTemplate = @"
 <Configuration>
   <Add OfficeClientEdition=""{0}"" Channel=""PerpetualVL2024"">
-    <Product ID=""ProPlus2024Volume"" PIDKEY=""NDY3T-HKY6R-HHTPD-M7KJG-BP33D"">
+    <Product ID=""ProPlus2024Volume"" PIDKEY=""BBBBB-BBBBB-BBBBB-BBBBB-BBBBB"">
       <Language ID=""fr-fr""/>
       {1}
     </Product>
@@ -62,21 +62,21 @@ namespace WEZD
                 f.UpdateStatusLabel("Installation d'Office en cours...");
 
                 // Exécuter le programme d'installation
-                ProcessStartInfo installProcessInfo = new ProcessStartInfo(_installerPath)
+                ProcessStartInfo installProcessInfo = new(_installerPath)
                 {
                     Arguments = $"/configure {configPath}",
                     UseShellExecute = false,
                     CreateNoWindow = true
                 };
 
-                var process = Process.Start(installProcessInfo);
+                Process? process = Process.Start(installProcessInfo);
                 process.WaitForExit();
 
                 f.UpdateStatusLabel("Installation d'Office terminée.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erreur lors de l'installation d'Office : {ex.Message}");
+                MessageBox.Show($@"Erreur lors de l'installation d'Office : {ex.Message}");
             }
         }
 

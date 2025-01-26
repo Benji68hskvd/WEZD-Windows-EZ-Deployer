@@ -2,13 +2,13 @@ using System.Text;
 
 namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 {
-	internal class EncodingFoundException : Exception
+	public class EncodingFoundException : Exception
 	{
 		private Encoding _encoding;
 
-		internal Encoding Encoding => _encoding;
+		public Encoding Encoding => _encoding;
 
-		internal EncodingFoundException(Encoding encoding)
+		public EncodingFoundException(Encoding encoding)
 		{
 			_encoding = encoding;
 		}

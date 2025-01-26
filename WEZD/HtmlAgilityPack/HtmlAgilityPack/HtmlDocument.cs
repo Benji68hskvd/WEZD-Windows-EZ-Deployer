@@ -44,7 +44,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		private int _index;
 
-		internal Dictionary<string, HtmlNode> Lastnodes = new Dictionary<string, HtmlNode>();
+		internal Dictionary<string, HtmlNode> Lastnodes = new();
 
 		private HtmlNode _lastparentnode;
 
@@ -62,7 +62,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		internal Dictionary<int, HtmlNode> Openednodes;
 
-		private List<HtmlParseError> _parseerrors = new List<HtmlParseError>();
+		private List<HtmlParseError> _parseerrors = [];
 
 		private string _remainder;
 
@@ -134,27 +134,23 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		internal static readonly string HtmlExceptionClassExists = "Class name already exists";
 
-		internal static readonly Dictionary<string, string[]> HtmlResetters = new Dictionary<string, string[]>
-		{
+		internal static readonly Dictionary<string, string[]> HtmlResetters = new()
+        {
 			{
-				"li",
-				new string[2] { "ul", "ol" }
-			},
+				"li", ["ul", "ol"]
+            },
 			{
-				"tr",
-				new string[1] { "table" }
-			},
+				"tr", ["table"]
+            },
 			{
-				"th",
-				new string[2] { "tr", "table" }
-			},
+				"th", ["tr", "table"]
+            },
 			{
-				"td",
-				new string[2] { "tr", "table" }
-			}
+				"td", ["tr", "table"]
+            }
 		};
 
-		private static List<string> BlockAttributes = new List<string> { "\"", "'" };
+		private static List<string> BlockAttributes = ["\"", "'"];
 
 		public static bool DisableBehaviorTagP
 		{
@@ -424,7 +420,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				throw new ArgumentNullException("html");
 			}
-			using (StringReader reader = new StringReader(html))
+			using (StringReader reader = new(html))
 			{
 				return DetectEncoding(reader);
 			}
@@ -548,7 +544,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				throw new ArgumentNullException("html");
 			}
-			using (StringReader reader = new StringReader(html))
+			using (StringReader reader = new(html))
 			{
 				Load(reader);
 			}
@@ -556,7 +552,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public void Save(Stream outStream)
 		{
-			StreamWriter writer = new StreamWriter(outStream, GetOutEncoding());
+			StreamWriter writer = new(outStream, GetOutEncoding());
 			Save(writer);
 		}
 
@@ -570,7 +566,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				throw new ArgumentNullException("encoding");
 			}
-			StreamWriter writer = new StreamWriter(outStream, encoding);
+			StreamWriter writer = new(outStream, encoding);
 			Save(writer);
 		}
 
@@ -672,7 +668,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		private void AddError(HtmlParseErrorCode code, int line, int linePosition, int streamPosition, string sourceText, string reason)
 		{
-			HtmlParseError item = new HtmlParseError(code, line, linePosition, streamPosition, sourceText, reason);
+			HtmlParseError item = new(code, line, linePosition, streamPosition, sourceText, reason);
 			_parseerrors.Add(item);
 		}
 
@@ -692,7 +688,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 					if (_lastparentnode != null)
 					{
 						HtmlNode htmlNode = null;
-						Stack<HtmlNode> stack = new Stack<HtmlNode>();
+						Stack<HtmlNode> stack = new();
 						if (!_currentnode.Name.Equals("br"))
 						{
 							for (HtmlNode htmlNode2 = _lastparentnode.LastChild; htmlNode2 != null; htmlNode2 = htmlNode2.PreviousSibling)
@@ -819,7 +815,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 				HtmlNode dictionaryValueOrDefault = Utilities.GetDictionaryValueOrDefault(Lastnodes, _currentnode.Name);
 				if (dictionaryValueOrDefault != null && !Lastnodes[name].Closed && !FindResetterNodes(dictionaryValueOrDefault, resetters))
 				{
-					HtmlNode htmlNode = new HtmlNode(dictionaryValueOrDefault.NodeType, this, -1);
+					HtmlNode htmlNode = new(dictionaryValueOrDefault.NodeType, this, -1);
 					htmlNode._endnode = htmlNode;
 					dictionaryValueOrDefault.CloseNode(htmlNode);
 				}
@@ -948,7 +944,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			Lastnodes = new Dictionary<string, HtmlNode>();
 			_c = 0;
 			_fullcomment = false;
-			_parseerrors = new List<HtmlParseError>();
+			_parseerrors = [];
 			_line = 1;
 			_lineposition = 0;
 			_maxlineposition = 0;
@@ -1575,7 +1571,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		private void CloseParentImplicitEnd()
 		{
-			HtmlNode htmlNode = new HtmlNode(_lastparentnode.NodeType, this, -1);
+			HtmlNode htmlNode = new(_lastparentnode.NodeType, this, -1);
 			htmlNode._endnode = htmlNode;
 			htmlNode._isImplicitEnd = true;
 			_lastparentnode._isImplicitEnd = true;
@@ -1584,7 +1580,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		private void CloseParentExplicitEnd()
 		{
-			HtmlNode htmlNode = new HtmlNode(_lastparentnode.NodeType, this, -1);
+			HtmlNode htmlNode = new(_lastparentnode.NodeType, this, -1);
 			htmlNode._endnode = htmlNode;
 			_lastparentnode.CloseNode(htmlNode);
 		}
@@ -1760,7 +1756,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				throw new ArgumentNullException("path");
 			}
-			using (StreamReader reader = new StreamReader(path, OptionDefaultStreamEncoding))
+			using (StreamReader reader = new(path, OptionDefaultStreamEncoding))
 			{
 				return DetectEncoding(reader);
 			}
@@ -1772,7 +1768,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				throw new ArgumentNullException("path");
 			}
-			using (StreamReader reader = new StreamReader(path, OptionDefaultStreamEncoding))
+			using (StreamReader reader = new(path, OptionDefaultStreamEncoding))
 			{
 				Load(reader);
 			}
@@ -1784,7 +1780,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				throw new ArgumentNullException("path");
 			}
-			using (StreamReader reader = new StreamReader(path, detectEncodingFromByteOrderMarks))
+			using (StreamReader reader = new(path, detectEncodingFromByteOrderMarks))
 			{
 				Load(reader);
 			}
@@ -1800,7 +1796,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				throw new ArgumentNullException("encoding");
 			}
-			using (StreamReader reader = new StreamReader(path, encoding))
+			using (StreamReader reader = new(path, encoding))
 			{
 				Load(reader);
 			}
@@ -1816,7 +1812,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				throw new ArgumentNullException("encoding");
 			}
-			using (StreamReader reader = new StreamReader(path, encoding, detectEncodingFromByteOrderMarks))
+			using (StreamReader reader = new(path, encoding, detectEncodingFromByteOrderMarks))
 			{
 				Load(reader);
 			}
@@ -1832,7 +1828,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				throw new ArgumentNullException("encoding");
 			}
-			using (StreamReader reader = new StreamReader(path, encoding, detectEncodingFromByteOrderMarks, buffersize))
+			using (StreamReader reader = new(path, encoding, detectEncodingFromByteOrderMarks, buffersize))
 			{
 				Load(reader);
 			}
@@ -1840,7 +1836,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 
 		public void Save(string filename)
 		{
-			using (StreamWriter writer = new StreamWriter(filename, append: false, GetOutEncoding()))
+			using (StreamWriter writer = new(filename, append: false, GetOutEncoding()))
 			{
 				Save(writer);
 			}
@@ -1856,7 +1852,7 @@ namespace WEZD.HtmlAgilityPack.HtmlAgilityPack
 			{
 				throw new ArgumentNullException("encoding");
 			}
-			using (StreamWriter writer = new StreamWriter(filename, append: false, encoding))
+			using (StreamWriter writer = new(filename, append: false, encoding))
 			{
 				Save(writer);
 			}
