@@ -13,9 +13,12 @@
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier> <!-- Cible Windows 64 bits -->
 		<SelfContained>true</SelfContained> <!-- Inclut le runtime -->
 		<PublishTrimmed>false</PublishTrimmed>
-		<ApplicationIcon>Ressource\setup-icon-29.ico</ApplicationIcon>
-		<ApplicationManifest>app.manifest</ApplicationManifest> <!-- Pas de trimming pour Windows Forms -->
+		<ApplicationIcon>Ressource\setup-icon-29.ico</ApplicationIcon> <!-- Pas de trimming pour Windows Forms -->
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <AdditionalFiles Remove="app.manifest" />
+	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Remove="OfficeBinary.cs" />
