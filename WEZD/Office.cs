@@ -47,6 +47,19 @@ namespace WEZD
                 Form1 f = new();
                 f.UpdateStatusLabel("Préparation de l'installation d'Office...");
 
+                if (f.UseProdKey.Checked && !string.IsNullOrEmpty(f.UseProdKey.Text))
+                {
+                    // Utilise la clé personnalisée saisie par l'utilisateur
+                    string customKey = f.ProductKey.Text;
+                    Debug.WriteLine($"Utilisation de la clé personnalisée : {customKey}");
+                }
+                else
+                {
+                    // Utilise la clé par défaut
+                    string defaultKey = "BBBBB-BBBBB-BBBBB-BBBBb-BBBBB";
+                    Debug.WriteLine($"Utilisation de la clé par défaut : {defaultKey}");
+                }
+
                 string architecture = isX64 ? "64" : "32";
 
                 // Générer les exclusions

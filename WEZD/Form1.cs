@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Text;
 
 namespace WEZD
 {
@@ -76,6 +77,32 @@ namespace WEZD
                     control.Enabled = isEnabled;
                 }
             }
+        }
+
+        private void UseProdKey_CheckedChanged(object sender, EventArgs e)
+        {
+            ProductKey.Enabled = UseProdKey.Checked;
+            if (!UseProdKey.Checked)
+            {
+                ProductKey.Text = ""; // Efface la clé si désactivé
+            }
+        }
+
+        private void ProductKey_TextChanged(object sender, EventArgs e)
+        {
+            string text = ProductKey.Text.Replace("-", ""); // Supprime les tirets existants
+            if (text.Length > 25) text = text.Substring(0, 25);    // Limite à 25 caractères
+
+            // Ajoute les tirets automatiquement
+            StringBuilder formattedKey = new StringBuilder();
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (i > 0 && i % 5 == 0) formattedKey.Append("-");
+                formattedKey.Append(text[i]);
+            }
+
+            ProductKey.Text = formattedKey.ToString().ToUpper(); // Convertit en majuscule
+            ProductKey.SelectionStart = ProductKey.Text.Length; // Position du curseur
         }
     }
 }

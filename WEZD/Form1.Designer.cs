@@ -54,6 +54,8 @@
             Ohook = new RadioButton();
             UseCurDir = new CheckBox();
             panel4 = new Panel();
+            ProductKey = new TextBox();
+            UseProdKey = new CheckBox();
             Excel = new CheckBox();
             PowerPoint = new CheckBox();
             Outlook = new CheckBox();
@@ -343,6 +345,26 @@
             panel4.Size = new Size(422, 330);
             panel4.TabIndex = 24;
             // 
+            // ProductKey
+            // 
+            ProductKey.Enabled = false;
+            ProductKey.Location = new Point(35, 291);
+            ProductKey.Name = "ProductKey";
+            ProductKey.Size = new Size(208, 23);
+            ProductKey.TabIndex = 27;
+            ProductKey.TextChanged += ProductKey_TextChanged;
+            // 
+            // UseProdKey
+            // 
+            UseProdKey.AutoSize = true;
+            UseProdKey.Location = new Point(37, 263);
+            UseProdKey.Name = "UseProdKey";
+            UseProdKey.Size = new Size(161, 19);
+            UseProdKey.TabIndex = 26;
+            UseProdKey.Text = "Utiliser une clé de produit";
+            UseProdKey.UseVisualStyleBackColor = true;
+            UseProdKey.CheckedChanged += UseProdKey_CheckedChanged;
+            // 
             // Excel
             // 
             Excel.AutoSize = true;
@@ -456,7 +478,7 @@
             // labelStatus
             // 
             labelStatus.AutoSize = true;
-            labelStatus.Location = new Point(80, 308);
+            labelStatus.Location = new Point(160, 414);
             labelStatus.Name = "labelStatus";
             labelStatus.Size = new Size(38, 15);
             labelStatus.TabIndex = 25;
@@ -481,6 +503,8 @@
             Controls.Add(AutoDeleteInstaller);
             Controls.Add(CancelButton);
             Controls.Add(InstallButton);
+            Controls.Add(UseProdKey);
+            Controls.Add(ProductKey);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "MultiInstaller";
@@ -534,7 +558,10 @@
         public RadioButton x64;
         private RadioButton x86;
         private Label label5;
-        private static Label labelStatus;
+        public CheckBox UseProdKey;
+        private Label labelStatus;
+
+        public TextBox ProductKey;
         //private Label labelStatus;
     }
 }
