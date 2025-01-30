@@ -54,8 +54,8 @@
             Ohook = new RadioButton();
             UseCurDir = new CheckBox();
             panel4 = new Panel();
-            ProductKey = new TextBox();
-            UseProdKey = new CheckBox();
+            Std2016 = new RadioButton();
+            PPlus2016 = new RadioButton();
             Excel = new CheckBox();
             PowerPoint = new CheckBox();
             Outlook = new CheckBox();
@@ -66,8 +66,21 @@
             x64 = new RadioButton();
             x86 = new RadioButton();
             label5 = new Label();
+            ProductKey = new TextBox();
+            UseProdKey = new CheckBox();
             label4 = new Label();
             labelStatus = new Label();
+            Std2019 = new RadioButton();
+            Std2021 = new RadioButton();
+            Std2024 = new RadioButton();
+            PPlus2019 = new RadioButton();
+            PPlus2021 = new RadioButton();
+            PPlus2024 = new RadioButton();
+            label6 = new Label();
+            label7 = new Label();
+            label8 = new Label();
+            label9 = new Label();
+            label10 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -330,6 +343,19 @@
             // panel4
             // 
             panel4.BorderStyle = BorderStyle.FixedSingle;
+            panel4.Controls.Add(label10);
+            panel4.Controls.Add(label9);
+            panel4.Controls.Add(label8);
+            panel4.Controls.Add(label7);
+            panel4.Controls.Add(label6);
+            panel4.Controls.Add(PPlus2024);
+            panel4.Controls.Add(PPlus2021);
+            panel4.Controls.Add(PPlus2019);
+            panel4.Controls.Add(Std2024);
+            panel4.Controls.Add(Std2021);
+            panel4.Controls.Add(Std2019);
+            panel4.Controls.Add(Std2016);
+            panel4.Controls.Add(PPlus2016);
             panel4.Controls.Add(Excel);
             panel4.Controls.Add(PowerPoint);
             panel4.Controls.Add(Outlook);
@@ -345,25 +371,25 @@
             panel4.Size = new Size(422, 330);
             panel4.TabIndex = 24;
             // 
-            // ProductKey
+            // Std2016
             // 
-            ProductKey.Enabled = false;
-            ProductKey.Location = new Point(35, 291);
-            ProductKey.Name = "ProductKey";
-            ProductKey.Size = new Size(208, 23);
-            ProductKey.TabIndex = 27;
-            ProductKey.TextChanged += ProductKey_TextChanged;
+            Std2016.AutoSize = true;
+            Std2016.Location = new Point(236, 78);
+            Std2016.Name = "Std2016";
+            Std2016.Size = new Size(72, 19);
+            Std2016.TabIndex = 29;
+            Std2016.Text = "Standard";
+            Std2016.UseVisualStyleBackColor = true;
             // 
-            // UseProdKey
+            // PPlus2016
             // 
-            UseProdKey.AutoSize = true;
-            UseProdKey.Location = new Point(37, 263);
-            UseProdKey.Name = "UseProdKey";
-            UseProdKey.Size = new Size(161, 19);
-            UseProdKey.TabIndex = 26;
-            UseProdKey.Text = "Utiliser une clé de produit";
-            UseProdKey.UseVisualStyleBackColor = true;
-            UseProdKey.CheckedChanged += UseProdKey_CheckedChanged;
+            PPlus2016.AutoSize = true;
+            PPlus2016.Location = new Point(327, 78);
+            PPlus2016.Name = "PPlus2016";
+            PPlus2016.Size = new Size(65, 19);
+            PPlus2016.TabIndex = 28;
+            PPlus2016.Text = "ProPlus";
+            PPlus2016.UseVisualStyleBackColor = true;
             // 
             // Excel
             // 
@@ -466,6 +492,26 @@
             label5.TabIndex = 0;
             label5.Text = "Version :";
             // 
+            // ProductKey
+            // 
+            ProductKey.Enabled = false;
+            ProductKey.Location = new Point(35, 291);
+            ProductKey.Name = "ProductKey";
+            ProductKey.Size = new Size(208, 23);
+            ProductKey.TabIndex = 27;
+            ProductKey.TextChanged += ProductKey_TextChanged;
+            // 
+            // UseProdKey
+            // 
+            UseProdKey.AutoSize = true;
+            UseProdKey.Location = new Point(37, 263);
+            UseProdKey.Name = "UseProdKey";
+            UseProdKey.Size = new Size(161, 19);
+            UseProdKey.TabIndex = 26;
+            UseProdKey.Text = "Utiliser une clé de produit";
+            UseProdKey.UseVisualStyleBackColor = true;
+            UseProdKey.CheckedChanged += UseProdKey_CheckedChanged;
+            // 
             // label4
             // 
             label4.AutoSize = true;
@@ -484,6 +530,111 @@
             labelStatus.TabIndex = 25;
             labelStatus.Text = "V1.2.0";
             labelStatus.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // Std2019
+            // 
+            Std2019.AutoSize = true;
+            Std2019.Location = new Point(236, 134);
+            Std2019.Name = "Std2019";
+            Std2019.Size = new Size(72, 19);
+            Std2019.TabIndex = 30;
+            Std2019.Text = "Standard";
+            Std2019.UseVisualStyleBackColor = true;
+            // 
+            // Std2021
+            // 
+            Std2021.AutoSize = true;
+            Std2021.Location = new Point(236, 179);
+            Std2021.Name = "Std2021";
+            Std2021.Size = new Size(72, 19);
+            Std2021.TabIndex = 31;
+            Std2021.Text = "Standard";
+            Std2021.UseVisualStyleBackColor = true;
+            // 
+            // Std2024
+            // 
+            Std2024.AutoSize = true;
+            Std2024.Location = new Point(236, 229);
+            Std2024.Name = "Std2024";
+            Std2024.Size = new Size(72, 19);
+            Std2024.TabIndex = 32;
+            Std2024.Text = "Standard";
+            Std2024.UseVisualStyleBackColor = true;
+            // 
+            // PPlus2019
+            // 
+            PPlus2019.AutoSize = true;
+            PPlus2019.Location = new Point(327, 134);
+            PPlus2019.Name = "PPlus2019";
+            PPlus2019.Size = new Size(65, 19);
+            PPlus2019.TabIndex = 33;
+            PPlus2019.Text = "ProPlus";
+            PPlus2019.UseVisualStyleBackColor = true;
+            // 
+            // PPlus2021
+            // 
+            PPlus2021.AutoSize = true;
+            PPlus2021.Location = new Point(327, 179);
+            PPlus2021.Name = "PPlus2021";
+            PPlus2021.Size = new Size(65, 19);
+            PPlus2021.TabIndex = 34;
+            PPlus2021.Text = "ProPlus";
+            PPlus2021.UseVisualStyleBackColor = true;
+            // 
+            // PPlus2024
+            // 
+            PPlus2024.AutoSize = true;
+            PPlus2024.Location = new Point(327, 229);
+            PPlus2024.Name = "PPlus2024";
+            PPlus2024.Size = new Size(65, 19);
+            PPlus2024.TabIndex = 35;
+            PPlus2024.Text = "ProPlus";
+            PPlus2024.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(283, 20);
+            label6.Name = "label6";
+            label6.Size = new Size(85, 15);
+            label6.TabIndex = 36;
+            label6.Text = "Office versions";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(301, 60);
+            label7.Name = "label7";
+            label7.Size = new Size(31, 15);
+            label7.TabIndex = 37;
+            label7.Text = "2016";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(301, 116);
+            label8.Name = "label8";
+            label8.Size = new Size(31, 15);
+            label8.TabIndex = 38;
+            label8.Text = "2019";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(301, 161);
+            label9.Name = "label9";
+            label9.Size = new Size(31, 15);
+            label9.TabIndex = 39;
+            label9.Text = "2021";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(301, 211);
+            label10.Name = "label10";
+            label10.Size = new Size(31, 15);
+            label10.TabIndex = 40;
+            label10.Text = "2024";
             // 
             // Form1
             // 
@@ -562,6 +713,19 @@
         private Label labelStatus;
 
         public TextBox ProductKey;
+        public RadioButton Std2016;
+        public RadioButton PPlus2016;
+        public RadioButton Std2024;
+        public RadioButton Std2021;
+        public RadioButton Std2019;
+        private Label label10;
+        private Label label9;
+        private Label label8;
+        private Label label7;
+        private Label label6;
+        public RadioButton PPlus2024;
+        public RadioButton PPlus2021;
+        public RadioButton PPlus2019;
         //private Label labelStatus;
     }
 }

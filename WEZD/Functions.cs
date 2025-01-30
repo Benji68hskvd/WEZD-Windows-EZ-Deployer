@@ -6,49 +6,49 @@ namespace WEZD
 {
     public class Functions
     {
-        public async Task Install(Form1 form)
+        public async Task Install(Form1 f)
         {
             try
             {
                 Debug.WriteLine("start install");
                 // vérifier directement les checkboxes sur l'instance actuelle du formulaire
-                if (form.chrome.Checked)
+                if (f.chrome.Checked)
                 {
                     Debug.WriteLine("install chrome");
                     await Install("https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi", "", "/", "", "", "chrome_installer.msi", "Chrome");
                 }
-                if (form.Firefox.Checked)
+                if (f.Firefox.Checked)
                 {
                     Debug.WriteLine("install firefox");
                     await Install("https://ftp.mozilla.org/pub/firefox/releases/", "/pub/firefox/releases/", "/pub/firefox/releases/", "b", "/win64/fr/", "firefox_installer.msi", "Firefox");
                 }
-                if (form.CCleaner.Checked)
+                if (f.CCleaner.Checked)
                 {
                     Debug.WriteLine("install ccleaner");
                     await Install("https://bits.avcdn.net/productfamily_CCLEANER/insttype_BUSINESS_32/platform_WIN_MSI/installertype_ONLINE/build_RELEASE/.msi/", "", "/", "", "", "ccleaner_installer.msi", "CCleaner");
                 }
-                if (form.NovaBench.Checked)
+                if (f.NovaBench.Checked)
                 {
                     Debug.WriteLine("install novabench");
                     await Install("https://cdn.novabench.net/novabench.msi", "", "/", "", "", "novabench_installer.msi", "NovaBench");
                 }
-                if (form.LibreOffice.Checked)
+                if (f.LibreOffice.Checked)
                 {
                     Debug.WriteLine("install libreoffice");
                     await Install("https://miroir.univ-lorraine.fr/documentfoundation/libreoffice/stable/", "", "/", "", "/win/x86_64/", "libreoffice_installer.msi", "LibreOffice");
                 }
-                if (form.VLC.Checked)
+                if (f.VLC.Checked)
                 {
                     Debug.WriteLine("install vlc");
                     await InstallVLC(); // appel spécifique pour VLC
                 }
-                if (form.TeamViewer.Checked)
+                if (f.TeamViewer.Checked)
                 {
                     Debug.WriteLine("install teamviewer");
                     await Install("https://dl.teamviewer.com/download/version_15x/TeamViewer_Setup_x64.exe", "", "/", "", "", "TeamViewer.exe", "TeamViewer");
                 }
                 // ajout de l'installation d'Office
-                if (form.Word.Checked || form.Excel.Checked || form.PowerPoint.Checked || form.Outlook.Checked)
+                if (f.Word.Checked || f.Excel.Checked || f.PowerPoint.Checked || f.Outlook.Checked)
                 {
                     Debug.WriteLine("install office");
 
@@ -56,41 +56,41 @@ namespace WEZD
                     Office officeInstaller = new();
 
                     // récupérer les options sélectionnées dans le formulaire
-                    bool isX64 = form.x64.Checked;
-                    bool installWord = form.Word.Checked;
-                    bool installExcel = form.Excel.Checked;
-                    bool installPowerPoint = form.PowerPoint.Checked;
-                    bool installOutlook = form.Outlook.Checked;
+                    bool isX64 = f.x64.Checked;
+                    bool Word = f.Word.Checked;
+                    bool Excel = f.Excel.Checked;
+                    bool PowerPoint = f.PowerPoint.Checked;
+                    bool Outlook = f.Outlook.Checked;
 
                     // appeler la méthode d'installation
-                    officeInstaller.Install(isX64, installWord, installExcel, installPowerPoint, installOutlook);
+                    officeInstaller.Install(f, isX64, Word, Excel, PowerPoint, Outlook);
                 }
                 // activation Windows
-                if (form.HWID.Checked)
+                if (f.HWID.Checked)
                 {
                     Debug.WriteLine("using hwid");
-                    ActivationCommand(form.UseCurDir.Checked, " /HWID");
+                    ActivationCommand(f.UseCurDir.Checked, " /HWID");
                 }
-                if (form.KMS38.Checked)
+                if (f.KMS38.Checked)
                 {
                     Debug.WriteLine("using kms38");
-                    ActivationCommand(form.UseCurDir.Checked, " /KMS38");
+                    ActivationCommand(f.UseCurDir.Checked, " /KMS38");
                 }
-                if (form.WinOnlineKMS.Checked)
+                if (f.WinOnlineKMS.Checked)
                 {
                     Debug.WriteLine("using online kms windows");
-                    ActivationCommand(form.UseCurDir.Checked, " /KMS-Windows /KMS-RenewalTask");
+                    ActivationCommand(f.UseCurDir.Checked, " /KMS-Windows /KMS-RenewalTask");
                 }
                 // activation Office
-                if (form.Ohook.Checked)
+                if (f.Ohook.Checked)
                 {
                     Debug.WriteLine("install ohook");
-                    ActivationCommand(form.UseCurDir.Checked, " /Ohook");
+                    ActivationCommand(f.UseCurDir.Checked, " /Ohook");
                 }
-                if (form.OfficeOnlineKMS.Checked)
+                if (f.OfficeOnlineKMS.Checked)
                 {
                     Debug.WriteLine("install online kms office");
-                    ActivationCommand(form.UseCurDir.Checked, " /KMS-Office /KMS-RenewalTask");
+                    ActivationCommand(f.UseCurDir.Checked, " /KMS-Office /KMS-RenewalTask");
                 }
             }
             catch (Exception e)
@@ -101,35 +101,8 @@ namespace WEZD
 
         //Activation Script ----------------------------------------------------------------------------------------------------------
 
-        //public static async void ActivationCommand(bool useCurrentDirectory, string command)
-        //{
-        //    Form1 f = new();
-        //    f.UpdateStatusLabel("Activate...");
-        //    //string url = "https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/master/MAS/All-In-One-Version/MAS_AIO-CRC32_31F7FD1E.cmd";
+        //    string url = "https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/master/MAS/All-In-One-Version/MAS_AIO-CRC32_31F7FD1E.cmd";
         //    string url = "https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/refs/heads/master/MAS/All-In-One-Version-KL/MAS_AIO.cmd";
-        //    string currentDirectory = Directory.GetCurrentDirectory();
-        //    string ScriptFile = "\\MAS_AIO.cmd";
-
-        //    if (File.Exists(currentDirectory + ScriptFile) == false)
-        //    {
-        //        System.Net.WebClient myWebClient = new();
-        //        myWebClient.DownloadFile(url, currentDirectory + ScriptFile);
-        //    }
-        //    if (useCurrentDirectory)
-        //    {
-        //        ProcessStartInfo currentDeleteInfo = new("cmd.exe", "/C " + currentDirectory + ScriptFile + command);
-        //        var currentDeleteProcess = Process.Start(currentDeleteInfo);
-        //        currentDeleteProcess.WaitForExit();
-        //    }
-        //    else
-        //    {
-        //        string FilePath = "C:\\Users\\" + Environment.UserName + "\\Downloads\\" + ScriptFile;
-
-        //        ProcessStartInfo deleteInfo = new("cmd.exe", "/C " + FilePath + command);
-        //        var deleteProcess = Process.Start(deleteInfo);
-        //        deleteProcess.WaitForExit();
-        //    }
-        //}
 
         public static async void ActivationCommand(bool useCurrentDirectory, string command)
         {
@@ -192,10 +165,7 @@ namespace WEZD
 
         public static async Task CheckInstall(string url, string hrefNodes, string hrefReplace, string ignoreVersionName, string endUrl, string installerName, string packageName)
         {
-            //if (isChecked == true)
-            //{
                 await Install(url, hrefNodes, hrefReplace, ignoreVersionName, endUrl, installerName, packageName);
-            //}
         }
 
         //Installation Script ---------------------------------------------------------------------------------------------------------------
@@ -348,94 +318,6 @@ namespace WEZD
             }
         }
 
-        //private static async Task InstallPackage(string url, string downloadPath, string packageName, string installerName)
-        //{
-        //    Form1 f = new();
-        //    f.UpdateStatusLabel($"Download {packageName}...");
-
-        //    System.Net.WebClient myWebClient = new();
-        //    await myWebClient.DownloadFileTaskAsync(url, downloadPath + installerName);
-
-        //    string filePath = downloadPath + installerName;
-
-        //    bool containsExe = url.Contains(".exe");
-
-        //    if (containsExe)
-        //    {
-        //        f.UpdateStatusLabel($"Install {packageName}...");
-        //        ProcessStartInfo installInfo = new("cmd.exe", "/C " + filePath);
-        //        var installProcess = Process.Start(installInfo);
-        //        installProcess.WaitForExit();
-        //    }
-        //    else
-        //    {
-        //        f.UpdateStatusLabel($"Install {packageName}...");
-
-        //        string msiPath = downloadPath + installerName;
-
-        //        string arguments = $"/passive /i \"{msiPath}\"";
-
-        //        ProcessStartInfo startInfo = new("msiexec.exe", arguments);
-
-        //        var process = Process.Start(startInfo);
-        //        process.WaitForExit();
-        //    }
-
-        //    ProcessStartInfo deleteInfo = new($"cmd.exe", "/C " + $"del \"{filePath}\"");
-        //    var deleteProcess = Process.Start(deleteInfo);
-        //    deleteProcess.WaitForExit();
-        //}
-
-        //private static async Task InstallPackage(string url, string downloadPath, string packageName, string installerName)
-        //{
-        //    Form1 f = new();
-        //    f.UpdateStatusLabel($"Download {packageName}...");
-        //    System.Net.WebClient myWebClient = new();
-        //    await myWebClient.DownloadFileTaskAsync(url, Path.Combine(downloadPath, installerName));
-        //    string filePath = Path.Combine(downloadPath, installerName);
-
-        //    // Installation silencieuse spécifique pour TeamViewer
-        //    if (packageName.Equals("TeamViewer", StringComparison.OrdinalIgnoreCase))
-        //    {
-        //        f.UpdateStatusLabel($"Install {packageName} en arrière-plan...");
-        //        ProcessStartInfo psInfo = new()
-        //        {
-        //            FileName = "powershell",
-        //            Arguments = $"-Command \"Start-Process -FilePath '{filePath}' -ArgumentList '/S' -Wait\"",
-        //            UseShellExecute = false,
-        //            CreateNoWindow = true
-        //        };
-        //        var psProcess = Process.Start(psInfo);
-        //        psProcess.WaitForExit();
-        //    }
-        //    else
-        //    {
-        //        // Installation classique pour les autres packages
-        //        bool containsExe = url.Contains(".exe");
-        //        if (containsExe)
-        //        {
-        //            f.UpdateStatusLabel($"Install {packageName}...");
-        //            ProcessStartInfo installInfo = new("cmd.exe", "/C " + filePath);
-        //            var installProcess = Process.Start(installInfo);
-        //            installProcess.WaitForExit();
-        //        }
-        //        else
-        //        {
-        //            f.UpdateStatusLabel($"Install {packageName}...");
-        //            string msiPath = downloadPath + installerName;
-        //            string arguments = $"/passive /i \"{msiPath}\"";
-        //            ProcessStartInfo startInfo = new("msiexec.exe", arguments);
-        //            var process = Process.Start(startInfo);
-        //            process.WaitForExit();
-        //        }
-        //    }
-        //    // Supprimer l'installateur après installation
-        //    f.UpdateStatusLabel($"Cleaning up {packageName} installer...");
-        //    ProcessStartInfo deleteInfo = new($"cmd.exe", "/C " + $"del \"{filePath}\"");
-        //    var deleteProcess = Process.Start(deleteInfo);
-        //    deleteProcess.WaitForExit();
-        //}
-
         private static async Task InstallPackage(string url, string downloadPath, string packageName, string installerName)
         {
             Form1 f = new();
@@ -477,9 +359,9 @@ namespace WEZD
             else
             {
                 // Installation classique pour les autres packages
-                bool containsExe = filePath.EndsWith(".exe", StringComparison.OrdinalIgnoreCase);
+                bool exe = filePath.EndsWith(".exe", StringComparison.OrdinalIgnoreCase);
 
-                if (containsExe)
+                if (exe)
                 {
                     f.UpdateStatusLabel($"Installing {packageName}...");
                     ProcessStartInfo i = new("cmd.exe", "/C " + filePath)
