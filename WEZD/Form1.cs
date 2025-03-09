@@ -8,6 +8,10 @@ namespace WEZD
     {
         public bool Install { get; private set; }
         private List<RadioButton> officeRB;
+        private List<RadioButton> archRB;
+        private List<RadioButton> officeVersionRB;
+        private List<List<RadioButton>> officeYearGroups;
+ 
         //private Label statusLabel;
 
         public Form1()
@@ -74,7 +78,7 @@ namespace WEZD
         private void ProductKey_TextChanged(object sender, EventArgs e)
         {
             // Liste des caractères interdits dans les clés Microsoft
-            string cprod = "ABCDEFGHJKLMPRTVWXY0123456789"; // Exclut I, O, Q, S, U, Z
+            string cprod = "ABCDEFGHJKLMNPRTVWXY0123456789"; // Exclut I, O, Q, S, U, Z
             string rw = ProductKey.Text.Replace("-", ""); // Supprime les tirets existants
 
             // Filtre les caractères invalides
@@ -117,23 +121,66 @@ namespace WEZD
                 Std2021, PPlus2021, Std2024, PPlus2024
             };
 
+            archRB = new List<RadioButton>
+            {
+                x64, x86
+            };
+
             // Ajoute un événement commun pour tous les RadioButton
             foreach (var rbi in officeRB)
             {
-                rbi.CheckedChanged += OfficeRadioButton_CheckedChanged;
+                //rbi.CheckedChanged += OfficeRadioButton_CheckedChanged;
+                rbi.CheckedChanged += (s, e) => HandleSingleSelection(s, officeRB);
+            }
+
+            foreach (var rB in archRB)
+            {
+                //rB.CheckedChanged += ArchitectureRadioButton_CheckedChanged;
+                rB.CheckedChanged += (s, e) => HandleSingleSelection(s, archRB);
             }
         }
 
         private void OfficeRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            RadioButton selectedRadio = sender as RadioButton;
+            RadioButton sr = sender as RadioButton;
 
-            if (selectedRadio != null && selectedRadio.Checked)
+            if (sr != null && sr.Checked)
             {
                 // Désélectionne tous les autres boutons
                 foreach (var rb in officeRB)
                 {
-                    if (rb != selectedRadio)
+                    if (rb != sr)
+                    {
+                        rb.Checked = false;
+                    }
+                }
+            }
+        }
+
+        private void ArchitectureRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton sr = sender as RadioButton;
+            if (sr != null && sr.Checked)
+            {
+                // Désélectionne tous les autres boutons d'architecture sauf celui sélectionné
+                foreach (var rb in archRB)
+                {
+                    if (rb != sr)
+                    {
+                        rb.Checked = false;
+                    }
+                }
+            }
+        }
+
+        private void HandleSingleSelection(object sender, List<RadioButton> rbList)
+        {
+            RadioButton sr = sender as RadioButton;
+            if (sr != null && sr.Checked)
+            {
+                foreach (var rb in rbList)
+                {
+                    if (rb != sr)
                     {
                         rb.Checked = false;
                     }
