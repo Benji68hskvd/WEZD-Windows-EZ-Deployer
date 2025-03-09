@@ -13,7 +13,6 @@ namespace WEZD
         public Form1()
         {
             InitializeComponent();
-            InitializeRadioButtons();
         }
 
         private async void InstallButton_Click(object sender, EventArgs e)
@@ -65,10 +64,6 @@ namespace WEZD
         private void UseProdKey_CheckedChanged(object sender, EventArgs e)
         {
             ProductKey.Enabled = UseProdKey.Checked;
-            if (!UseProdKey.Checked)
-            {
-                ProductKey.Text = ""; // Efface la clé si désactivé
-            }
         }
 
         private void ProductKey_TextChanged(object sender, EventArgs e)
@@ -107,21 +102,7 @@ namespace WEZD
             // Met à jour le champ texte avec le format correct
             ProductKey.Text = fk.ToString();
             ProductKey.SelectionStart = ProductKey.Text.Length; // Place le curseur à la fin
-        }
-
-        private void InitializeRadioButtons()
-        {
-            officeRB = new List<RadioButton>
-            {
-                Std2016, PPlus2016, Std2019, PPlus2019,
-                Std2021, PPlus2021, Std2024, PPlus2024
-            };
-
-            // Ajoute un événement commun pour tous les RadioButton
-            foreach (var rbi in officeRB)
-            {
-                rbi.CheckedChanged += OfficeRadioButton_CheckedChanged;
-            }
+        
         }
 
         private void OfficeRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -140,5 +121,6 @@ namespace WEZD
                 }
             }
         }
+
     }
 }
