@@ -1,4 +1,4 @@
-# Windows Easy Deploy
+# Windows Easy Deployer
 
 A program that provide : downloading the latest version of a program, install it, activate windows and office (for massive windows installation) 
 
