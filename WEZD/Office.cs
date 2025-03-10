@@ -18,7 +18,6 @@ namespace WEZD
   <Add OfficeClientEdition=""{0}"" Channel=""{1}"">
     <Product ID=""{3}""{4}>
       <Language ID=""fr-fr""/>
-      <ExcludeApp ID=""OneNote""/>
        {5}
     </Product>
   </Add>
@@ -61,7 +60,7 @@ namespace WEZD
         }
 
 
-        public void Install(Form1 f, bool isX64, bool installWord, bool installExcel, bool installPowerPoint, bool installOutlook)
+        public void Install(Form1 f, bool isX64, bool installWord, bool installExcel, bool installPowerPoint, bool installOutlook, bool installAccess, bool installTeams, bool installOneNote)
         {
             try
             {
@@ -85,7 +84,7 @@ namespace WEZD
                 string architecture = isX64 ? "64" : "32";
 
                 // Générer les exclusions
-                string exclusions = GenerateExclusions(installWord, installExcel, installPowerPoint, installOutlook);
+                string exclusions = GenerateExclusions(installWord, installExcel, installPowerPoint, installOutlook, installAccess, installTeams, installOneNote);
 
                 string pidKeySection = f.UseProdKey.Checked ? $"PIDKEY=\"{productKey}\"" : "";
 
@@ -207,7 +206,7 @@ namespace WEZD
         /// <summary>
         /// Génère les exclusions pour le fichier XML.
         /// </summary>
-        private string GenerateExclusions(bool installWord, bool installExcel, bool installPowerPoint, bool installOutlook)
+        private string GenerateExclusions(bool installWord, bool installExcel, bool installPowerPoint, bool installOutlook, bool installAccess, bool installTeams, bool installOneNote)
         {
             StringBuilder exclusions = new();
 
@@ -215,12 +214,13 @@ namespace WEZD
             if (!installExcel) exclusions.AppendLine("<ExcludeApp ID=\"Excel\"/>");
             if (!installPowerPoint) exclusions.AppendLine("<ExcludeApp ID=\"PowerPoint\"/>");
             if (!installOutlook) exclusions.AppendLine("<ExcludeApp ID=\"Outlook\"/>");
+            if (!installAccess) exclusions.AppendLine("<ExcludeApp ID=\"Access\"/>");
+            if (!installTeams) exclusions.AppendLine("<ExcludeApp ID=\"Teams\"/>");
+            if (!installOneNote) exclusions.AppendLine("<ExcludeApp ID = \"OneNote\"/>");
 
             // Exclusions par défaut
             exclusions.AppendLine("<ExcludeApp ID=\"Groove\"/>");
             exclusions.AppendLine("<ExcludeApp ID=\"Lync\"/>");
-            exclusions.AppendLine("<ExcludeApp ID=\"Teams\"/>");
-            exclusions.AppendLine("<ExcludeApp ID=\"Access\"/>");
 
             return exclusions.ToString();
         }

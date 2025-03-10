@@ -61,9 +61,12 @@ namespace WEZD
                     bool Excel = f.Excel.Checked;
                     bool PowerPoint = f.PowerPoint.Checked;
                     bool Outlook = f.Outlook.Checked;
+                    bool Access = f.Access.Checked;
+                    bool Teams = f.Teams.Checked;
+                    bool OneNote = f.OneNote.Checked;
 
                     // appeler la méthode d'installation
-                    officeInstaller.Install(f, isX64, Word, Excel, PowerPoint, Outlook);
+                    officeInstaller.Install(f, isX64, Word, Excel, PowerPoint, Outlook, Access, Teams, OneNote);
                 }
                 // activation Windows
                 if (f.HWID.Checked)

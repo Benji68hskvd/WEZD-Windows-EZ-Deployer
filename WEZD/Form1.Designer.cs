@@ -54,6 +54,8 @@
             Ohook = new RadioButton();
             UseCurDir = new CheckBox();
             panel4 = new Panel();
+            OneNote = new CheckBox();
+            Teams = new CheckBox();
             label7 = new Label();
             officeVersions = new ComboBox();
             label6 = new Label();
@@ -75,8 +77,14 @@
             aboutToolStrip = new ToolStripMenuItem();
             menuStrip2 = new System.Windows.Forms.MenuStrip();
             fichierToolStripMenuItem1 = new ToolStripMenuItem();
+            ouvrirToolStripMenuItem = new ToolStripMenuItem();
+            saveSettingsToolStripMenuItem = new ToolStripMenuItem();
+            quitToolStripMenuItem = new ToolStripMenuItem();
             outilsToolStripMenuItem = new ToolStripMenuItem();
+            debugModeToolStripMenuItem = new ToolStripMenuItem();
             aideToolStripMenuItem1 = new ToolStripMenuItem();
+            helpToolStripMenuItem = new ToolStripMenuItem();
+            documentationToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -87,7 +95,7 @@
             // 
             // InstallButton
             // 
-            InstallButton.Location = new Point(768, 532);
+            InstallButton.Location = new Point(689, 532);
             InstallButton.Margin = new Padding(3, 4, 3, 4);
             InstallButton.Name = "InstallButton";
             InstallButton.Size = new Size(114, 36);
@@ -98,7 +106,7 @@
             // 
             // CancelButton
             // 
-            CancelButton.Location = new Point(888, 532);
+            CancelButton.Location = new Point(809, 532);
             CancelButton.Margin = new Padding(3, 4, 3, 4);
             CancelButton.Name = "CancelButton";
             CancelButton.Size = new Size(114, 36);
@@ -362,6 +370,8 @@
             // panel4
             // 
             panel4.BorderStyle = BorderStyle.FixedSingle;
+            panel4.Controls.Add(OneNote);
+            panel4.Controls.Add(Teams);
             panel4.Controls.Add(label7);
             panel4.Controls.Add(officeVersions);
             panel4.Controls.Add(label6);
@@ -378,15 +388,36 @@
             panel4.Location = new Point(520, 59);
             panel4.Margin = new Padding(3, 4, 3, 4);
             panel4.Name = "panel4";
-            panel4.Size = new Size(482, 439);
+            panel4.Size = new Size(403, 439);
             panel4.TabIndex = 24;
+            // 
+            // OneNote
+            // 
+            OneNote.AutoSize = true;
+            OneNote.Location = new Point(223, 206);
+            OneNote.Name = "OneNote";
+            OneNote.Size = new Size(91, 24);
+            OneNote.TabIndex = 44;
+            OneNote.Text = "OneNote";
+            OneNote.UseVisualStyleBackColor = true;
+            // 
+            // Teams
+            // 
+            Teams.AutoSize = true;
+            Teams.Location = new Point(223, 173);
+            Teams.Name = "Teams";
+            Teams.Size = new Size(73, 24);
+            Teams.TabIndex = 43;
+            Teams.Text = "Teams";
+            Teams.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(71, 112);
+            label7.Font = new Font("SF UI Display", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            label7.Location = new Point(138, 132);
             label7.Name = "label7";
-            label7.Size = new Size(67, 20);
+            label7.Size = new Size(73, 18);
             label7.TabIndex = 42;
             label7.Text = "Product :";
             label7.TextAlign = ContentAlignment.MiddleCenter;
@@ -396,7 +427,7 @@
             officeVersions.DropDownStyle = ComboBoxStyle.DropDownList;
             officeVersions.FormattingEnabled = true;
             officeVersions.Items.AddRange(new object[] { "Office 2016 Std", "Office 2016 ProPlus", "Office 2019 Std", "Office 2019 ProPlus", "Office 2021 Std", "Office 2021 ProPlus", "Office 2024 Std", "Office 2024 ProPlus" });
-            officeVersions.Location = new Point(283, 59);
+            officeVersions.Location = new Point(223, 55);
             officeVersions.Name = "officeVersions";
             officeVersions.Size = new Size(151, 28);
             officeVersions.TabIndex = 41;
@@ -404,16 +435,17 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(300, 27);
+            label6.Font = new Font("SF UI Display", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            label6.Location = new Point(235, 28);
             label6.Name = "label6";
-            label6.Size = new Size(114, 20);
+            label6.Size = new Size(126, 18);
             label6.TabIndex = 36;
             label6.Text = "Office Versions :";
             // 
             // Excel
             // 
             Excel.AutoSize = true;
-            Excel.Location = new Point(54, 192);
+            Excel.Location = new Point(54, 208);
             Excel.Margin = new Padding(3, 4, 3, 4);
             Excel.Name = "Excel";
             Excel.Size = new Size(65, 24);
@@ -424,7 +456,7 @@
             // PowerPoint
             // 
             PowerPoint.AutoSize = true;
-            PowerPoint.Location = new Point(54, 225);
+            PowerPoint.Location = new Point(54, 241);
             PowerPoint.Margin = new Padding(3, 4, 3, 4);
             PowerPoint.Name = "PowerPoint";
             PowerPoint.Size = new Size(104, 24);
@@ -435,7 +467,7 @@
             // Outlook
             // 
             Outlook.AutoSize = true;
-            Outlook.Location = new Point(54, 257);
+            Outlook.Location = new Point(54, 273);
             Outlook.Margin = new Padding(3, 4, 3, 4);
             Outlook.Name = "Outlook";
             Outlook.Size = new Size(84, 24);
@@ -446,7 +478,7 @@
             // Access
             // 
             Access.AutoSize = true;
-            Access.Location = new Point(54, 290);
+            Access.Location = new Point(223, 241);
             Access.Margin = new Padding(3, 4, 3, 4);
             Access.Name = "Access";
             Access.Size = new Size(75, 24);
@@ -460,9 +492,9 @@
             UseProdKey.Location = new Point(25, 357);
             UseProdKey.Margin = new Padding(3, 4, 3, 4);
             UseProdKey.Name = "UseProdKey";
-            UseProdKey.Size = new Size(138, 24);
+            UseProdKey.Size = new Size(150, 24);
             UseProdKey.TabIndex = 26;
-            UseProdKey.Text = "Use Product Key";
+            UseProdKey.Text = "Use a Product Key";
             UseProdKey.UseVisualStyleBackColor = true;
             UseProdKey.CheckedChanged += UseProdKey_CheckedChanged;
             // 
@@ -479,7 +511,7 @@
             // Word
             // 
             Word.AutoSize = true;
-            Word.Location = new Point(54, 157);
+            Word.Location = new Point(54, 173);
             Word.Margin = new Padding(3, 4, 3, 4);
             Word.Name = "Word";
             Word.Size = new Size(67, 24);
@@ -490,33 +522,34 @@
             // x64
             // 
             x64.AutoSize = true;
-            x64.Location = new Point(137, 59);
+            x64.Checked = true;
+            x64.Location = new Point(122, 58);
             x64.Margin = new Padding(3, 4, 3, 4);
             x64.Name = "x64";
             x64.Size = new Size(53, 24);
             x64.TabIndex = 18;
+            x64.TabStop = true;
             x64.Text = "x64";
             x64.UseVisualStyleBackColor = true;
             // 
             // x86
             // 
             x86.AutoSize = true;
-            x86.Checked = true;
-            x86.Location = new Point(42, 59);
+            x86.Location = new Point(37, 58);
             x86.Margin = new Padding(3, 4, 3, 4);
             x86.Name = "x86";
             x86.Size = new Size(53, 24);
             x86.TabIndex = 17;
-            x86.TabStop = true;
             x86.Text = "x86";
             x86.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(42, 27);
+            label5.Font = new Font("SF UI Display", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            label5.Location = new Point(25, 27);
             label5.Name = "label5";
-            label5.Size = new Size(148, 20);
+            label5.Size = new Size(166, 18);
             label5.TabIndex = 0;
             label5.Text = "Architecture Version :";
             // 
@@ -570,33 +603,77 @@
             menuStrip2.Items.AddRange(new ToolStripItem[] { fichierToolStripMenuItem1, outilsToolStripMenuItem, aideToolStripMenuItem1 });
             menuStrip2.Location = new Point(0, 0);
             menuStrip2.Name = "menuStrip2";
-            menuStrip2.Size = new Size(1049, 28);
+            menuStrip2.Size = new Size(948, 28);
             menuStrip2.TabIndex = 26;
             menuStrip2.Text = "menuStrip2";
             // 
             // fichierToolStripMenuItem1
             // 
+            fichierToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { ouvrirToolStripMenuItem, saveSettingsToolStripMenuItem, quitToolStripMenuItem });
             fichierToolStripMenuItem1.Name = "fichierToolStripMenuItem1";
-            fichierToolStripMenuItem1.Size = new Size(66, 24);
-            fichierToolStripMenuItem1.Text = "Fichier";
+            fichierToolStripMenuItem1.Size = new Size(46, 24);
+            fichierToolStripMenuItem1.Text = "File";
+            // 
+            // ouvrirToolStripMenuItem
+            // 
+            ouvrirToolStripMenuItem.Enabled = false;
+            ouvrirToolStripMenuItem.Name = "ouvrirToolStripMenuItem";
+            ouvrirToolStripMenuItem.Size = new Size(180, 26);
+            ouvrirToolStripMenuItem.Text = "Open";
+            // 
+            // saveSettingsToolStripMenuItem
+            // 
+            saveSettingsToolStripMenuItem.Enabled = false;
+            saveSettingsToolStripMenuItem.Name = "saveSettingsToolStripMenuItem";
+            saveSettingsToolStripMenuItem.Size = new Size(180, 26);
+            saveSettingsToolStripMenuItem.Text = "Save Settings";
+            // 
+            // quitToolStripMenuItem
+            // 
+            quitToolStripMenuItem.Name = "quitToolStripMenuItem";
+            quitToolStripMenuItem.Size = new Size(180, 26);
+            quitToolStripMenuItem.Text = "Quit";
+            quitToolStripMenuItem.Click += quitToolStripMenuItem_Click;
             // 
             // outilsToolStripMenuItem
             // 
+            outilsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { debugModeToolStripMenuItem });
             outilsToolStripMenuItem.Name = "outilsToolStripMenuItem";
-            outilsToolStripMenuItem.Size = new Size(61, 24);
-            outilsToolStripMenuItem.Text = "Outils";
+            outilsToolStripMenuItem.Size = new Size(58, 24);
+            outilsToolStripMenuItem.Text = "Tools";
+            // 
+            // debugModeToolStripMenuItem
+            // 
+            debugModeToolStripMenuItem.Enabled = false;
+            debugModeToolStripMenuItem.Name = "debugModeToolStripMenuItem";
+            debugModeToolStripMenuItem.Size = new Size(180, 26);
+            debugModeToolStripMenuItem.Text = "Debug Mode";
             // 
             // aideToolStripMenuItem1
             // 
-            aideToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { aboutToolStripMenuItem });
+            aideToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { helpToolStripMenuItem, documentationToolStripMenuItem, aboutToolStripMenuItem });
             aideToolStripMenuItem1.Name = "aideToolStripMenuItem1";
-            aideToolStripMenuItem1.Size = new Size(54, 24);
-            aideToolStripMenuItem1.Text = "Aide";
+            aideToolStripMenuItem1.Size = new Size(55, 24);
+            aideToolStripMenuItem1.Text = "Help";
+            // 
+            // helpToolStripMenuItem
+            // 
+            helpToolStripMenuItem.Enabled = false;
+            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            helpToolStripMenuItem.Size = new Size(195, 26);
+            helpToolStripMenuItem.Text = "Help";
+            // 
+            // documentationToolStripMenuItem
+            // 
+            documentationToolStripMenuItem.Enabled = false;
+            documentationToolStripMenuItem.Name = "documentationToolStripMenuItem";
+            documentationToolStripMenuItem.Size = new Size(195, 26);
+            documentationToolStripMenuItem.Text = "Documentation";
             // 
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(224, 26);
+            aboutToolStripMenuItem.Size = new Size(195, 26);
             aboutToolStripMenuItem.Text = "About";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
@@ -604,7 +681,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1049, 585);
+            ClientSize = new Size(948, 583);
             Controls.Add(labelStatus);
             Controls.Add(label4);
             Controls.Add(panel4);
@@ -679,7 +756,7 @@
         public CheckBox Excel;
         public CheckBox PowerPoint;
         public CheckBox Outlook;
-        private CheckBox Access;
+        public CheckBox Access;
         public CheckBox Word;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fichierToolStripMenuItem;
@@ -691,6 +768,14 @@
         private ToolStripMenuItem outilsToolStripMenuItem;
         private ToolStripMenuItem aideToolStripMenuItem1;
         private ToolStripMenuItem aboutToolStripMenuItem;
+        private ToolStripMenuItem ouvrirToolStripMenuItem;
+        private ToolStripMenuItem saveSettingsToolStripMenuItem;
+        private ToolStripMenuItem quitToolStripMenuItem;
+        private ToolStripMenuItem debugModeToolStripMenuItem;
+        private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem documentationToolStripMenuItem;
+        public CheckBox Teams;
+        public CheckBox OneNote;
         //private Label labelStatus;
     }
 }

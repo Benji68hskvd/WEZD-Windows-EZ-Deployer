@@ -16,6 +16,7 @@ namespace WEZD
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
         }
     }
 }

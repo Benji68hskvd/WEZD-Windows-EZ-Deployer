@@ -19,6 +19,7 @@ namespace WEZD
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
         }
 
         private async void InstallButton_Click(object sender, EventArgs e)
@@ -161,8 +162,13 @@ namespace WEZD
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-                About about = new About();
-                about.ShowDialog();
+            About about = new About();
+            about.ShowDialog();
+        }
+
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
-}
 }
