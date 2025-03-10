@@ -95,6 +95,12 @@ namespace WEZD
                     Debug.WriteLine("install online kms office");
                     ActivationCommand(f.UseCurDir.Checked, " /K-Office");
                 }
+
+                if (f.UninstallKMSWindows.Checked || f.UninstallKMSOffice.Checked)
+                {
+                    Debug.WriteLine("uninstall online kms");
+                    ActivationCommand(f.UseCurDir.Checked, "/K-Uninstall");
+                }
             }
             catch (Exception e)
             {

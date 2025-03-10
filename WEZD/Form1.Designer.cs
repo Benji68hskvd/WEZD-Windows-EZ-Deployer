@@ -86,6 +86,8 @@
             helpToolStripMenuItem = new ToolStripMenuItem();
             documentationToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
+            UninstallKMSWindows = new RadioButton();
+            UninstallKMSOffice = new RadioButton();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -250,6 +252,7 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(UninstallKMSWindows);
             panel1.Controls.Add(radioButton1);
             panel1.Controls.Add(HWID);
             panel1.Controls.Add(KMS38);
@@ -257,7 +260,7 @@
             panel1.Location = new Point(290, 59);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(210, 182);
+            panel1.Size = new Size(210, 198);
             panel1.TabIndex = 18;
             // 
             // panel2
@@ -310,20 +313,21 @@
             // panel3
             // 
             panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Controls.Add(UninstallKMSOffice);
             panel3.Controls.Add(radioButton8);
             panel3.Controls.Add(OfficeOnlineKMS);
             panel3.Controls.Add(Ohook);
             panel3.Location = new Point(290, 280);
             panel3.Margin = new Padding(3, 4, 3, 4);
             panel3.Name = "panel3";
-            panel3.Size = new Size(210, 150);
+            panel3.Size = new Size(210, 169);
             panel3.TabIndex = 21;
             // 
             // radioButton8
             // 
             radioButton8.AutoSize = true;
             radioButton8.Checked = true;
-            radioButton8.Location = new Point(34, 24);
+            radioButton8.Location = new Point(34, 21);
             radioButton8.Margin = new Padding(3, 4, 3, 4);
             radioButton8.Name = "radioButton8";
             radioButton8.Size = new Size(84, 24);
@@ -335,7 +339,7 @@
             // OfficeOnlineKMS
             // 
             OfficeOnlineKMS.AutoSize = true;
-            OfficeOnlineKMS.Location = new Point(34, 91);
+            OfficeOnlineKMS.Location = new Point(34, 88);
             OfficeOnlineKMS.Margin = new Padding(3, 4, 3, 4);
             OfficeOnlineKMS.Name = "OfficeOnlineKMS";
             OfficeOnlineKMS.Size = new Size(107, 24);
@@ -346,7 +350,7 @@
             // Ohook
             // 
             Ohook.AutoSize = true;
-            Ohook.Location = new Point(34, 57);
+            Ohook.Location = new Point(34, 54);
             Ohook.Margin = new Padding(3, 4, 3, 4);
             Ohook.Name = "Ohook";
             Ohook.Size = new Size(74, 24);
@@ -677,6 +681,28 @@
             aboutToolStripMenuItem.Text = "About";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
+            // UninstallKMSWindows
+            // 
+            UninstallKMSWindows.AutoSize = true;
+            UninstallKMSWindows.Location = new Point(34, 155);
+            UninstallKMSWindows.Name = "UninstallKMSWindows";
+            UninstallKMSWindows.Size = new Size(121, 24);
+            UninstallKMSWindows.TabIndex = 17;
+            UninstallKMSWindows.TabStop = true;
+            UninstallKMSWindows.Text = "Uninstall KMS";
+            UninstallKMSWindows.UseVisualStyleBackColor = true;
+            // 
+            // UninstallKMSOffice
+            // 
+            UninstallKMSOffice.AutoSize = true;
+            UninstallKMSOffice.Location = new Point(34, 122);
+            UninstallKMSOffice.Name = "UninstallKMSOffice";
+            UninstallKMSOffice.Size = new Size(121, 24);
+            UninstallKMSOffice.TabIndex = 26;
+            UninstallKMSOffice.TabStop = true;
+            UninstallKMSOffice.Text = "Uninstall KMS";
+            UninstallKMSOffice.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -776,6 +802,8 @@
         private ToolStripMenuItem documentationToolStripMenuItem;
         public CheckBox Teams;
         public CheckBox OneNote;
+        public RadioButton UninstallKMSWindows;
+        public RadioButton UninstallKMSOffice;
         //private Label labelStatus;
     }
 }
