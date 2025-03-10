@@ -69,10 +69,20 @@
             label5 = new Label();
             label4 = new Label();
             labelStatus = new Label();
+            fichierToolStripMenuItem = new ToolStripMenuItem();
+            optionsToolStripMenuItem = new ToolStripMenuItem();
+            aideToolStripMenuItem = new ToolStripMenuItem();
+            aboutToolStrip = new ToolStripMenuItem();
+            menuStrip2 = new System.Windows.Forms.MenuStrip();
+            fichierToolStripMenuItem1 = new ToolStripMenuItem();
+            outilsToolStripMenuItem = new ToolStripMenuItem();
+            aideToolStripMenuItem1 = new ToolStripMenuItem();
+            aboutToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
+            menuStrip2.SuspendLayout();
             SuspendLayout();
             // 
             // InstallButton
@@ -529,6 +539,67 @@
             labelStatus.Text = "V1.3.0";
             labelStatus.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // fichierToolStripMenuItem
+            // 
+            fichierToolStripMenuItem.Name = "fichierToolStripMenuItem";
+            fichierToolStripMenuItem.Size = new Size(66, 24);
+            fichierToolStripMenuItem.Text = "Fichier";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            optionsToolStripMenuItem.Size = new Size(75, 24);
+            optionsToolStripMenuItem.Text = "Options";
+            // 
+            // aideToolStripMenuItem
+            // 
+            aideToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { aboutToolStrip });
+            aideToolStripMenuItem.Name = "aideToolStripMenuItem";
+            aideToolStripMenuItem.Size = new Size(54, 24);
+            aideToolStripMenuItem.Text = "Aide";
+            // 
+            // aboutToolStrip
+            // 
+            aboutToolStrip.Name = "aboutToolStrip";
+            aboutToolStrip.Size = new Size(337, 26);
+            aboutToolStrip.Text = "À propos de Windows Easy Deployer";
+            // 
+            // menuStrip2
+            // 
+            menuStrip2.ImageScalingSize = new Size(20, 20);
+            menuStrip2.Items.AddRange(new ToolStripItem[] { fichierToolStripMenuItem1, outilsToolStripMenuItem, aideToolStripMenuItem1 });
+            menuStrip2.Location = new Point(0, 0);
+            menuStrip2.Name = "menuStrip2";
+            menuStrip2.Size = new Size(1049, 28);
+            menuStrip2.TabIndex = 26;
+            menuStrip2.Text = "menuStrip2";
+            // 
+            // fichierToolStripMenuItem1
+            // 
+            fichierToolStripMenuItem1.Name = "fichierToolStripMenuItem1";
+            fichierToolStripMenuItem1.Size = new Size(66, 24);
+            fichierToolStripMenuItem1.Text = "Fichier";
+            // 
+            // outilsToolStripMenuItem
+            // 
+            outilsToolStripMenuItem.Name = "outilsToolStripMenuItem";
+            outilsToolStripMenuItem.Size = new Size(61, 24);
+            outilsToolStripMenuItem.Text = "Outils";
+            // 
+            // aideToolStripMenuItem1
+            // 
+            aideToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { aboutToolStripMenuItem });
+            aideToolStripMenuItem1.Name = "aideToolStripMenuItem1";
+            aideToolStripMenuItem1.Size = new Size(54, 24);
+            aideToolStripMenuItem1.Text = "Aide";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            aboutToolStripMenuItem.Size = new Size(224, 26);
+            aboutToolStripMenuItem.Text = "About";
+            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -547,7 +618,9 @@
             Controls.Add(AutoDeleteInstaller);
             Controls.Add(CancelButton);
             Controls.Add(InstallButton);
+            Controls.Add(menuStrip2);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MainMenuStrip = menuStrip2;
             Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             Text = "WEZD - Windows Easy Deployer";
@@ -559,6 +632,8 @@
             panel3.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
+            menuStrip2.ResumeLayout(false);
+            menuStrip2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -606,6 +681,16 @@
         public CheckBox Outlook;
         private CheckBox Access;
         public CheckBox Word;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem fichierToolStripMenuItem;
+        private ToolStripMenuItem optionsToolStripMenuItem;
+        private ToolStripMenuItem aideToolStripMenuItem;
+        private ToolStripMenuItem aboutToolStrip;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private ToolStripMenuItem fichierToolStripMenuItem1;
+        private ToolStripMenuItem outilsToolStripMenuItem;
+        private ToolStripMenuItem aideToolStripMenuItem1;
+        private ToolStripMenuItem aboutToolStripMenuItem;
         //private Label labelStatus;
     }
 }

@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Security.AccessControl;
 using System.Text;
 #pragma warning disable CA1416
 
@@ -11,12 +12,13 @@ namespace WEZD
         private List<RadioButton> archRB;
         private List<RadioButton> officeVersionRB;
         private List<List<RadioButton>> officeYearGroups;
- 
+
         //private Label statusLabel;
 
         public Form1()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
         private async void InstallButton_Click(object sender, EventArgs e)
@@ -106,7 +108,7 @@ namespace WEZD
             // Met à jour le champ texte avec le format correct
             ProductKey.Text = fk.ToString();
             ProductKey.SelectionStart = ProductKey.Text.Length; // Place le curseur à la fin
-        
+
         }
 
         private void OfficeRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -157,5 +159,10 @@ namespace WEZD
             }
         }
 
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+                About about = new About();
+                about.ShowDialog();
     }
+}
 }
