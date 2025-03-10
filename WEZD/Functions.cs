@@ -82,7 +82,7 @@ namespace WEZD
                 if (f.WinOnlineKMS.Checked)
                 {
                     Debug.WriteLine("using online kms windows");
-                    ActivationCommand(f.UseCurDir.Checked, " /KMS-Windows /KMS-RenewalTask");
+                    ActivationCommand(f.UseCurDir.Checked, " /K-Windows");
                 }
                 // activation Office
                 if (f.Ohook.Checked)
@@ -93,7 +93,7 @@ namespace WEZD
                 if (f.OfficeOnlineKMS.Checked)
                 {
                     Debug.WriteLine("install online kms office");
-                    ActivationCommand(f.UseCurDir.Checked, " /KMS-Office /KMS-RenewalTask");
+                    ActivationCommand(f.UseCurDir.Checked, " /K-Office");
                 }
             }
             catch (Exception e)
