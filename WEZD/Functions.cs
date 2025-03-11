@@ -101,6 +101,18 @@ namespace WEZD
                     Debug.WriteLine("uninstall online kms");
                     ActivationCommand(f.UseCurDir.Checked, "/K-Uninstall");
                 }
+
+                if (f.TSforgeOffice.Checked)
+                {
+                    Debug.WriteLine("use TSforge for Office");
+                    ActivationCommand(f.UseCurDir.Checked, "/Z-Office");
+                }
+
+                if (f.TSforgeWindows.Checked)
+                {
+                    Debug.WriteLine("use TSforge for windows");
+                    ActivationCommand(f.UseCurDir.Checked, "/Z-Windows");
+                }
             }
             catch (Exception e)
             {

@@ -44,11 +44,15 @@
             KMS38 = new RadioButton();
             WinOnlineKMS = new RadioButton();
             panel1 = new Panel();
+            TSforgeWindows = new RadioButton();
+            UninstallKMSWindows = new RadioButton();
             panel2 = new Panel();
             TeamViewer = new CheckBox();
             Firefox = new CheckBox();
             label3 = new Label();
             panel3 = new Panel();
+            TSforgeOffice = new RadioButton();
+            UninstallKMSOffice = new RadioButton();
             radioButton8 = new RadioButton();
             OfficeOnlineKMS = new RadioButton();
             Ohook = new RadioButton();
@@ -86,8 +90,6 @@
             helpToolStripMenuItem = new ToolStripMenuItem();
             documentationToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
-            UninstallKMSWindows = new RadioButton();
-            UninstallKMSOffice = new RadioButton();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -252,6 +254,7 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(TSforgeWindows);
             panel1.Controls.Add(UninstallKMSWindows);
             panel1.Controls.Add(radioButton1);
             panel1.Controls.Add(HWID);
@@ -260,8 +263,30 @@
             panel1.Location = new Point(290, 59);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(210, 198);
+            panel1.Size = new Size(210, 223);
             panel1.TabIndex = 18;
+            // 
+            // TSforgeWindows
+            // 
+            TSforgeWindows.AutoSize = true;
+            TSforgeWindows.Location = new Point(34, 187);
+            TSforgeWindows.Name = "TSforgeWindows";
+            TSforgeWindows.Size = new Size(82, 24);
+            TSforgeWindows.TabIndex = 18;
+            TSforgeWindows.TabStop = true;
+            TSforgeWindows.Text = "TSforge";
+            TSforgeWindows.UseVisualStyleBackColor = true;
+            // 
+            // UninstallKMSWindows
+            // 
+            UninstallKMSWindows.AutoSize = true;
+            UninstallKMSWindows.Location = new Point(34, 155);
+            UninstallKMSWindows.Name = "UninstallKMSWindows";
+            UninstallKMSWindows.Size = new Size(121, 24);
+            UninstallKMSWindows.TabIndex = 17;
+            UninstallKMSWindows.TabStop = true;
+            UninstallKMSWindows.Text = "Uninstall KMS";
+            UninstallKMSWindows.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -304,7 +329,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(295, 267);
+            label3.Location = new Point(295, 298);
             label3.Name = "label3";
             label3.Size = new Size(127, 20);
             label3.TabIndex = 20;
@@ -313,15 +338,38 @@
             // panel3
             // 
             panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Controls.Add(TSforgeOffice);
             panel3.Controls.Add(UninstallKMSOffice);
             panel3.Controls.Add(radioButton8);
             panel3.Controls.Add(OfficeOnlineKMS);
             panel3.Controls.Add(Ohook);
-            panel3.Location = new Point(290, 280);
+            panel3.Location = new Point(290, 310);
             panel3.Margin = new Padding(3, 4, 3, 4);
             panel3.Name = "panel3";
-            panel3.Size = new Size(210, 169);
+            panel3.Size = new Size(210, 197);
             panel3.TabIndex = 21;
+            // 
+            // TSforgeOffice
+            // 
+            TSforgeOffice.AutoSize = true;
+            TSforgeOffice.Location = new Point(34, 155);
+            TSforgeOffice.Name = "TSforgeOffice";
+            TSforgeOffice.Size = new Size(82, 24);
+            TSforgeOffice.TabIndex = 27;
+            TSforgeOffice.TabStop = true;
+            TSforgeOffice.Text = "TSforge";
+            TSforgeOffice.UseVisualStyleBackColor = true;
+            // 
+            // UninstallKMSOffice
+            // 
+            UninstallKMSOffice.AutoSize = true;
+            UninstallKMSOffice.Location = new Point(34, 122);
+            UninstallKMSOffice.Name = "UninstallKMSOffice";
+            UninstallKMSOffice.Size = new Size(121, 24);
+            UninstallKMSOffice.TabIndex = 26;
+            UninstallKMSOffice.TabStop = true;
+            UninstallKMSOffice.Text = "Uninstall KMS";
+            UninstallKMSOffice.UseVisualStyleBackColor = true;
             // 
             // radioButton8
             // 
@@ -681,28 +729,6 @@
             aboutToolStripMenuItem.Text = "About";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
-            // UninstallKMSWindows
-            // 
-            UninstallKMSWindows.AutoSize = true;
-            UninstallKMSWindows.Location = new Point(34, 155);
-            UninstallKMSWindows.Name = "UninstallKMSWindows";
-            UninstallKMSWindows.Size = new Size(121, 24);
-            UninstallKMSWindows.TabIndex = 17;
-            UninstallKMSWindows.TabStop = true;
-            UninstallKMSWindows.Text = "Uninstall KMS";
-            UninstallKMSWindows.UseVisualStyleBackColor = true;
-            // 
-            // UninstallKMSOffice
-            // 
-            UninstallKMSOffice.AutoSize = true;
-            UninstallKMSOffice.Location = new Point(34, 122);
-            UninstallKMSOffice.Name = "UninstallKMSOffice";
-            UninstallKMSOffice.Size = new Size(121, 24);
-            UninstallKMSOffice.TabIndex = 26;
-            UninstallKMSOffice.TabStop = true;
-            UninstallKMSOffice.Text = "Uninstall KMS";
-            UninstallKMSOffice.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -804,6 +830,8 @@
         public CheckBox OneNote;
         public RadioButton UninstallKMSWindows;
         public RadioButton UninstallKMSOffice;
+        public RadioButton TSforgeWindows;
+        public RadioButton TSforgeOffice;
         //private Label labelStatus;
     }
 }
