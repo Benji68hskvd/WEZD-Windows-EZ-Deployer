@@ -15,38 +15,52 @@ namespace WEZD
                 if (f.chrome.Checked)
                 {
                     Debug.WriteLine("install chrome");
-                    await Install("https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi", "", "/", "", "", "chrome_installer.msi", "Chrome");
+                    await Install("https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi", "",
+                        "/", "", "", "chrome_installer.msi", "Chrome");
                 }
+
                 if (f.Firefox.Checked)
                 {
                     Debug.WriteLine("install firefox");
-                    await Install("https://ftp.mozilla.org/pub/firefox/releases/", "/pub/firefox/releases/", "/pub/firefox/releases/", "b", "/win64/fr/", "firefox_installer.msi", "Firefox");
+                    await Install("https://ftp.mozilla.org/pub/firefox/releases/", "/pub/firefox/releases/",
+                        "/pub/firefox/releases/", "b", "/win64/fr/", "firefox_installer.msi", "Firefox");
                 }
+
                 if (f.CCleaner.Checked)
                 {
                     Debug.WriteLine("install ccleaner");
-                    await Install("https://bits.avcdn.net/productfamily_CCLEANER/insttype_BUSINESS_32/platform_WIN_MSI/installertype_ONLINE/build_RELEASE/.msi/", "", "/", "", "", "ccleaner_installer.msi", "CCleaner");
+                    await Install(
+                        "https://bits.avcdn.net/productfamily_CCLEANER/insttype_BUSINESS_32/platform_WIN_MSI/installertype_ONLINE/build_RELEASE/.msi/",
+                        "", "/", "", "", "ccleaner_installer.msi", "CCleaner");
                 }
+
                 if (f.NovaBench.Checked)
                 {
                     Debug.WriteLine("install novabench");
-                    await Install("https://cdn.novabench.net/novabench.msi", "", "/", "", "", "novabench_installer.msi", "NovaBench");
+                    await Install("https://cdn.novabench.net/novabench.msi", "", "/", "", "", "novabench_installer.msi",
+                        "NovaBench");
                 }
+
                 if (f.LibreOffice.Checked)
                 {
                     Debug.WriteLine("install libreoffice");
-                    await Install("https://miroir.univ-lorraine.fr/documentfoundation/libreoffice/stable/", "", "/", "", "/win/x86_64/", "libreoffice_installer.msi", "LibreOffice");
+                    await Install("https://miroir.univ-lorraine.fr/documentfoundation/libreoffice/stable/", "", "/", "",
+                        "/win/x86_64/", "libreoffice_installer.msi", "LibreOffice");
                 }
+
                 if (f.VLC.Checked)
                 {
                     Debug.WriteLine("install vlc");
                     await InstallVLC(); // appel spécifique pour VLC
                 }
+
                 if (f.TeamViewer.Checked)
                 {
                     Debug.WriteLine("install teamviewer");
-                    await Install("https://dl.teamviewer.com/download/version_15x/TeamViewer_Setup_x64.exe", "", "/", "", "", "TeamViewer.exe", "TeamViewer");
+                    await Install("https://dl.teamviewer.com/download/version_15x/TeamViewer_Setup_x64.exe", "", "/",
+                        "", "", "TeamViewer.exe", "TeamViewer");
                 }
+
                 // ajout de l'installation d'Office
                 if (f.Word.Checked || f.Excel.Checked || f.PowerPoint.Checked || f.Outlook.Checked)
                 {
@@ -68,28 +82,33 @@ namespace WEZD
                     // appeler la méthode d'installation
                     officeInstaller.Install(f, isX64, Word, Excel, PowerPoint, Outlook, Access, Teams, OneNote);
                 }
+
                 // activation Windows
                 if (f.HWID.Checked)
                 {
                     Debug.WriteLine("using hwid");
                     ActivationCommand(f.UseCurDir.Checked, " /HWID");
                 }
+
                 if (f.KMS38.Checked)
                 {
                     Debug.WriteLine("using kms38");
                     ActivationCommand(f.UseCurDir.Checked, " /KMS38");
                 }
+
                 if (f.WinOnlineKMS.Checked)
                 {
                     Debug.WriteLine("using online kms windows");
                     ActivationCommand(f.UseCurDir.Checked, " /K-Windows");
                 }
+
                 // activation Office
                 if (f.Ohook.Checked)
                 {
                     Debug.WriteLine("install ohook");
                     ActivationCommand(f.UseCurDir.Checked, " /Ohook");
                 }
+
                 if (f.OfficeOnlineKMS.Checked)
                 {
                     Debug.WriteLine("install online kms office");
@@ -132,7 +151,8 @@ namespace WEZD
                 Form1 f = new();
                 f.UpdateStatusLabel("Activate...");
 
-                string url = "https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/refs/heads/master/MAS/All-In-One-Version-KL/MAS_AIO.cmd";
+                string url =
+                    "https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/refs/heads/master/MAS/All-In-One-Version-KL/MAS_AIO.cmd";
                 string currentDirectory = Directory.GetCurrentDirectory();
                 string scriptFile = Path.Combine(currentDirectory, "MAS_AIO.cmd");
 
@@ -142,25 +162,30 @@ namespace WEZD
                     try
                     {
                         using HttpClient httpClient = new();
-                        using HttpResponseMessage response = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+                        using HttpResponseMessage response =
+                            await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
 
                         response.EnsureSuccessStatusCode(); // Vérifie le succès de la réponse
 
                         await using Stream contentStream = await response.Content.ReadAsStreamAsync();
-                        await using FileStream fileStream = new(scriptFile, FileMode.Create, FileAccess.Write, FileShare.None);
+                        await using FileStream fileStream = new(scriptFile, FileMode.Create, FileAccess.Write,
+                            FileShare.None);
 
                         await contentStream.CopyToAsync(fileStream);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Erreur lors du téléchargement du script : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Erreur lors du téléchargement du script : {ex.Message}", "Erreur",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
 
                 // Exécute le script selon le répertoire choisi
-                string filePath = useCurrentDirectory ? scriptFile
-                    : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads", "MAS_AIO.cmd");
+                string filePath = useCurrentDirectory
+                    ? scriptFile
+                    : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads",
+                        "MAS_AIO.cmd");
 
                 try
                 {
@@ -174,7 +199,8 @@ namespace WEZD
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Erreur lors de l'exécution du script : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Erreur lors de l'exécution du script : {ex.Message}", "Erreur",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception e)
@@ -184,13 +210,15 @@ namespace WEZD
         }
 
 
-        public static async Task CheckInstall(string url, string hrefNodes, string hrefReplace, string ignoreVersionName, string endUrl, string installerName, string packageName)
+        public static async Task CheckInstall(string url, string hrefNodes, string hrefReplace,
+            string ignoreVersionName, string endUrl, string installerName, string packageName)
         {
-                await Install(url, hrefNodes, hrefReplace, ignoreVersionName, endUrl, installerName, packageName);
+            await Install(url, hrefNodes, hrefReplace, ignoreVersionName, endUrl, installerName, packageName);
         }
 
         //Installation Script ---------------------------------------------------------------------------------------------------------------
-        private static async Task Install(string url, string hrefNodes, string hrefReplace, string ignoreVersionName, string endUrl, string installerName, string packageName)
+        private static async Task Install(string url, string hrefNodes, string hrefReplace, string ignoreVersionName,
+            string endUrl, string installerName, string packageName)
         {
             var downloadPath = "C:\\Users\\" + Environment.UserName + "\\Downloads\\";
 
@@ -210,16 +238,17 @@ namespace WEZD
                 var doc = new HtmlDocument();
                 doc.LoadHtml(pageContent);
 
-                var versionNodes = doc.DocumentNode.SelectNodes($"//a[starts-with(@href, '{hrefNodes}') and contains(@href, '.')]");
+                var versionNodes =
+                    doc.DocumentNode.SelectNodes($"//a[starts-with(@href, '{hrefNodes}') and contains(@href, '.')]");
                 List<string> versions = [];
 
                 if (versionNodes != null)
                 {
                     versions = versionNodes
-                                .Select(node => node.GetAttributeValue("href", ""))
-                                .Select(href => href.Replace(hrefReplace, "").Trim('/'))
-                                .Where(href => Version.TryParse(href, out _))
-                                .ToList();
+                        .Select(node => node.GetAttributeValue("href", ""))
+                        .Select(href => href.Replace(hrefReplace, "").Trim('/'))
+                        .Where(href => Version.TryParse(href, out _))
+                        .ToList();
                 }
 
                 versions = versions.Where(version => !version.Contains(ignoreVersionName)).ToList();
@@ -283,15 +312,16 @@ namespace WEZD
                 string pageContent = await client.GetStringAsync(baseVlcUrl);
                 var doc = new HtmlDocument();
                 doc.LoadHtml(pageContent);
-                var versionNodes = doc.DocumentNode.SelectNodes("//a[starts-with(@href, '3.0.') and contains(@href, '/')]");
+                var versionNodes =
+                    doc.DocumentNode.SelectNodes("//a[starts-with(@href, '3.0.') and contains(@href, '/')]");
                 List<string> versions = new();
 
                 if (versionNodes != null)
                 {
                     versions = versionNodes
-                                .Select(node => node.GetAttributeValue("href", "").Trim('/'))
-                                .Where(href => Version.TryParse(href, out _))
-                                .ToList();
+                        .Select(node => node.GetAttributeValue("href", "").Trim('/'))
+                        .Where(href => Version.TryParse(href, out _))
+                        .ToList();
                 }
 
                 // trier les versions par ordre décroissant
@@ -307,7 +337,9 @@ namespace WEZD
                         var versionDoc = new HtmlDocument();
                         versionDoc.LoadHtml(versionPageContent);
 
-                        var msiNode = versionDoc.DocumentNode.SelectSingleNode($"//a[contains(@href, 'vlc-{version}-win64.msi')]");
+                        var msiNode =
+                            versionDoc.DocumentNode.SelectSingleNode(
+                                $"//a[contains(@href, 'vlc-{version}-win64.msi')]");
 
                         if (msiNode != null)
                         {
@@ -339,7 +371,8 @@ namespace WEZD
             }
         }
 
-        private static async Task InstallPackage(string url, string downloadPath, string packageName, string installerName)
+        private static async Task InstallPackage(string url, string downloadPath, string packageName,
+            string installerName)
         {
             Form1 f = new();
             f.UpdateStatusLabel($"Downloading {packageName}...");
@@ -359,7 +392,8 @@ namespace WEZD
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erreur lors du téléchargement de {packageName} : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erreur lors du téléchargement de {packageName} : {ex.Message}", "Erreur",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -387,8 +421,7 @@ namespace WEZD
                     f.UpdateStatusLabel($"Installing {packageName}...");
                     ProcessStartInfo i = new("cmd.exe", "/C " + filePath)
                     {
-                        UseShellExecute = true,
-                        CreateNoWindow = true
+                        UseShellExecute = true, CreateNoWindow = true
                     };
                     var p = Process.Start(i);
                     p.WaitForExit();
@@ -397,15 +430,12 @@ namespace WEZD
                 {
                     f.UpdateStatusLabel($"Installing {packageName}...");
                     string a = $"/passive /i \"{filePath}\"";
-                    ProcessStartInfo s = new("msiexec.exe", a)
-                    {
-                        UseShellExecute = true,
-                        CreateNoWindow = true
-                    };
+                    ProcessStartInfo s = new("msiexec.exe", a) { UseShellExecute = true, CreateNoWindow = true };
                     var p = Process.Start(s);
                     p.WaitForExit();
                 }
             }
+
             // Supprime l'installateur après installation
             try
             {
@@ -414,8 +444,63 @@ namespace WEZD
             }
             catch (Exception ex)
             {
-                MessageBox.Show($@"Erreur lors de la suppression de l'installateur de {packageName} : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($@"Erreur lors de la suppression de l'installateur de {packageName} : {ex.Message}",
+                    "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+        public static void SaveSettings(Form1 f)
+        {
+            var settings = new Dictionary<string, bool>
+            {
+                { "chrome", f.chrome.Checked },
+                { "firefox", f.Firefox.Checked },
+                { "ccleaner", f.CCleaner.Checked},
+                { "novabench", f.NovaBench.Checked},
+                { "libreoffice", f.LibreOffice.Checked},
+                { "vlc", f.VLC.Checked},
+                { "teamviewer", f.TeamViewer.Checked},
+            };
+
+            using (StreamWriter writer = new StreamWriter("C:/Users/Benji/Desktop/settings.config"))
+            {
+                foreach (var item in settings)
+                {
+                    writer.WriteLine($"{item.Key}={item.Value.ToString().ToLower()}");
+                }
+            }
+
+            MessageBox.Show("Paramètres sauvegardés !");
+        }
+        public static void LoadSettings(Form1 f)
+        {
+            if (!File.Exists("C:/Users/Benji/Desktop/settings.config"))
+            {
+                MessageBox.Show("Fichier de configuration introuvable !");
+                return;
+            }
+
+            var settings = new Dictionary<string, bool>();
+
+            foreach (var line in File.ReadAllLines("C:/Users/Benji/Desktop/settings.config"))
+            {
+                var parts = line.Split('=');
+                if (parts.Length == 2)
+                {
+                    settings[parts[0]] = bool.Parse(parts[1]);
+                }
+            }
+
+            // Appliquer les valeurs aux CheckBox
+            f.chrome.Checked = settings.ContainsKey("chrome") && settings["chrome"];
+            f.Firefox.Checked = settings.ContainsKey("firefox") && settings["firefox"];
+            f.CCleaner.Checked = settings.ContainsKey("ccleaner") && settings["ccleaner"];
+            f.NovaBench.Checked = settings.ContainsKey("novabench") && settings["novabench"];
+            f.LibreOffice.Checked = settings.ContainsKey("libreoffice") && settings["libreoffice"];
+            f.VLC.Checked = settings.ContainsKey("vlc") && settings["vlc"];
+            f.TeamViewer.Checked = settings.ContainsKey("teamviewer") && settings["teamviewer"];
+
+            MessageBox.Show("Paramètres chargés !");
+        }
+
     }
 }

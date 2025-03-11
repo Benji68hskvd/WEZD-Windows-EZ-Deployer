@@ -82,6 +82,7 @@
             menuStrip2 = new System.Windows.Forms.MenuStrip();
             fichierToolStripMenuItem1 = new ToolStripMenuItem();
             ouvrirToolStripMenuItem = new ToolStripMenuItem();
+            loadSettingsToolStripMenuItem = new ToolStripMenuItem();
             saveSettingsToolStripMenuItem = new ToolStripMenuItem();
             quitToolStripMenuItem = new ToolStripMenuItem();
             outilsToolStripMenuItem = new ToolStripMenuItem();
@@ -661,7 +662,7 @@
             // 
             // fichierToolStripMenuItem1
             // 
-            fichierToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { ouvrirToolStripMenuItem, saveSettingsToolStripMenuItem, quitToolStripMenuItem });
+            fichierToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { ouvrirToolStripMenuItem, loadSettingsToolStripMenuItem, saveSettingsToolStripMenuItem, quitToolStripMenuItem });
             fichierToolStripMenuItem1.Name = "fichierToolStripMenuItem1";
             fichierToolStripMenuItem1.Size = new Size(46, 24);
             fichierToolStripMenuItem1.Text = "File";
@@ -670,20 +671,27 @@
             // 
             ouvrirToolStripMenuItem.Enabled = false;
             ouvrirToolStripMenuItem.Name = "ouvrirToolStripMenuItem";
-            ouvrirToolStripMenuItem.Size = new Size(180, 26);
+            ouvrirToolStripMenuItem.Size = new Size(224, 26);
             ouvrirToolStripMenuItem.Text = "Open";
+            // 
+            // loadSettingsToolStripMenuItem
+            // 
+            loadSettingsToolStripMenuItem.Name = "loadSettingsToolStripMenuItem";
+            loadSettingsToolStripMenuItem.Size = new Size(224, 26);
+            loadSettingsToolStripMenuItem.Text = "Load Settings";
+            loadSettingsToolStripMenuItem.Click += loadSettingsToolStripMenuItem_Click;
             // 
             // saveSettingsToolStripMenuItem
             // 
-            saveSettingsToolStripMenuItem.Enabled = false;
             saveSettingsToolStripMenuItem.Name = "saveSettingsToolStripMenuItem";
-            saveSettingsToolStripMenuItem.Size = new Size(180, 26);
+            saveSettingsToolStripMenuItem.Size = new Size(224, 26);
             saveSettingsToolStripMenuItem.Text = "Save Settings";
+            saveSettingsToolStripMenuItem.Click += saveSettingsToolStripMenuItem_Click;
             // 
             // quitToolStripMenuItem
             // 
             quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            quitToolStripMenuItem.Size = new Size(180, 26);
+            quitToolStripMenuItem.Size = new Size(224, 26);
             quitToolStripMenuItem.Text = "Quit";
             quitToolStripMenuItem.Click += quitToolStripMenuItem_Click;
             // 
@@ -832,6 +840,7 @@
         public RadioButton UninstallKMSOffice;
         public RadioButton TSforgeWindows;
         public RadioButton TSforgeOffice;
+        private ToolStripMenuItem loadSettingsToolStripMenuItem;
         //private Label labelStatus;
     }
 }

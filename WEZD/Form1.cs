@@ -170,5 +170,15 @@ namespace WEZD
         {
             Application.Exit();
         }
+
+        private void saveSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Functions.SaveSettings(this);
+        }
+
+        private void loadSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Functions.LoadSettings(this);
+        }
     }
 }
