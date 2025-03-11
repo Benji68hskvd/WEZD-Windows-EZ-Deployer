@@ -459,6 +459,15 @@ namespace WEZD
                 { "libreoffice", f.LibreOffice.Checked},
                 { "vlc", f.VLC.Checked},
                 { "teamviewer", f.TeamViewer.Checked},
+                { "hwid", f.HWID.Checked},
+                { "kms38", f.KMS38.Checked},
+                { "winonlinekms", f.WinOnlineKMS.Checked},
+                { "winkmsuninstall", f.UninstallKMSWindows.Checked},
+                { "wintsforge", f.TSforgeWindows.Checked},
+                { "ohook", f.Ohook.Checked},
+                { "officeonlinekms", f.OfficeOnlineKMS.Checked},
+                { "officekmsuninstall", f.UninstallKMSOffice.Checked},
+                { "officetsforge", f.TSforgeOffice.Checked},
             };
 
             using (StreamWriter writer = new StreamWriter("C:/Users/Benji/Desktop/settings.config"))
@@ -498,6 +507,15 @@ namespace WEZD
             f.LibreOffice.Checked = settings.ContainsKey("libreoffice") && settings["libreoffice"];
             f.VLC.Checked = settings.ContainsKey("vlc") && settings["vlc"];
             f.TeamViewer.Checked = settings.ContainsKey("teamviewer") && settings["teamviewer"];
+            f.HWID.Checked = settings.ContainsKey("hwid") && settings["hwid"];
+            f.KMS38.Checked = settings.ContainsKey("kms38") && settings["kms38"];
+            f.WinOnlineKMS.Checked = settings.ContainsKey("winonlinekms") && settings["winonlinekms"];
+            f.UninstallKMSWindows.Checked = settings.ContainsKey("winkmsuninstall") && settings["winkmsuninstall"];
+            f.TSforgeWindows.Checked = settings.ContainsKey("wintsforge") && settings["wintsforge"];
+            f.OfficeOnlineKMS.Checked = settings.ContainsKey("officeonlinekms") && settings["officeonlinekms"];
+            f.UninstallKMSOffice.Checked = settings.ContainsKey("officekmsuninstall") && settings["officekmsuninstall"];
+            f.TSforgeOffice.Checked = settings.ContainsKey("officetsforge") && settings["officetsforge"];
+            f.Ohook.Checked = settings.ContainsKey("ohook") && settings["ohook"];
 
             MessageBox.Show("Paramètres chargés !");
         }
