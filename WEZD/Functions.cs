@@ -480,6 +480,7 @@ namespace WEZD
                 { "teams", f.Teams.Checked.ToString().ToLower() },
                 { "onenote", f.OneNote.Checked.ToString().ToLower() },
                 { "access", f.Access.Checked.ToString().ToLower() },
+                { "useprodkey", f.UseProdKey.Checked.ToString().ToLower() },
             };
 
             using (StreamWriter writer = new StreamWriter("C:/Users/Benji/Desktop/settings.config"))
@@ -551,6 +552,7 @@ namespace WEZD
             f.Teams.Checked = settings.ContainsKey("[Booleans].teams") && bool.Parse(settings["[Booleans].teams"]);
             f.OneNote.Checked = settings.ContainsKey("[Booleans].onenote") && bool.Parse(settings["[Booleans].onenote"]);
             f.Access.Checked = settings.ContainsKey("[Booleans].access") && bool.Parse(settings["[Booleans].access"]);
+            f.UseProdKey.Checked = settings.ContainsKey("[Booleans].useprodkey") && bool.Parse(settings["[Booleans].useprodkey"]);
 
             MessageBox.Show("Paramètres chargés !");
         }
