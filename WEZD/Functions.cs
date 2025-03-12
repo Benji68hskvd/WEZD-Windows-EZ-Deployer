@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using static System.Collections.Specialized.BitVector32;
 using HtmlDocument = WEZD.HtmlAgilityPack.HtmlAgilityPack.HtmlDocument;
 // ReSharper disable InconsistentNaming
 
@@ -450,31 +451,39 @@ namespace WEZD
         }
         public static void SaveSettings(Form1 f)
         {
-            var settings = new Dictionary<string, bool>
+            var settings = new Dictionary<string, string>
             {
-                { "chrome", f.chrome.Checked },
-                { "firefox", f.Firefox.Checked },
-                { "ccleaner", f.CCleaner.Checked},
-                { "novabench", f.NovaBench.Checked},
-                { "libreoffice", f.LibreOffice.Checked},
-                { "vlc", f.VLC.Checked},
-                { "teamviewer", f.TeamViewer.Checked},
-                { "hwid", f.HWID.Checked},
-                { "kms38", f.KMS38.Checked},
-                { "winonlinekms", f.WinOnlineKMS.Checked},
-                { "winkmsuninstall", f.UninstallKMSWindows.Checked},
-                { "wintsforge", f.TSforgeWindows.Checked},
-                { "ohook", f.Ohook.Checked},
-                { "officeonlinekms", f.OfficeOnlineKMS.Checked},
-                { "officekmsuninstall", f.UninstallKMSOffice.Checked},
-                { "officetsforge", f.TSforgeOffice.Checked},
+                { "[Booleans]", ""},
+                { "chrome", f.chrome.Checked.ToString().ToLower() },
+                { "firefox", f.Firefox.Checked.ToString().ToLower() },
+                { "ccleaner", f.CCleaner.Checked.ToString().ToLower() },
+                { "novabench", f.NovaBench.Checked.ToString().ToLower() },
+                { "libreoffice", f.LibreOffice.Checked.ToString().ToLower() },
+                { "vlc", f.VLC.Checked.ToString().ToLower() },
+                { "teamviewer", f.TeamViewer.Checked.ToString().ToLower() },
+                { "hwid", f.HWID.Checked.ToString().ToLower() },
+                { "kms38", f.KMS38.Checked.ToString().ToLower() },
+                { "winonlinekms", f.WinOnlineKMS.Checked.ToString().ToLower() },
+                { "winkmsuninstall", f.UninstallKMSWindows.Checked.ToString().ToLower() },
+                { "wintsforge", f.TSforgeWindows.Checked.ToString().ToLower() },
+                { "ohook", f.Ohook.Checked.ToString().ToLower() },
+                { "officeonlinekms", f.OfficeOnlineKMS.Checked.ToString().ToLower() },
+                { "officekmsuninstall", f.UninstallKMSOffice.Checked.ToString().ToLower() },
+                { "officetsforge", f.TSforgeOffice.Checked.ToString().ToLower() },
             };
 
             using (StreamWriter writer = new StreamWriter("C:/Users/Benji/Desktop/settings.config"))
             {
                 foreach (var item in settings)
                 {
-                    writer.WriteLine($"{item.Key}={item.Value.ToString().ToLower()}");
+                    if (item.Value == "")
+                    {
+                        writer.WriteLine(item.Key); 
+                    }
+                    else
+                    {
+                        writer.WriteLine($"{item.Key}={item.Value.ToString().ToLower()}");
+                    }
                 }
             }
 
@@ -488,34 +497,41 @@ namespace WEZD
                 return;
             }
 
-            var settings = new Dictionary<string, bool>();
+            string section = "";
+            var settings = new Dictionary<string, string>();
 
-            foreach (var line in File.ReadAllLines("C:/Users/Benji/Desktop/settings.config"))
+            foreach (var line in File.ReadAllLines("settings.config"))
             {
+                if (line.StartsWith("["))
+                {
+                    section = line.Trim(); // Récupère la section actuelle ([Booleans], [Strings], etc.)
+                    continue;
+                }
+
                 var parts = line.Split('=');
                 if (parts.Length == 2)
                 {
-                    settings[parts[0]] = bool.Parse(parts[1]);
+                    settings[$"{section}.{parts[0]}"] = parts[1]; // Stocke sous forme "Section.Clé"
                 }
             }
 
             // Appliquer les valeurs aux CheckBox
-            f.chrome.Checked = settings.ContainsKey("chrome") && settings["chrome"];
-            f.Firefox.Checked = settings.ContainsKey("firefox") && settings["firefox"];
-            f.CCleaner.Checked = settings.ContainsKey("ccleaner") && settings["ccleaner"];
-            f.NovaBench.Checked = settings.ContainsKey("novabench") && settings["novabench"];
-            f.LibreOffice.Checked = settings.ContainsKey("libreoffice") && settings["libreoffice"];
-            f.VLC.Checked = settings.ContainsKey("vlc") && settings["vlc"];
-            f.TeamViewer.Checked = settings.ContainsKey("teamviewer") && settings["teamviewer"];
-            f.HWID.Checked = settings.ContainsKey("hwid") && settings["hwid"];
-            f.KMS38.Checked = settings.ContainsKey("kms38") && settings["kms38"];
-            f.WinOnlineKMS.Checked = settings.ContainsKey("winonlinekms") && settings["winonlinekms"];
-            f.UninstallKMSWindows.Checked = settings.ContainsKey("winkmsuninstall") && settings["winkmsuninstall"];
-            f.TSforgeWindows.Checked = settings.ContainsKey("wintsforge") && settings["wintsforge"];
-            f.OfficeOnlineKMS.Checked = settings.ContainsKey("officeonlinekms") && settings["officeonlinekms"];
-            f.UninstallKMSOffice.Checked = settings.ContainsKey("officekmsuninstall") && settings["officekmsuninstall"];
-            f.TSforgeOffice.Checked = settings.ContainsKey("officetsforge") && settings["officetsforge"];
-            f.Ohook.Checked = settings.ContainsKey("ohook") && settings["ohook"];
+            f.chrome.Checked = settings.ContainsKey("[Booleans].chrome") && bool.Parse(settings["[Booleans].chrome"]);
+            f.Firefox.Checked = settings.ContainsKey("[Booleans].firefox") && bool.Parse(settings["[Booleans].chrome"]);
+            f.CCleaner.Checked = settings.ContainsKey("[Booleans].ccleaner") && bool.Parse(settings["[Booleans].chrome"]);
+            f.NovaBench.Checked = settings.ContainsKey("[Booleans].novabench") && bool.Parse(settings["[Booleans].chrome"]);
+            f.LibreOffice.Checked = settings.ContainsKey("[Booleans].libreoffice") && bool.Parse(settings["[Booleans].chrome"]);
+            f.VLC.Checked = settings.ContainsKey("[Booleans].vlc") && bool.Parse(settings["[Booleans].chrome"]);
+            f.TeamViewer.Checked = settings.ContainsKey("[Booleans].teamviewer") && bool.Parse(settings["[Booleans].chrome"]);
+            f.HWID.Checked = settings.ContainsKey("[Booleans].hwid") && bool.Parse(settings["[Booleans].chrome"]);
+            f.KMS38.Checked = settings.ContainsKey("[Booleans].kms38") && bool.Parse(settings["[Booleans].chrome"]);
+            f.WinOnlineKMS.Checked = settings.ContainsKey("[Booleans].winonlinekms") && bool.Parse(settings["[Booleans].chrome"]);
+            f.UninstallKMSWindows.Checked = settings.ContainsKey("[Booleans].winkmsuninstall") && bool.Parse(settings["[Booleans].chrome"]);
+            f.TSforgeWindows.Checked = settings.ContainsKey("[Booleans].wintsforge") && bool.Parse(settings["[Booleans].chrome"]);
+            f.OfficeOnlineKMS.Checked = settings.ContainsKey("[Booleans].officeonlinekms") && bool.Parse(settings["[Booleans].chrome"]);
+            f.UninstallKMSOffice.Checked = settings.ContainsKey("[Booleans].officekmsuninstall") && bool.Parse(settings["[Booleans].chrome"]);
+            f.TSforgeOffice.Checked = settings.ContainsKey("[Booleans].officetsforge") && bool.Parse(settings["[Booleans].chrome"]);
+            f.Ohook.Checked = settings.ContainsKey("[Booleans].ohook") && bool.Parse(settings["[Booleans].chrome"]);
 
             MessageBox.Show("Paramètres chargés !");
         }
