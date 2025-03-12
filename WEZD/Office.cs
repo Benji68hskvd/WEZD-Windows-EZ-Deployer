@@ -127,14 +127,15 @@ namespace WEZD
         {
             return f.officeVersions.SelectedIndex switch
             {
-                0 => "Standard2016Volume",
-                1 => "ProPlus2016Volume",
-                2 => "Standard2019Volume",
-                3 => "ProPlus2019Volume",
-                4 => "Standard2021Volume",
-                5 => "ProPlus2021Volume",
-                6 => "Standard2024Volume",
-                7 => "ProPlus2024Volume",
+                0 => null,
+                1 => "Standard2016Volume",
+                2 => "ProPlus2016Volume",
+                3 => "Standard2019Volume",
+                4 => "ProPlus2019Volume",
+                5 => "Standard2021Volume",
+                6 => "ProPlus2021Volume",
+                7 => "Standard2024Volume",
+                8 => "ProPlus2024Volume",
                 _ => null // Si aucun choix n'est fait
             };
             //if (f.Std2016.Checked) return "Standard2016Volume";

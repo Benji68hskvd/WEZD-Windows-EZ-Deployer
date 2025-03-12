@@ -20,6 +20,7 @@ namespace WEZD
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            officeVersions.SelectedIndex = 0;
         }
 
         private async void InstallButton_Click(object sender, EventArgs e)

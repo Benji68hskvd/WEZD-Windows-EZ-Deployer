@@ -454,7 +454,7 @@ namespace WEZD
         {
             var settings = new Dictionary<string, string>
             {
-                { "[Booleans]", ""},
+                { "[Booleans]", "!"},
                 { "chrome", f.chrome.Checked.ToString().ToLower() },
                 { "firefox", f.Firefox.Checked.ToString().ToLower() },
                 { "ccleaner", f.CCleaner.Checked.ToString().ToLower() },
@@ -481,19 +481,21 @@ namespace WEZD
                 { "onenote", f.OneNote.Checked.ToString().ToLower() },
                 { "access", f.Access.Checked.ToString().ToLower() },
                 { "useprodkey", f.UseProdKey.Checked.ToString().ToLower() },
+                { "[Combobox]", "!" },
+                { "officeversions", f.officeVersions.SelectedItem?.ToString() ?? "Nothing" },
             };
 
             using (StreamWriter writer = new StreamWriter("C:/Users/Benji/Desktop/settings.config"))
             {
                 foreach (var item in settings)
                 {
-                    if (item.Value == "")
+                    if (item.Value == "!")
                     {
                         writer.WriteLine(item.Key); 
                     }
                     else
                     {
-                        writer.WriteLine($"{item.Key}={item.Value.ToString().ToLower()}");
+                        writer.WriteLine($"{item.Key}={item.Value}");
                     }
                 }
             }
@@ -511,7 +513,7 @@ namespace WEZD
             string section = "";
             var settings = new Dictionary<string, string>();
 
-            foreach (var line in File.ReadAllLines("settings.config"))
+            foreach (var line in File.ReadAllLines("C:/Users/Benji/Desktop/settings.config"))
             {
                 if (line.StartsWith("["))
                 {
@@ -553,6 +555,15 @@ namespace WEZD
             f.OneNote.Checked = settings.ContainsKey("[Booleans].onenote") && bool.Parse(settings["[Booleans].onenote"]);
             f.Access.Checked = settings.ContainsKey("[Booleans].access") && bool.Parse(settings["[Booleans].access"]);
             f.UseProdKey.Checked = settings.ContainsKey("[Booleans].useprodkey") && bool.Parse(settings["[Booleans].useprodkey"]);
+
+            //Applique la valeur au ComboBox
+
+            MessageBox.Show($"Valeur enregistrée : {settings["[Combobox].officeversions"]}");
+
+            if (settings.ContainsKey("[Combobox].officeversions"))
+            {
+                f.officeVersions.SelectedItem = settings["[Combobox].officeversions"];
+            }
 
             MessageBox.Show("Paramètres chargés !");
         }

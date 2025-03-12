@@ -479,7 +479,7 @@
             // 
             officeVersions.DropDownStyle = ComboBoxStyle.DropDownList;
             officeVersions.FormattingEnabled = true;
-            officeVersions.Items.AddRange(new object[] { "Office 2016 Std", "Office 2016 ProPlus", "Office 2019 Std", "Office 2019 ProPlus", "Office 2021 Std", "Office 2021 ProPlus", "Office 2024 Std", "Office 2024 ProPlus" });
+            officeVersions.Items.AddRange(new object[] { "Nothing", "Office 2016 Std", "Office 2016 ProPlus", "Office 2019 Std", "Office 2019 ProPlus", "Office 2021 Std", "Office 2021 ProPlus", "Office 2024 Std", "Office 2024 ProPlus" });
             officeVersions.Location = new Point(223, 55);
             officeVersions.Name = "officeVersions";
             officeVersions.Size = new Size(151, 28);
@@ -520,7 +520,7 @@
             // Outlook
             // 
             Outlook.AutoSize = true;
-            Outlook.Location = new Point(54, 273);
+            Outlook.Location = new Point(54, 274);
             Outlook.Margin = new Padding(3, 4, 3, 4);
             Outlook.Name = "Outlook";
             Outlook.Size = new Size(84, 24);
@@ -671,27 +671,27 @@
             // 
             ouvrirToolStripMenuItem.Enabled = false;
             ouvrirToolStripMenuItem.Name = "ouvrirToolStripMenuItem";
-            ouvrirToolStripMenuItem.Size = new Size(224, 26);
+            ouvrirToolStripMenuItem.Size = new Size(182, 26);
             ouvrirToolStripMenuItem.Text = "Open";
             // 
             // loadSettingsToolStripMenuItem
             // 
             loadSettingsToolStripMenuItem.Name = "loadSettingsToolStripMenuItem";
-            loadSettingsToolStripMenuItem.Size = new Size(224, 26);
+            loadSettingsToolStripMenuItem.Size = new Size(182, 26);
             loadSettingsToolStripMenuItem.Text = "Load Settings";
             loadSettingsToolStripMenuItem.Click += loadSettingsToolStripMenuItem_Click;
             // 
             // saveSettingsToolStripMenuItem
             // 
             saveSettingsToolStripMenuItem.Name = "saveSettingsToolStripMenuItem";
-            saveSettingsToolStripMenuItem.Size = new Size(224, 26);
+            saveSettingsToolStripMenuItem.Size = new Size(182, 26);
             saveSettingsToolStripMenuItem.Text = "Save Settings";
             saveSettingsToolStripMenuItem.Click += saveSettingsToolStripMenuItem_Click;
             // 
             // quitToolStripMenuItem
             // 
             quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            quitToolStripMenuItem.Size = new Size(224, 26);
+            quitToolStripMenuItem.Size = new Size(182, 26);
             quitToolStripMenuItem.Text = "Quit";
             quitToolStripMenuItem.Click += quitToolStripMenuItem_Click;
             // 
