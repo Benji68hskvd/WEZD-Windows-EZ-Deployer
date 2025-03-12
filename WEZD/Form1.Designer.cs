@@ -804,7 +804,7 @@
         private Panel panel4;
         private Label label4;
         public RadioButton x64;
-        private RadioButton x86;
+        public RadioButton x86;
         private Label label5;
         public CheckBox UseProdKey;
         private Label labelStatus;

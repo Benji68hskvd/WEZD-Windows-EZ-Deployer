@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using WEZD.HtmlAgilityPack.HtmlAgilityPack;
 using static System.Collections.Specialized.BitVector32;
 using HtmlDocument = WEZD.HtmlAgilityPack.HtmlAgilityPack.HtmlDocument;
 // ReSharper disable InconsistentNaming
@@ -470,6 +471,15 @@ namespace WEZD
                 { "officeonlinekms", f.OfficeOnlineKMS.Checked.ToString().ToLower() },
                 { "officekmsuninstall", f.UninstallKMSOffice.Checked.ToString().ToLower() },
                 { "officetsforge", f.TSforgeOffice.Checked.ToString().ToLower() },
+                { "x86", f.x86.Checked.ToString().ToLower() },
+                { "x64", f.x64.Checked.ToString().ToLower() },
+                { "word", f.Word.Checked.ToString().ToLower() },
+                { "excel", f.Excel.Checked.ToString().ToLower() },
+                { "powerpoint", f.PowerPoint.Checked.ToString().ToLower() },
+                { "outlook", f.Outlook.Checked.ToString().ToLower() },
+                { "teams", f.Teams.Checked.ToString().ToLower() },
+                { "onenote", f.OneNote.Checked.ToString().ToLower() },
+                { "access", f.Access.Checked.ToString().ToLower() },
             };
 
             using (StreamWriter writer = new StreamWriter("C:/Users/Benji/Desktop/settings.config"))
@@ -532,6 +542,15 @@ namespace WEZD
             f.UninstallKMSOffice.Checked = settings.ContainsKey("[Booleans].officekmsuninstall") && bool.Parse(settings["[Booleans].chrome"]);
             f.TSforgeOffice.Checked = settings.ContainsKey("[Booleans].officetsforge") && bool.Parse(settings["[Booleans].chrome"]);
             f.Ohook.Checked = settings.ContainsKey("[Booleans].ohook") && bool.Parse(settings["[Booleans].chrome"]);
+            f.x86.Checked = settings.ContainsKey("[Booleans].x86") && bool.Parse(settings["[Booleans].x86"]);
+            f.x64.Checked = settings.ContainsKey("[Booleans].x64") && bool.Parse(settings["[Booleans].x64"]);
+            f.Word.Checked = settings.ContainsKey("[Booleans].word") && bool.Parse(settings["[Booleans].word"]);
+            f.Excel.Checked = settings.ContainsKey("[Booleans].excel") && bool.Parse(settings["[Booleans].excel"]);
+            f.PowerPoint.Checked = settings.ContainsKey("[Booleans].powerpoint") && bool.Parse(settings["[Booleans].powerpoint"]);
+            f.Outlook.Checked = settings.ContainsKey("[Booleans].outlook") && bool.Parse(settings["[Booleans].outlook"]);
+            f.Teams.Checked = settings.ContainsKey("[Booleans].teams") && bool.Parse(settings["[Booleans].teams"]);
+            f.OneNote.Checked = settings.ContainsKey("[Booleans].onenote") && bool.Parse(settings["[Booleans].onenote"]);
+            f.Access.Checked = settings.ContainsKey("[Booleans].access") && bool.Parse(settings["[Booleans].access"]);
 
             MessageBox.Show("Paramètres chargés !");
         }
