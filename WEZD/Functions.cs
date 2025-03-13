@@ -91,44 +91,37 @@ namespace WEZD
                     Debug.WriteLine("using hwid");
                     ActivationCommand(f.UseCurDir.Checked, " /HWID");
                 }
-
                 if (f.KMS38.Checked)
                 {
                     Debug.WriteLine("using kms38");
                     ActivationCommand(f.UseCurDir.Checked, " /KMS38");
                 }
-
                 if (f.WinOnlineKMS.Checked)
                 {
                     Debug.WriteLine("using online kms windows");
                     ActivationCommand(f.UseCurDir.Checked, " /K-Windows");
                 }
-
                 // activation Office
                 if (f.Ohook.Checked)
                 {
                     Debug.WriteLine("install ohook");
                     ActivationCommand(f.UseCurDir.Checked, " /Ohook");
                 }
-
                 if (f.OfficeOnlineKMS.Checked)
                 {
                     Debug.WriteLine("install online kms office");
                     ActivationCommand(f.UseCurDir.Checked, " /K-Office");
                 }
-
                 if (f.UninstallKMSWindows.Checked || f.UninstallKMSOffice.Checked)
                 {
                     Debug.WriteLine("uninstall online kms");
                     ActivationCommand(f.UseCurDir.Checked, "/K-Uninstall");
                 }
-
                 if (f.TSforgeOffice.Checked)
                 {
                     Debug.WriteLine("use TSforge for Office");
                     ActivationCommand(f.UseCurDir.Checked, "/Z-Office");
                 }
-
                 if (f.TSforgeWindows.Checked)
                 {
                     Debug.WriteLine("use TSforge for windows");
@@ -184,10 +177,7 @@ namespace WEZD
                 }
 
                 // Exécute le script selon le répertoire choisi
-                string filePath = useCurrentDirectory
-                    ? scriptFile
-                    : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads",
-                        "MAS_AIO.cmd");
+                string filePath = useCurrentDirectory ? scriptFile : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads", "MAS_AIO.cmd");
 
                 try
                 {
@@ -212,10 +202,9 @@ namespace WEZD
         }
 
 
-        public static async Task CheckInstall(string url, string hrefNodes, string hrefReplace,
-            string ignoreVersionName, string endUrl, string installerName, string packageName)
+        public static async Task CheckInstall(string u, string h, string hr, string i, string e, string ism, string p)
         {
-            await Install(url, hrefNodes, hrefReplace, ignoreVersionName, endUrl, installerName, packageName);
+            await Install(u, h, hr, i, e, ism, p);
         }
 
         //Installation Script ---------------------------------------------------------------------------------------------------------------
