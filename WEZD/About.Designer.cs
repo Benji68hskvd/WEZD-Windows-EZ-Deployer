@@ -34,6 +34,7 @@
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
+            label5 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -84,15 +85,24 @@
             label4.Name = "label4";
             label4.Size = new Size(448, 60);
             label4.TabIndex = 4;
-            label4.Text = "WEZD v1.3.0\r\nLicence : Open Source  (C#)\r\nDeveloped by : Benji68hskvd and Melvin\r\nGithub Repository : https://github.com/Benji68hskvd/WEZD-Windows-EZ-Deployer";
+            label4.Text = "\nLicence : Open Source  (C#)\r\nDeveloped by : Benji68hskvd and Melvin\r\nGithub Repository : https://github.com/Benji68hskvd/WEZD-Windows-EZ-Deployer";
             label4.TextAlign = ContentAlignment.BottomRight;
             label4.Click += label4_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(573, 271);
+            label5.Name = "label5";
+            label5.Size = new Size(0, 15);
+            label5.TabIndex = 5;
             // 
             // About
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(657, 338);
+            Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -114,5 +124,6 @@
         private Label label2;
         private Label label3;
         private Label label4;
+        private Label label5;
     }
 }
