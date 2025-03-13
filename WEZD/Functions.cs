@@ -177,7 +177,7 @@ namespace WEZD
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Erreur lors du téléchargement du script : {ex.Message}", "Erreur",
+                        MessageBox.Show($"Error while downloading the script : {ex.Message}", "Erreur",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
@@ -201,7 +201,7 @@ namespace WEZD
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Erreur lors de l'exécution du script : {ex.Message}", "Erreur",
+                    MessageBox.Show($"Error while executing the script : {ex.Message}", "Erreur",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -261,12 +261,12 @@ namespace WEZD
             }
             catch (HttpRequestException ex) when (ex.InnerException is System.Net.Sockets.SocketException)
             {
-                MessageBox.Show(@"Erreur de connexion internet: Veuillez vérifier votre connexion et réessayer.");
+                MessageBox.Show(@"Internet connection error: Please check your connection and try again.");
                 return;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($@"Erreur lors de la récupération des versions: {ex.Message}");
+                MessageBox.Show($@"Error while retrieving versions : {ex.Message}");
                 return;
             }
 
@@ -289,11 +289,11 @@ namespace WEZD
             }
             catch (HttpRequestException ex) when (ex.InnerException is System.Net.Sockets.SocketException)
             {
-                MessageBox.Show(@"Erreur de connexion internet: Veuillez vérifier votre connexion et réessayer.");
+                MessageBox.Show(@"Internet connection error: Please check your connection and try again.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($@"Erreur lors du téléchargement: {ex.Message}");
+                MessageBox.Show($@"Error while downloading : {ex.Message}");
             }
         }
 
@@ -339,9 +339,7 @@ namespace WEZD
                         var versionDoc = new HtmlDocument();
                         versionDoc.LoadHtml(versionPageContent);
 
-                        var msiNode =
-                            versionDoc.DocumentNode.SelectSingleNode(
-                                $"//a[contains(@href, 'vlc-{version}-win64.msi')]");
+                        var msiNode = versionDoc.DocumentNode.SelectSingleNode($"//a[contains(@href, 'vlc-{version}-win64.msi')]");
 
                         if (msiNode != null)
                         {
@@ -361,15 +359,15 @@ namespace WEZD
                 }
 
                 // si aucune version valide n'a été trouvée
-                MessageBox.Show("Impossible de trouver un fichier MSI valide pour VLC.");
+                MessageBox.Show("Unable to find a valid MSI file for VLC.");
             }
             catch (HttpRequestException ex) when (ex.InnerException is System.Net.Sockets.SocketException)
             {
-                MessageBox.Show("Erreur de connexion internet: Veuillez vérifier votre connexion et réessayer.");
+                MessageBox.Show("Internet connection error: Please check your connection and try again.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erreur lors de la recherche des versions de VLC: {ex.Message}");
+                MessageBox.Show($"Error while searching for VLC versions : {ex.Message}");
             }
         }
 
@@ -394,7 +392,7 @@ namespace WEZD
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erreur lors du téléchargement de {packageName} : {ex.Message}", "Erreur",
+                MessageBox.Show($"Error while downloading {packageName} : {ex.Message}", "Erreur",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -446,8 +444,8 @@ namespace WEZD
             }
             catch (Exception ex)
             {
-                MessageBox.Show($@"Erreur lors de la suppression de l'installateur de {packageName} : {ex.Message}",
-                    "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($@"Error while deleting the installer of {packageName} : {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         public static void SaveSettings(Form1 f)
@@ -486,10 +484,10 @@ namespace WEZD
                 { "[Combobox]", "!" },
                 { "officeversions", f.officeVersions.SelectedItem?.ToString() ?? "Nothing" },
                 { "[Strings]", "!" },
-                { "productkey", f.ProductKey.Text }
+                { "productkey", f.ProductKey.Text },
             };
 
-            using (StreamWriter writer = new StreamWriter("C:/Users/Benji/Desktop/settings.config"))
+            using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "\\settings.config"))
             {
                 foreach (var item in settings)
                 {
@@ -508,16 +506,17 @@ namespace WEZD
         }
         public static void LoadSettings(Form1 f)
         {
-            if (!File.Exists("C:/Users/Benji/Desktop/settings.config"))
+
+            if (!File.Exists(Directory.GetCurrentDirectory() + "\\settings.config"))
             {
-                MessageBox.Show("Fichier de configuration introuvable !");
+                MessageBox.Show("Configuration file not found!");
                 return;
             }
 
             string section = "";
             var settings = new Dictionary<string, string>();
 
-            foreach (var line in File.ReadAllLines("C:/Users/Benji/Desktop/settings.config"))
+            foreach (var line in File.ReadAllLines(Directory.GetCurrentDirectory() + "\\settings.config"))
             {
                 if (line.StartsWith("["))
                 {
