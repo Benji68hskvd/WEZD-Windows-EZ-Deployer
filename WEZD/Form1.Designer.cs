@@ -804,7 +804,6 @@
         private ToolStripMenuItem outilsToolStripMenuItem;
         private ToolStripMenuItem aideToolStripMenuItem1;
         private ToolStripMenuItem aboutToolStripMenuItem;
-        private ToolStripMenuItem ouvrirToolStripMenuItem;
         private ToolStripMenuItem saveSettingsToolStripMenuItem;
         private ToolStripMenuItem quitToolStripMenuItem;
         private ToolStripMenuItem debugModeToolStripMenuItem;

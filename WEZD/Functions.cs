@@ -494,10 +494,6 @@ namespace WEZD
                 MessageBox.Show("Fichier de configuration introuvable !");
                 return;
             }
-            else
-            {
-                File.Create(@"./settings.config");
-            }
 
             string section = "";
             var settings = new Dictionary<string, string>();
