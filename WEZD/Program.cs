@@ -1,3 +1,4 @@
+#pragma warning disable CA1416
 namespace WEZD
 {
     public static class Program

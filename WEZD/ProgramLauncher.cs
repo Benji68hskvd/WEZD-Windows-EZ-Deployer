@@ -5,7 +5,7 @@ namespace WEZD
 {
     public static class ProgramLauncher
     {
-        public static void LaunchAsAdmin(string filePath, string arguments = "")
+        public static void LaunchAsAdmin(string f, string a = "")
         {
             try
             {
@@ -14,8 +14,8 @@ namespace WEZD
                 {
                     ProcessStartInfo startInfo = new()
                     {
-                        FileName = filePath,         
-                        Arguments = arguments,       
+                        FileName = f,         
+                        Arguments = a,       
                         UseShellExecute = true,      
                         Verb = "runas"               
                     };
@@ -36,9 +36,9 @@ namespace WEZD
         public static bool IsRunAsAdmin()
         {
             // Vérifie si le processus actuel est exécuté avec des privilèges administrateur
-            WindowsIdentity identity = WindowsIdentity.GetCurrent();
-            WindowsPrincipal principal = new(identity);
-            return principal.IsInRole(WindowsBuiltInRole.Administrator);
+            WindowsIdentity i = WindowsIdentity.GetCurrent();
+            WindowsPrincipal p = new(i);
+            return p.IsInRole(WindowsBuiltInRole.Administrator);
         }
     }
 }
