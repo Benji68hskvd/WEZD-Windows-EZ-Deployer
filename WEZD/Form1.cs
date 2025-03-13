@@ -9,8 +9,8 @@ namespace WEZD
         public bool Install { get; private set; }
         private List<RadioButton> officeRB;
         private List<RadioButton> archRB;
-        private List<RadioButton> officeVersionRB;
-        private List<List<RadioButton>> officeYearGroups;
+        //private List<RadioButton> officeVersionRB;
+        //private List<List<RadioButton>> officeYearGroups;
 
         //private Label statusLabel;
 
