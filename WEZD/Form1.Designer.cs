@@ -39,7 +39,7 @@
             LibreOffice = new CheckBox();
             AutoDeleteInstaller = new CheckBox();
             label2 = new Label();
-            radioButton1 = new RadioButton();
+            winNothing = new RadioButton();
             HWID = new RadioButton();
             KMS38 = new RadioButton();
             WinOnlineKMS = new RadioButton();
@@ -53,7 +53,7 @@
             panel3 = new Panel();
             TSforgeOffice = new RadioButton();
             UninstallKMSOffice = new RadioButton();
-            radioButton8 = new RadioButton();
+            officeNothing = new RadioButton();
             OfficeOnlineKMS = new RadioButton();
             Ohook = new RadioButton();
             UseCurDir = new CheckBox();
@@ -206,18 +206,18 @@
             label2.TabIndex = 12;
             label2.Text = "Windows Activation :";
             // 
-            // radioButton1
+            // winNothing
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Checked = true;
-            radioButton1.Location = new Point(34, 21);
-            radioButton1.Margin = new Padding(3, 4, 3, 4);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(84, 24);
-            radioButton1.TabIndex = 13;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Nothing";
-            radioButton1.UseVisualStyleBackColor = true;
+            winNothing.AutoSize = true;
+            winNothing.Checked = true;
+            winNothing.Location = new Point(34, 21);
+            winNothing.Margin = new Padding(3, 4, 3, 4);
+            winNothing.Name = "winNothing";
+            winNothing.Size = new Size(84, 24);
+            winNothing.TabIndex = 13;
+            winNothing.TabStop = true;
+            winNothing.Text = "Nothing";
+            winNothing.UseVisualStyleBackColor = true;
             // 
             // HWID
             // 
@@ -257,7 +257,7 @@
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(TSforgeWindows);
             panel1.Controls.Add(UninstallKMSWindows);
-            panel1.Controls.Add(radioButton1);
+            panel1.Controls.Add(winNothing);
             panel1.Controls.Add(HWID);
             panel1.Controls.Add(KMS38);
             panel1.Controls.Add(WinOnlineKMS);
@@ -341,7 +341,7 @@
             panel3.BorderStyle = BorderStyle.FixedSingle;
             panel3.Controls.Add(TSforgeOffice);
             panel3.Controls.Add(UninstallKMSOffice);
-            panel3.Controls.Add(radioButton8);
+            panel3.Controls.Add(officeNothing);
             panel3.Controls.Add(OfficeOnlineKMS);
             panel3.Controls.Add(Ohook);
             panel3.Location = new Point(290, 310);
@@ -372,18 +372,18 @@
             UninstallKMSOffice.Text = "Uninstall KMS";
             UninstallKMSOffice.UseVisualStyleBackColor = true;
             // 
-            // radioButton8
+            // officeNothing
             // 
-            radioButton8.AutoSize = true;
-            radioButton8.Checked = true;
-            radioButton8.Location = new Point(34, 21);
-            radioButton8.Margin = new Padding(3, 4, 3, 4);
-            radioButton8.Name = "radioButton8";
-            radioButton8.Size = new Size(84, 24);
-            radioButton8.TabIndex = 25;
-            radioButton8.TabStop = true;
-            radioButton8.Text = "Nothing";
-            radioButton8.UseVisualStyleBackColor = true;
+            officeNothing.AutoSize = true;
+            officeNothing.Checked = true;
+            officeNothing.Location = new Point(34, 21);
+            officeNothing.Margin = new Padding(3, 4, 3, 4);
+            officeNothing.Name = "officeNothing";
+            officeNothing.Size = new Size(84, 24);
+            officeNothing.TabIndex = 25;
+            officeNothing.TabStop = true;
+            officeNothing.Text = "Nothing";
+            officeNothing.UseVisualStyleBackColor = true;
             // 
             // OfficeOnlineKMS
             // 
@@ -557,7 +557,7 @@
             ProductKey.Location = new Point(22, 389);
             ProductKey.Margin = new Padding(3, 4, 3, 4);
             ProductKey.Name = "ProductKey";
-            ProductKey.Size = new Size(237, 27);
+            ProductKey.Size = new Size(292, 27);
             ProductKey.TabIndex = 27;
             ProductKey.TextChanged += ProductKey_TextChanged;
             // 
@@ -787,7 +787,7 @@
         public CheckBox LibreOffice;
         private CheckBox AutoDeleteInstaller;
         private Label label2;
-        private RadioButton radioButton1;
+        public RadioButton winNothing;
         public RadioButton HWID;
         public RadioButton KMS38;
         public RadioButton WinOnlineKMS;
@@ -795,7 +795,7 @@
         private Panel panel2;
         private Label label3;
         private Panel panel3;
-        private RadioButton radioButton8;
+        public RadioButton officeNothing;
         public RadioButton Ohook;
         public RadioButton OfficeOnlineKMS;
         public CheckBox UseCurDir;

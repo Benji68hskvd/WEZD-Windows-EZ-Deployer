@@ -462,11 +462,13 @@ namespace WEZD
                 { "libreoffice", f.LibreOffice.Checked.ToString().ToLower() },
                 { "vlc", f.VLC.Checked.ToString().ToLower() },
                 { "teamviewer", f.TeamViewer.Checked.ToString().ToLower() },
+                { "winnothing", f.winNothing.Checked.ToString().ToLower() },
                 { "hwid", f.HWID.Checked.ToString().ToLower() },
                 { "kms38", f.KMS38.Checked.ToString().ToLower() },
                 { "winonlinekms", f.WinOnlineKMS.Checked.ToString().ToLower() },
                 { "winkmsuninstall", f.UninstallKMSWindows.Checked.ToString().ToLower() },
                 { "wintsforge", f.TSforgeWindows.Checked.ToString().ToLower() },
+                { "officenothing", f.officeNothing.Checked.ToString().ToLower() },
                 { "ohook", f.Ohook.Checked.ToString().ToLower() },
                 { "officeonlinekms", f.OfficeOnlineKMS.Checked.ToString().ToLower() },
                 { "officekmsuninstall", f.UninstallKMSOffice.Checked.ToString().ToLower() },
@@ -483,6 +485,8 @@ namespace WEZD
                 { "useprodkey", f.UseProdKey.Checked.ToString().ToLower() },
                 { "[Combobox]", "!" },
                 { "officeversions", f.officeVersions.SelectedItem?.ToString() ?? "Nothing" },
+                { "[Strings]", "!" },
+                { "productkey", f.ProductKey.Text }
             };
 
             using (StreamWriter writer = new StreamWriter("C:/Users/Benji/Desktop/settings.config"))
@@ -500,7 +504,7 @@ namespace WEZD
                 }
             }
 
-            MessageBox.Show("Paramètres sauvegardés !");
+            MessageBox.Show("Settings Save !");
         }
         public static void LoadSettings(Form1 f)
         {
@@ -530,21 +534,23 @@ namespace WEZD
 
             // Appliquer les valeurs aux CheckBox
             f.chrome.Checked = settings.ContainsKey("[Booleans].chrome") && bool.Parse(settings["[Booleans].chrome"]);
-            f.Firefox.Checked = settings.ContainsKey("[Booleans].firefox") && bool.Parse(settings["[Booleans].chrome"]);
-            f.CCleaner.Checked = settings.ContainsKey("[Booleans].ccleaner") && bool.Parse(settings["[Booleans].chrome"]);
-            f.NovaBench.Checked = settings.ContainsKey("[Booleans].novabench") && bool.Parse(settings["[Booleans].chrome"]);
-            f.LibreOffice.Checked = settings.ContainsKey("[Booleans].libreoffice") && bool.Parse(settings["[Booleans].chrome"]);
-            f.VLC.Checked = settings.ContainsKey("[Booleans].vlc") && bool.Parse(settings["[Booleans].chrome"]);
-            f.TeamViewer.Checked = settings.ContainsKey("[Booleans].teamviewer") && bool.Parse(settings["[Booleans].chrome"]);
-            f.HWID.Checked = settings.ContainsKey("[Booleans].hwid") && bool.Parse(settings["[Booleans].chrome"]);
-            f.KMS38.Checked = settings.ContainsKey("[Booleans].kms38") && bool.Parse(settings["[Booleans].chrome"]);
-            f.WinOnlineKMS.Checked = settings.ContainsKey("[Booleans].winonlinekms") && bool.Parse(settings["[Booleans].chrome"]);
-            f.UninstallKMSWindows.Checked = settings.ContainsKey("[Booleans].winkmsuninstall") && bool.Parse(settings["[Booleans].chrome"]);
-            f.TSforgeWindows.Checked = settings.ContainsKey("[Booleans].wintsforge") && bool.Parse(settings["[Booleans].chrome"]);
-            f.OfficeOnlineKMS.Checked = settings.ContainsKey("[Booleans].officeonlinekms") && bool.Parse(settings["[Booleans].chrome"]);
-            f.UninstallKMSOffice.Checked = settings.ContainsKey("[Booleans].officekmsuninstall") && bool.Parse(settings["[Booleans].chrome"]);
-            f.TSforgeOffice.Checked = settings.ContainsKey("[Booleans].officetsforge") && bool.Parse(settings["[Booleans].chrome"]);
-            f.Ohook.Checked = settings.ContainsKey("[Booleans].ohook") && bool.Parse(settings["[Booleans].chrome"]);
+            f.Firefox.Checked = settings.ContainsKey("[Booleans].firefox") && bool.Parse(settings["[Booleans].firefox"]);
+            f.CCleaner.Checked = settings.ContainsKey("[Booleans].ccleaner") && bool.Parse(settings["[Booleans].ccleaner"]);
+            f.NovaBench.Checked = settings.ContainsKey("[Booleans].novabench") && bool.Parse(settings["[Booleans].novabench"]);
+            f.LibreOffice.Checked = settings.ContainsKey("[Booleans].libreoffice") && bool.Parse(settings["[Booleans].libreoffice"]);
+            f.VLC.Checked = settings.ContainsKey("[Booleans].vlc") && bool.Parse(settings["[Booleans].vlc"]);
+            f.TeamViewer.Checked = settings.ContainsKey("[Booleans].teamviewer") && bool.Parse(settings["[Booleans].teamviewer"]);
+            f.winNothing.Checked = settings.ContainsKey("[Booleans].winnothing") && bool.Parse(settings["[Booleans].winnothing"]);
+            f.HWID.Checked = settings.ContainsKey("[Booleans].hwid") && bool.Parse(settings["[Booleans].hwid"]);
+            f.KMS38.Checked = settings.ContainsKey("[Booleans].kms38") && bool.Parse(settings["[Booleans].kms38"]);
+            f.WinOnlineKMS.Checked = settings.ContainsKey("[Booleans].winonlinekms") && bool.Parse(settings["[Booleans].winonlinekms"]);
+            f.UninstallKMSWindows.Checked = settings.ContainsKey("[Booleans].winkmsuninstall") && bool.Parse(settings["[Booleans].winkmsuninstall"]);
+            f.TSforgeWindows.Checked = settings.ContainsKey("[Booleans].wintsforge") && bool.Parse(settings["[Booleans].wintsforge"]);
+            f.officeNothing.Checked = settings.ContainsKey("[Booleans].officenothing") && bool.Parse(settings["[Booleans].officenothing"]);
+            f.OfficeOnlineKMS.Checked = settings.ContainsKey("[Booleans].officeonlinekms") && bool.Parse(settings["[Booleans].officeonlinekms"]);
+            f.UninstallKMSOffice.Checked = settings.ContainsKey("[Booleans].officekmsuninstall") && bool.Parse(settings["[Booleans].officekmsuninstall"]);
+            f.TSforgeOffice.Checked = settings.ContainsKey("[Booleans].officetsforge") && bool.Parse(settings["[Booleans].officetsforge"]);
+            f.Ohook.Checked = settings.ContainsKey("[Booleans].ohook") && bool.Parse(settings["[Booleans].ohook"]);
             f.x86.Checked = settings.ContainsKey("[Booleans].x86") && bool.Parse(settings["[Booleans].x86"]);
             f.x64.Checked = settings.ContainsKey("[Booleans].x64") && bool.Parse(settings["[Booleans].x64"]);
             f.Word.Checked = settings.ContainsKey("[Booleans].word") && bool.Parse(settings["[Booleans].word"]);
@@ -558,14 +564,26 @@ namespace WEZD
 
             //Applique la valeur au ComboBox
 
-            MessageBox.Show($"Valeur enregistrée : {settings["[Combobox].officeversions"]}");
-
             if (settings.ContainsKey("[Combobox].officeversions"))
             {
                 f.officeVersions.SelectedItem = settings["[Combobox].officeversions"];
             }
 
-            MessageBox.Show("Paramètres chargés !");
+            //Applique la valeur au Strings
+
+            if (f.UseProdKey.Checked)
+            {
+                if (settings.ContainsKey("[Strings].productkey"))
+                {
+                    f.ProductKey.Text = settings["[Strings].productkey"];
+                }
+            }
+            else
+            {
+                f.ProductKey.Clear();
+            }
+
+            MessageBox.Show("Settings Load !");
         }
 
     }
