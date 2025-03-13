@@ -302,64 +302,60 @@ namespace WEZD
             Form1 f = new();
             f.UpdateStatusLabel("Download VLC...");
 
-            var downloadPath = "C:\\Users\\" + Environment.UserName + "\\Downloads\\";
-            var baseVlcUrl = "https://download.videolan.org/vlc/";
-            var installerName = "vlc_installer.msi";
-            var packageName = "VLC";
+            var d = "C:\\Users\\" + Environment.UserName + "\\Downloads\\";
+            var b = "https://download.videolan.org/vlc/";
+            var ie = "vlc_installer.msi";
+            var pkg = "VLC";
 
             try
             {
-                HttpClient client = new();
-                // récupérer la liste des versions disponibles
-                string pageContent = await client.GetStringAsync(baseVlcUrl);
-                var doc = new HtmlDocument();
-                doc.LoadHtml(pageContent);
-                var versionNodes =
-                    doc.DocumentNode.SelectNodes("//a[starts-with(@href, '3.0.') and contains(@href, '/')]");
-                List<string> versions = new();
+                HttpClient c = new();
+                // récupérer la liste des v disponibles
+                string p = await c.GetStringAsync(b);
+                var dc = new HtmlDocument();
+                dc.LoadHtml(p);
+                var vn = dc.DocumentNode.SelectNodes("//a[starts-with(@href, '3.0.') and contains(@href, '/')]");
+                List<string> v = new();
 
-                if (versionNodes != null)
+                if (vn != null)
                 {
-                    versions = versionNodes
-                        .Select(node => node.GetAttributeValue("href", "").Trim('/'))
-                        .Where(href => Version.TryParse(href, out _))
-                        .ToList();
+                    v = vn.Select(node => node.GetAttributeValue("href", "").Trim('/')).Where(href => Version.TryParse(href, out _)).ToList();
                 }
 
-                // trier les versions par ordre décroissant
-                versions.Sort((x, y) => new Version(y).CompareTo(new Version(x)));
+                // trier les v par ordre décroissant
+                v.Sort((x, y) => new Version(y).CompareTo(new Version(x)));
 
-                // vérifier chaque version pour trouver un fichier MSI valide
-                foreach (var version in versions)
+                // vérifier chaque ve pour trouver un fichier MSI valide
+                foreach (var ve in v)
                 {
-                    string versionUrl = $"{baseVlcUrl}{version}/win64/";
+                    string veUrl = $"{b}{ve}/win64/";
                     try
                     {
-                        string versionPageContent = await client.GetStringAsync(versionUrl);
-                        var versionDoc = new HtmlDocument();
-                        versionDoc.LoadHtml(versionPageContent);
+                        string vePageContent = await c.GetStringAsync(veUrl);
+                        var veDoc = new HtmlDocument();
+                        veDoc.LoadHtml(vePageContent);
 
-                        var msiNode = versionDoc.DocumentNode.SelectSingleNode($"//a[contains(@href, 'vlc-{version}-win64.msi')]");
+                        var m = veDoc.DocumentNode.SelectSingleNode($"//a[contains(@href, 'vlc-{ve}-win64.msi')]");
 
-                        if (msiNode != null)
+                        if (m != null)
                         {
-                            string originalHref = msiNode.GetAttributeValue("href", "");
-                            string fullFileUrl = new Uri(new Uri(versionUrl), originalHref).ToString();
+                            string originalHref = m.GetAttributeValue("href", "");
+                            string fullFileUrl = new Uri(new Uri(veUrl), originalHref).ToString();
 
                             // téléchargement et installation
-                            await InstallPackage(fullFileUrl, downloadPath, packageName, installerName);
+                            await InstallPackage(fullFileUrl, d, pkg, ie);
                             return;
                         }
                     }
                     catch
                     {
-                        // ignorer les erreurs et passer à la version suivante
+                        // ignorer les erreurs et passer à la ve suivante
                         continue;
                     }
                 }
 
-                // si aucune version valide n'a été trouvée
-                MessageBox.Show("Unable to find a valid MSI file for VLC.");
+                // si aucune ve valide n'a été trouvée
+                MessageBox.Show("Impossible de trouver un fichier MSI valide pour VLC.");
             }
             catch (HttpRequestException ex) when (ex.InnerException is System.Net.Sockets.SocketException)
             {
@@ -367,23 +363,22 @@ namespace WEZD
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error while searching for VLC versions : {ex.Message}");
+                MessageBox.Show($"Erreur lors de la recherche des v de VLC: {ex.Message}");
             }
         }
 
-        private static async Task InstallPackage(string url, string downloadPath, string packageName,
-            string installerName)
+        private static async Task InstallPackage(string u, string d, string pkg, string ie)
         {
             Form1 f = new();
-            f.UpdateStatusLabel($"Downloading {packageName}...");
+            f.UpdateStatusLabel($"Downloading {pkg}...");
 
             // Chemin complet pour l'installateur
-            string filePath = Path.Combine(downloadPath, installerName);
+            string filePath = Path.Combine(d, ie);
             try
             {
                 // Téléchargement du fichier avec HttpClient
                 using HttpClient h = new();
-                using HttpResponseMessage r = await h.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+                using HttpResponseMessage r = await h.GetAsync(u, HttpCompletionOption.ResponseHeadersRead);
                 r.EnsureSuccessStatusCode(); // Vérifie que la requête est réussie
                 await using Stream c = await r.Content.ReadAsStreamAsync();
                 await using FileStream fs = new(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
@@ -392,15 +387,14 @@ namespace WEZD
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error while downloading {packageName} : {ex.Message}", "Erreur",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erreur lors du téléchargement de {pkg} : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             // Installation silencieuse pour TeamViewer
-            if (packageName.Equals("TeamViewer", StringComparison.OrdinalIgnoreCase))
+            if (pkg.Equals("TeamViewer", StringComparison.OrdinalIgnoreCase))
             {
-                f.UpdateStatusLabel($"Installing {packageName} in the background...");
+                f.UpdateStatusLabel($"Installing {pkg} in the background...");
                 ProcessStartInfo ps = new()
                 {
                     FileName = "powershell",
@@ -418,7 +412,7 @@ namespace WEZD
 
                 if (exe)
                 {
-                    f.UpdateStatusLabel($"Installing {packageName}...");
+                    f.UpdateStatusLabel($"Installing {pkg}...");
                     ProcessStartInfo i = new("cmd.exe", "/C " + filePath)
                     {
                         UseShellExecute = true, CreateNoWindow = true
@@ -428,7 +422,7 @@ namespace WEZD
                 }
                 else
                 {
-                    f.UpdateStatusLabel($"Installing {packageName}...");
+                    f.UpdateStatusLabel($"Installing {pkg}...");
                     string a = $"/passive /i \"{filePath}\"";
                     ProcessStartInfo s = new("msiexec.exe", a) { UseShellExecute = true, CreateNoWindow = true };
                     var p = Process.Start(s);
@@ -439,13 +433,13 @@ namespace WEZD
             // Supprime l'installateur après installation
             try
             {
-                f.UpdateStatusLabel($"Cleaning up {packageName} installer...");
+                f.UpdateStatusLabel($"Cleaning up {pkg} installer...");
                 File.Delete(filePath);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($@"Error while deleting the installer of {packageName} : {ex.Message}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($@"Erreur lors de la suppression de l'installateur de {pkg} : {ex.Message}",
+                    "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         public static void SaveSettings(Form1 f)
@@ -487,7 +481,7 @@ namespace WEZD
                 { "productkey", f.ProductKey.Text },
             };
 
-            using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "\\settings.config"))
+            using (StreamWriter writer = new(@"./settings.config"))
             {
                 foreach (var item in settings)
                 {
@@ -506,17 +500,20 @@ namespace WEZD
         }
         public static void LoadSettings(Form1 f)
         {
-
-            if (!File.Exists(Directory.GetCurrentDirectory() + "\\settings.config"))
+            if (!File.Exists(@"./settings.config"))
             {
                 MessageBox.Show("Configuration file not found!");
                 return;
+            }
+            else
+            {
+                File.Create(@"./settings.config");
             }
 
             string section = "";
             var settings = new Dictionary<string, string>();
 
-            foreach (var line in File.ReadAllLines(Directory.GetCurrentDirectory() + "\\settings.config"))
+            foreach (var line in File.ReadAllLines(@"./settings.config"))
             {
                 if (line.StartsWith("["))
                 {
