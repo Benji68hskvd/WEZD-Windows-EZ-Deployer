@@ -3,6 +3,7 @@ using WEZD.HtmlAgilityPack.HtmlAgilityPack;
 using static System.Collections.Specialized.BitVector32;
 using HtmlDocument = WEZD.HtmlAgilityPack.HtmlAgilityPack.HtmlDocument;
 // ReSharper disable InconsistentNaming
+#pragma warning disable CA1416
 
 namespace WEZD
 {
@@ -12,65 +13,47 @@ namespace WEZD
         {
             try
             {
-                Debug.WriteLine("start install");
                 // vérifier directement les checkboxes sur l'instance actuelle du formulaire
                 if (f.chrome.Checked)
                 {
-                    Debug.WriteLine("install chrome");
                     await Install("https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi", "",
                         "/", "", "", "chrome_installer.msi", "Chrome");
                 }
-
                 if (f.Firefox.Checked)
                 {
-                    Debug.WriteLine("install firefox");
                     await Install("https://ftp.mozilla.org/pub/firefox/releases/", "/pub/firefox/releases/",
                         "/pub/firefox/releases/", "b", "/win64/fr/", "firefox_installer.msi", "Firefox");
                 }
-
                 if (f.CCleaner.Checked)
                 {
-                    Debug.WriteLine("install ccleaner");
                     await Install(
                         "https://bits.avcdn.net/productfamily_CCLEANER/insttype_BUSINESS_32/platform_WIN_MSI/installertype_ONLINE/build_RELEASE/.msi/",
                         "", "/", "", "", "ccleaner_installer.msi", "CCleaner");
                 }
-
                 if (f.NovaBench.Checked)
                 {
-                    Debug.WriteLine("install novabench");
                     await Install("https://cdn.novabench.net/novabench.msi", "", "/", "", "", "novabench_installer.msi",
                         "NovaBench");
                 }
-
                 if (f.LibreOffice.Checked)
                 {
-                    Debug.WriteLine("install libreoffice");
                     await Install("https://miroir.univ-lorraine.fr/documentfoundation/libreoffice/stable/", "", "/", "",
                         "/win/x86_64/", "libreoffice_installer.msi", "LibreOffice");
                 }
-
                 if (f.VLC.Checked)
                 {
-                    Debug.WriteLine("install vlc");
                     await InstallVLC(); // appel spécifique pour VLC
                 }
-
                 if (f.TeamViewer.Checked)
                 {
-                    Debug.WriteLine("install teamviewer");
                     await Install("https://dl.teamviewer.com/download/version_15x/TeamViewer_Setup_x64.exe", "", "/",
                         "", "", "TeamViewer.exe", "TeamViewer");
                 }
-
                 // ajout de l'installation d'Office
                 if (f.Word.Checked || f.Excel.Checked || f.PowerPoint.Checked || f.Outlook.Checked)
                 {
-                    Debug.WriteLine("install office");
-
                     // créer une instance de la classe Office
                     Office officeInstaller = new();
-
                     // récupérer les options sélectionnées dans le formulaire
                     bool isX64 = f.x64.Checked;
                     bool Word = f.Word.Checked;
@@ -80,51 +63,41 @@ namespace WEZD
                     bool Access = f.Access.Checked;
                     bool Teams = f.Teams.Checked;
                     bool OneNote = f.OneNote.Checked;
-
                     // appeler la méthode d'installation
                     officeInstaller.Install(f, isX64, Word, Excel, PowerPoint, Outlook, Access, Teams, OneNote);
                 }
-
                 // activation Windows
                 if (f.HWID.Checked)
                 {
-                    Debug.WriteLine("using hwid");
                     ActivationCommand(f.UseCurDir.Checked, " /HWID");
                 }
                 if (f.KMS38.Checked)
                 {
-                    Debug.WriteLine("using kms38");
                     ActivationCommand(f.UseCurDir.Checked, " /KMS38");
                 }
                 if (f.WinOnlineKMS.Checked)
                 {
-                    Debug.WriteLine("using online kms windows");
                     ActivationCommand(f.UseCurDir.Checked, " /K-Windows");
                 }
                 // activation Office
                 if (f.Ohook.Checked)
                 {
-                    Debug.WriteLine("install ohook");
                     ActivationCommand(f.UseCurDir.Checked, " /Ohook");
                 }
                 if (f.OfficeOnlineKMS.Checked)
                 {
-                    Debug.WriteLine("install online kms office");
                     ActivationCommand(f.UseCurDir.Checked, " /K-Office");
                 }
                 if (f.UninstallKMSWindows.Checked || f.UninstallKMSOffice.Checked)
                 {
-                    Debug.WriteLine("uninstall online kms");
                     ActivationCommand(f.UseCurDir.Checked, "/K-Uninstall");
                 }
                 if (f.TSforgeOffice.Checked)
                 {
-                    Debug.WriteLine("use TSforge for Office");
                     ActivationCommand(f.UseCurDir.Checked, "/Z-Office");
                 }
                 if (f.TSforgeWindows.Checked)
                 {
-                    Debug.WriteLine("use TSforge for windows");
                     ActivationCommand(f.UseCurDir.Checked, "/Z-Windows");
                 }
             }
@@ -145,9 +118,7 @@ namespace WEZD
             {
                 Form1 f = new();
                 f.UpdateStatusLabel("Activate...");
-
-                string url =
-                    "https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/refs/heads/master/MAS/All-In-One-Version-KL/MAS_AIO.cmd";
+                string url = "https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/refs/heads/master/MAS/All-In-One-Version-KL/MAS_AIO.cmd";
                 string currentDirectory = Directory.GetCurrentDirectory();
                 string scriptFile = Path.Combine(currentDirectory, "MAS_AIO.cmd");
 
@@ -157,21 +128,18 @@ namespace WEZD
                     try
                     {
                         using HttpClient httpClient = new();
-                        using HttpResponseMessage response =
-                            await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+                        using HttpResponseMessage response = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
 
                         response.EnsureSuccessStatusCode(); // Vérifie le succès de la réponse
 
                         await using Stream contentStream = await response.Content.ReadAsStreamAsync();
-                        await using FileStream fileStream = new(scriptFile, FileMode.Create, FileAccess.Write,
-                            FileShare.None);
+                        await using FileStream fileStream = new(scriptFile, FileMode.Create, FileAccess.Write, FileShare.None);
 
                         await contentStream.CopyToAsync(fileStream);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Erreur lors du téléchargement du script : {ex.Message}", "Erreur",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Erreur lors du téléchargement du script : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -191,8 +159,7 @@ namespace WEZD
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Erreur lors de l'exécution du script : {ex.Message}", "Erreur",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Erreur lors de l'exécution du script : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception e)
@@ -201,15 +168,13 @@ namespace WEZD
             }
         }
 
-
         public static async Task CheckInstall(string u, string h, string hr, string i, string e, string ism, string p)
         {
             await Install(u, h, hr, i, e, ism, p);
         }
 
         //Installation Script ---------------------------------------------------------------------------------------------------------------
-        private static async Task Install(string url, string hrefNodes, string hrefReplace, string ignoreVersionName,
-            string endUrl, string installerName, string packageName)
+        private static async Task Install(string url, string hrefNodes, string hrefReplace, string ignoreVersionName, string endUrl, string installerName, string packageName)
         {
             var downloadPath = "C:\\Users\\" + Environment.UserName + "\\Downloads\\";
 
@@ -229,8 +194,7 @@ namespace WEZD
                 var doc = new HtmlDocument();
                 doc.LoadHtml(pageContent);
 
-                var versionNodes =
-                    doc.DocumentNode.SelectNodes($"//a[starts-with(@href, '{hrefNodes}') and contains(@href, '.')]");
+                var versionNodes = doc.DocumentNode.SelectNodes($"//a[starts-with(@href, '{hrefNodes}') and contains(@href, '.')]");
                 List<string> versions = [];
 
                 if (versionNodes != null)
@@ -379,7 +343,6 @@ namespace WEZD
                 MessageBox.Show($"Erreur lors du téléchargement de {pkg} : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
             // Installation silencieuse pour TeamViewer
             if (pkg.Equals("TeamViewer", StringComparison.OrdinalIgnoreCase))
             {
@@ -402,10 +365,7 @@ namespace WEZD
                 if (exe)
                 {
                     f.UpdateStatusLabel($"Installing {pkg}...");
-                    ProcessStartInfo i = new("cmd.exe", "/C " + filePath)
-                    {
-                        UseShellExecute = true, CreateNoWindow = true
-                    };
+                    ProcessStartInfo i = new("cmd.exe", "/C " + filePath) { UseShellExecute = true, CreateNoWindow = true };
                     var p = Process.Start(i);
                     p.WaitForExit();
                 }
@@ -487,16 +447,13 @@ namespace WEZD
 
             MessageBox.Show("Settings Save !");
         }
+
         public static void LoadSettings(Form1 f)
         {
             if (!File.Exists(@"./settings.config"))
             {
                 MessageBox.Show("Fichier de configuration introuvable !");
                 return;
-            }
-            else
-            {
-                File.Create(@"./settings.config");
             }
 
             string section = "";
@@ -567,9 +524,7 @@ namespace WEZD
             {
                 f.ProductKey.Clear();
             }
-
             MessageBox.Show("Settings Load !");
         }
-
     }
 }

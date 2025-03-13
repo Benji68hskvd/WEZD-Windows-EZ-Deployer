@@ -125,7 +125,7 @@ namespace WEZD
         /// </summary>
         private string GetSelectedProductId(Form1 f)
         {
-            return f.officeVersions.SelectedIndex switch
+            return (f.officeVersions.SelectedIndex switch
             {
                 0 => null,
                 1 => "Standard2016Volume",
@@ -137,7 +137,7 @@ namespace WEZD
                 7 => "Standard2024Volume",
                 8 => "ProPlus2024Volume",
                 _ => null // Si aucun choix n'est fait
-            };
+            })!;
             //if (f.Std2016.Checked) return "Standard2016Volume";
             //if (f.PPlus2016.Checked) return "ProPlus2016Volume";
             //if (f.Std2019.Checked) return "Standard2019Volume";
@@ -146,7 +146,7 @@ namespace WEZD
             //if (f.PPlus2021.Checked) return "ProPlus2021Volume";
             //if (f.Std2024.Checked) return "Standard2024Volume";
             //if (f.PPlus2024.Checked) return "ProPlus2024Volume";
-            return null; // Aucun bouton sélectionné
+            //return null; // Aucun bouton sélectionné
         }
 
         /// <summary>
