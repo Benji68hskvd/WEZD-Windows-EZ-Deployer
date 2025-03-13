@@ -647,7 +647,7 @@
             // 
             ouvrirToolStripMenuItem.Enabled = false;
             ouvrirToolStripMenuItem.Name = "ouvrirToolStripMenuItem";
-            ouvrirToolStripMenuItem.Size = new Size(145, 22);
+            ouvrirToolStripMenuItem.Size = new Size(182, 26);
             ouvrirToolStripMenuItem.Text = "Open";
             // 
             // loadSettingsToolStripMenuItem
@@ -682,7 +682,7 @@
             // 
             debugModeToolStripMenuItem.Enabled = false;
             debugModeToolStripMenuItem.Name = "debugModeToolStripMenuItem";
-            debugModeToolStripMenuItem.Size = new Size(143, 22);
+            debugModeToolStripMenuItem.Size = new Size(180, 26);
             debugModeToolStripMenuItem.Text = "Debug Mode";
             // 
             // aideToolStripMenuItem1
@@ -799,11 +799,11 @@
         private ToolStripMenuItem aideToolStripMenuItem;
         private ToolStripMenuItem aboutToolStrip;
         private System.Windows.Forms.MenuStrip menuStrip2;
+        private ToolStripMenuItem ouvrirToolStripMenuItem;
         private ToolStripMenuItem fichierToolStripMenuItem1;
         private ToolStripMenuItem outilsToolStripMenuItem;
         private ToolStripMenuItem aideToolStripMenuItem1;
         private ToolStripMenuItem aboutToolStripMenuItem;
-        private ToolStripMenuItem ouvrirToolStripMenuItem;
         private ToolStripMenuItem saveSettingsToolStripMenuItem;
         private ToolStripMenuItem quitToolStripMenuItem;
         private ToolStripMenuItem debugModeToolStripMenuItem;

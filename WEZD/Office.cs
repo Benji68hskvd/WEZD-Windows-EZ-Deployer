@@ -1,12 +1,5 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Diagnostics;
 using System.Text;
-using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Linq;
-
-#pragma warning disable CA1416
 
 namespace WEZD
 {
