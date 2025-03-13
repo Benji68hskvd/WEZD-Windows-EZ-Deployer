@@ -1,8 +1,6 @@
 using System.Diagnostics;
 using System.Reflection;
-using System.Security.AccessControl;
 using System.Text;
-#pragma warning disable CA1416
 
 namespace WEZD
 {

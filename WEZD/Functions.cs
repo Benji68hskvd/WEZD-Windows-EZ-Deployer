@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using WEZD.HtmlAgilityPack.HtmlAgilityPack;
-using static System.Collections.Specialized.BitVector32;
 using HtmlDocument = WEZD.HtmlAgilityPack.HtmlAgilityPack.HtmlDocument;
 // ReSharper disable InconsistentNaming
 
