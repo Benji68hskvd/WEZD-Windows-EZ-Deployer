@@ -177,7 +177,7 @@ namespace WEZD
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Error while downloading the script : {ex.Message}", "Erreur",
+                        MessageBox.Show($"Erreur lors du téléchargement du script : {ex.Message}", "Erreur",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
@@ -201,7 +201,7 @@ namespace WEZD
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error while executing the script : {ex.Message}", "Erreur",
+                    MessageBox.Show($"Erreur lors de l'exécution du script : {ex.Message}", "Erreur",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -261,12 +261,12 @@ namespace WEZD
             }
             catch (HttpRequestException ex) when (ex.InnerException is System.Net.Sockets.SocketException)
             {
-                MessageBox.Show(@"Internet connection error: Please check your connection and try again.");
+                MessageBox.Show(@"Erreur de connexion internet: Veuillez vérifier votre connexion et réessayer.");
                 return;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($@"Error while retrieving versions : {ex.Message}");
+                MessageBox.Show($@"Erreur lors de la récupération des versions: {ex.Message}");
                 return;
             }
 
@@ -289,11 +289,11 @@ namespace WEZD
             }
             catch (HttpRequestException ex) when (ex.InnerException is System.Net.Sockets.SocketException)
             {
-                MessageBox.Show(@"Internet connection error: Please check your connection and try again.");
+                MessageBox.Show(@"Erreur de connexion internet: Veuillez vérifier votre connexion et réessayer.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($@"Error while downloading : {ex.Message}");
+                MessageBox.Show($@"Erreur lors du téléchargement: {ex.Message}");
             }
         }
 
@@ -359,7 +359,7 @@ namespace WEZD
             }
             catch (HttpRequestException ex) when (ex.InnerException is System.Net.Sockets.SocketException)
             {
-                MessageBox.Show("Internet connection error: Please check your connection and try again.");
+                MessageBox.Show("Erreur de connexion internet: Veuillez vérifier votre connexion et réessayer.");
             }
             catch (Exception ex)
             {
@@ -478,7 +478,7 @@ namespace WEZD
                 { "[Combobox]", "!" },
                 { "officeversions", f.officeVersions.SelectedItem?.ToString() ?? "Nothing" },
                 { "[Strings]", "!" },
-                { "productkey", f.ProductKey.Text },
+                { "productkey", f.ProductKey.Text }
             };
 
             using (StreamWriter writer = new(@"./settings.config"))
@@ -502,7 +502,7 @@ namespace WEZD
         {
             if (!File.Exists(@"./settings.config"))
             {
-                MessageBox.Show("Configuration file not found!");
+                MessageBox.Show("Fichier de configuration introuvable !");
                 return;
             }
             else

@@ -1,5 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
+using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 
 #pragma warning disable CA1416
 
@@ -59,13 +64,13 @@ namespace WEZD
         {
             try
             {
-                f.UpdateStatusLabel("Preparing the installation of Office...");
+                f.UpdateStatusLabel("Préparation de l'installation d'Office...");
 
                 // Déterminer l'édition et la version sélectionnée
                 string productId = GetSelectedProductId(f);
                 if (productId == null)
                 {
-                    MessageBox.Show("Please select a version and an edition of Office.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Veuillez sélectionner une version et une édition d'Office.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -94,7 +99,7 @@ namespace WEZD
                 string configPath = Path.Combine(Path.GetTempPath(), "OfficeConfig.xml");
                 File.WriteAllText(configPath, configXml);
 
-                f.UpdateStatusLabel("Installing Office...");
+                f.UpdateStatusLabel("Installation d'Office en cours...");
 
                 // Exécuter le programme d'installation
                 ProcessStartInfo installProcessInfo = new(_installerPath)
@@ -107,11 +112,11 @@ namespace WEZD
                 Process? process = Process.Start(installProcessInfo);
                 process.WaitForExit();
 
-                f.UpdateStatusLabel("Office installation completed.");
+                f.UpdateStatusLabel("Installation d'Office terminée.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($@"Error during Office installation : {ex.Message}");
+                MessageBox.Show($@"Erreur lors de l'installation d'Office : {ex.Message}");
             }
         }
 
@@ -131,8 +136,17 @@ namespace WEZD
                 6 => "ProPlus2021Volume",
                 7 => "Standard2024Volume",
                 8 => "ProPlus2024Volume",
+                _ => null // Si aucun choix n'est fait
             };
-
+            //if (f.Std2016.Checked) return "Standard2016Volume";
+            //if (f.PPlus2016.Checked) return "ProPlus2016Volume";
+            //if (f.Std2019.Checked) return "Standard2019Volume";
+            //if (f.PPlus2019.Checked) return "ProPlus2019Volume";
+            //if (f.Std2021.Checked) return "Standard2021Volume";
+            //if (f.PPlus2021.Checked) return "ProPlus2021Volume";
+            //if (f.Std2024.Checked) return "Standard2024Volume";
+            //if (f.PPlus2024.Checked) return "ProPlus2024Volume";
+            return null; // Aucun bouton sélectionné
         }
 
         /// <summary>
@@ -146,8 +160,8 @@ namespace WEZD
                 if (!IsValidProductKey(inputKey))
                 {
                     MessageBox.Show(
-                        "The custom product key is not valid. Make sure it follows the format XXXXX-XXXXX-XXXXX-XXXXX-XXXXX.",
-                        "Invalid key", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        "La clé de produit personnalisée n'est pas valide. Assurez-vous qu'elle respecte le format XXXXX-XXXXX-XXXXX-XXXXX-XXXXX.",
+                        "Clé non valide", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return null;
                 }
 

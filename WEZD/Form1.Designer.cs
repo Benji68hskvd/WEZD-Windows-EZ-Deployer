@@ -81,6 +81,7 @@
             aboutToolStrip = new ToolStripMenuItem();
             menuStrip2 = new System.Windows.Forms.MenuStrip();
             fichierToolStripMenuItem1 = new ToolStripMenuItem();
+            ouvrirToolStripMenuItem = new ToolStripMenuItem();
             loadSettingsToolStripMenuItem = new ToolStripMenuItem();
             saveSettingsToolStripMenuItem = new ToolStripMenuItem();
             quitToolStripMenuItem = new ToolStripMenuItem();
@@ -90,7 +91,6 @@
             helpToolStripMenuItem = new ToolStripMenuItem();
             documentationToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
-            createScriptToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -662,10 +662,17 @@
             // 
             // fichierToolStripMenuItem1
             // 
-            fichierToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { loadSettingsToolStripMenuItem, saveSettingsToolStripMenuItem, quitToolStripMenuItem });
+            fichierToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { ouvrirToolStripMenuItem, loadSettingsToolStripMenuItem, saveSettingsToolStripMenuItem, quitToolStripMenuItem });
             fichierToolStripMenuItem1.Name = "fichierToolStripMenuItem1";
             fichierToolStripMenuItem1.Size = new Size(46, 24);
             fichierToolStripMenuItem1.Text = "File";
+            // 
+            // ouvrirToolStripMenuItem
+            // 
+            ouvrirToolStripMenuItem.Enabled = false;
+            ouvrirToolStripMenuItem.Name = "ouvrirToolStripMenuItem";
+            ouvrirToolStripMenuItem.Size = new Size(182, 26);
+            ouvrirToolStripMenuItem.Text = "Open";
             // 
             // loadSettingsToolStripMenuItem
             // 
@@ -690,7 +697,7 @@
             // 
             // outilsToolStripMenuItem
             // 
-            outilsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { debugModeToolStripMenuItem, createScriptToolStripMenuItem });
+            outilsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { debugModeToolStripMenuItem });
             outilsToolStripMenuItem.Name = "outilsToolStripMenuItem";
             outilsToolStripMenuItem.Size = new Size(58, 24);
             outilsToolStripMenuItem.Text = "Tools";
@@ -699,7 +706,7 @@
             // 
             debugModeToolStripMenuItem.Enabled = false;
             debugModeToolStripMenuItem.Name = "debugModeToolStripMenuItem";
-            debugModeToolStripMenuItem.Size = new Size(224, 26);
+            debugModeToolStripMenuItem.Size = new Size(180, 26);
             debugModeToolStripMenuItem.Text = "Debug Mode";
             // 
             // aideToolStripMenuItem1
@@ -729,13 +736,6 @@
             aboutToolStripMenuItem.Size = new Size(195, 26);
             aboutToolStripMenuItem.Text = "About";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
-            // 
-            // createScriptToolStripMenuItem
-            // 
-            createScriptToolStripMenuItem.Enabled = false;
-            createScriptToolStripMenuItem.Name = "createScriptToolStripMenuItem";
-            createScriptToolStripMenuItem.Size = new Size(224, 26);
-            createScriptToolStripMenuItem.Text = "Create Script";
             // 
             // Form1
             // 
@@ -828,6 +828,7 @@
         private ToolStripMenuItem outilsToolStripMenuItem;
         private ToolStripMenuItem aideToolStripMenuItem1;
         private ToolStripMenuItem aboutToolStripMenuItem;
+        private ToolStripMenuItem ouvrirToolStripMenuItem;
         private ToolStripMenuItem saveSettingsToolStripMenuItem;
         private ToolStripMenuItem quitToolStripMenuItem;
         private ToolStripMenuItem debugModeToolStripMenuItem;
@@ -840,7 +841,6 @@
         public RadioButton TSforgeWindows;
         public RadioButton TSforgeOffice;
         private ToolStripMenuItem loadSettingsToolStripMenuItem;
-        private ToolStripMenuItem createScriptToolStripMenuItem;
         //private Label labelStatus;
     }
 }
